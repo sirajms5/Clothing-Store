@@ -1,0 +1,63 @@
+:root {
+  --salt: #f3fafd;
+  --prussian-blue: #0B3954;
+  --metalic-seaweed: #087E8B;
+  --pale-yellow: #F0F3BD;
+}
+
+.master {
+  margin: 0 0 0 0;
+  padding: 0;
+  background-color: var(--prussian-blue);
+  color: var(--salt, white);
+  overflow-x: hidden;
+}
+
+#nav-bar {
+  background-color: #FC7753 !important;
+  position: fixed;
+  width: 100%;
+}
+
+#ss-logo {
+  color: blue;
+  font-size: 1.5rem;
+  font-weight: bold;
+  animation: rotateAnimation 5s linear infinite;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-left: 0.5rem;
+  display: flex;
+}
+
+@keyframes rotateAnimation {
+  from {
+    transform: rotateY(0deg);
+  }
+
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+.search-form {
+  display: flex;
+  gap: 1rem;
+  max-width: 40rem !important;
+}
+
+.search-form-content {
+  margin-top: 8rem;
+}
+
+#shopping-items {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 5rem;
+  margin-top: 5rem;
+}
+
+.shopping-grid-item {
+  margin-left: auto;
+  margin-right: auto;
+}
