@@ -1,12 +1,12 @@
 <?php
 include 'conn.php';
 
-$firstName = $_POST['first-name'];
-$lastName = $_POST['last-name'];
-$address = $_POST['address'];
-$dateOfBird = $_POST['date-of-birth'];
-$email = $_POST['email'];
-$password = $_POST['password'];
+$firstName = $_GET['first-name'];
+$lastName = $_GET['last-name'];
+$address = $_GET['address'];
+$dateOfBird = $_GET['date-of-birth'];
+$email = $_GET['email'];
+$password = $_GET['password'];
 
 $queryCheckEmail = "SELECT Email FROM users WHERE email = '$email';";
 $resultCheckEmail = mysqli_query($conn, $queryCheckEmail);
