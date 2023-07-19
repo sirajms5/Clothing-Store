@@ -1,0 +1,11 @@
+CREATE DATABASE Siraj_Shop;
+USE Siraj_Shop;
+CREATE TABLE USERS(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    First_Name VARCHAR(50) NOT NULL,
+    Last_Name VARCHAR(50) NOT NULL,
+    Address VARCHAR(255) NOT NULL,
+    Date_Of_Birth DATE,
+    Email VARCHAR(70) NOT NULL,
+    Password VARCHAR(30) NOT NULL
+);
