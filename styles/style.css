@@ -66,24 +66,16 @@
   transition: 1s;
 }
 
-#main {
-  height: 95vh;
-}
-
 .search-form {
   display: flex;
   gap: 1rem;
   max-width: 40rem !important;
 }
 
-.search-form-content {
-  margin-top: 8rem;
-}
-
 #shopping-items {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  row-gap: 5rem;
+  gap: 5rem;
   margin-top: 5rem;
 }
 
@@ -94,15 +86,18 @@
 }
 
 #footer {
-  text-align: center;
-  margin-top: 1rem;
+  position: absolute;
+  bottom: 0;
+  margin-left: 50%;
+  transform: translateX(-50%);
 }
 
 /* registration and log in pages */
 
-#main-registration {
+#main {
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 5rem;
