@@ -17,6 +17,8 @@
   background-color: #FC7753 !important;
   position: fixed;
   width: 100%;
+  display: flex;
+  top: 0;
 }
 
 #ss-logo {
@@ -40,6 +42,34 @@
   }
 }
 
+.nav-bar-items {
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-right: 1rem;
+}
+
+.nav-bar-item {
+  text-decoration: none;
+  color: var(--salt, white);
+  display: block;
+  cursor: pointer;
+  padding: initial;
+}
+
+.nav-bar-item:hover {
+  color: black;
+  transition: 1s;
+}
+
+#main {
+  height: 95vh;
+}
+
 .search-form {
   display: flex;
   gap: 1rem;
@@ -60,4 +90,55 @@
 .shopping-grid-item {
   margin-left: auto;
   margin-right: auto;
+  max-width: 18rem;
+}
+
+#footer {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* registration and log in pages */
+
+#main-registration {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+}
+
+.registration-section-content {
+  border: 2px solid red;  
+  border-radius: 30px;
+  box-shadow: 0px 0px 20px palevioletred;  
+  padding: 2.5rem 3rem 2.5rem 3rem;
+  width: 1000px;
+}
+
+.form-layout {  
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-element-package {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.secondary-title {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+#username-error,
+#password-error {
+  color: orange;
+  display: none;
+}
+
+#user-login,
+#user-registration {
+  display: none;
 }
