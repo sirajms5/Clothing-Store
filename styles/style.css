@@ -81,10 +81,15 @@
   max-width: 40rem !important;
 }
 
-#shopping-items {
+#shopping-items,
+#cart-details-list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 5rem;
+  gap: 5rem;  
+  list-style: none;
+}
+
+#shopping-items {
   margin-top: 5rem;
 }
 
@@ -131,4 +136,11 @@
 #password-error {
   color: orange;
   display: none;
+}
+
+/* payment page */
+
+#cart-contents,
+#cart-details-list {
+  margin-top: 3rem;
 }

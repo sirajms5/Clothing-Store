@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +19,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
+
 <body class="master">
     <header>
         <nav id="nav-bar">
@@ -32,7 +34,72 @@
         </nav>
     </header>
     <main id="main">
-
+        <section class="registration-section-content">
+            <h2 class="secondary-title">Payment Details</h2>
+            <form class="form-layout" id="payment-form" method="post"
+                action="https://sirajsaleem.com/web/ticket-master/php/post-ticket.php">
+                <div class="form-element-package">
+                    <label for="name-on-card">Name On Card:</label>
+                    <input class="input-details" id="name-on-card" type="text" name="name-on-card"
+                        placeholder="Name On Card..." maxlength="50">
+                </div>
+                <div class="form-element-package">
+                    <label for="card-number">Card Number:</label>
+                    <input class="input-details" id="card-number" type="text" name="card-number"
+                        placeholder="Card Number..." maxlength="16">
+                </div>
+                <div class="form-element-package">
+                    <label for="card-expiration-date">Expiration Date:</label>
+                    <input class="input-details" id="card-expiration-date" type="text" name="card-expiration-date"
+                        placeholder="MM/YY" maxlength="5">
+                </div>
+                <div class="form-element-package">
+                    <label for="card-cvc-number">CVC:</label>
+                    <input class="input-details" id="card-cvc-number" type="text" name="card-cvc-number"
+                        placeholder="XXX" maxlength="3">
+                </div>
+                <button class="btn btn-success" id="button-payment">Confirm Payment</button>
+            </form>
+        </section>
+        <section id="cart-contents">
+            <h2 class="secondary-title">Cart Contents</h2>
+            <ul id="cart-details-list">
+                <li class="card shopping-grid-item">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's
+                            content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </li>
+                <li class="card shopping-grid-item">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's
+                            content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </li>
+                <li class="card shopping-grid-item">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's
+                            content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </li>
+            </ul>
+        </section>
     </main>
+    <footer id="footer">
+        <p>Developed By Siraj</p>
+    </footer>
 </body>
+
 </html>
