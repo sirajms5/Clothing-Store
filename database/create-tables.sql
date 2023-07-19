@@ -5,7 +5,7 @@ CREATE TABLE USERS(
     First_Name VARCHAR(50) NOT NULL,
     Last_Name VARCHAR(50) NOT NULL,
     Address VARCHAR(255) NOT NULL,
-    Date_Of_Birth DATE,
-    Email VARCHAR(70) NOT NULL,
+    Date_Of_Birth DATE NOT NULL,
+    Email VARCHAR(70) UNIQUE NOT NULL,
     Password VARCHAR(30) NOT NULL
 );
