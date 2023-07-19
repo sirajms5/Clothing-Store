@@ -66,6 +66,15 @@
   transition: 1s;
 }
 
+#main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+}
+
 .search-form {
   display: flex;
   gap: 1rem;
@@ -93,15 +102,6 @@
 }
 
 /* registration and log in pages */
-
-#main {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 5rem;
-}
 
 .registration-section-content {
   border: 2px solid red;  
