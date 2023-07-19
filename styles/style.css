@@ -136,6 +136,7 @@
 #password-error {
   color: orange;
   display: none;
+  grid-column: 2/3;
 }
 
 /* payment page */

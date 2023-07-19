@@ -1,18 +1,18 @@
 <?php
 include 'conn.php';
 
-$firstName = $_GET['first-name'];
-$lastName = $_GET['last-name'];
-$address = $_GET['address'];
-$dateOfBird = $_GET['date-of-birth'];
-$email = $_GET['email'];
-$password = $_GET['password'];
+$firstName = $_POST['first-name'];
+$lastName = $_POST['last-name'];
+$address = $_POST['address'];
+$dateOfBird = $_POST['date-of-birth'];
+$email = $_POST['email'];
+$password = $_POST['password'];
 
 $queryCheckEmail = "SELECT Email FROM users WHERE email = '$email';";
 $resultCheckEmail = mysqli_query($conn, $queryCheckEmail);
 
 if (mysqli_num_rows($resultCheckEmail) == 0) {
-    $encryptedPassword = md5($password);
+    $encryptedPassword = md5($password); // encrypting the password
     $queryRegistration = "INSERT INTO USERS(
                                             First_Name,
                                             Last_Name,
