@@ -42,3 +42,14 @@ VALUES ('Hawaiian Shirts', 33.29, 'Men', 'shirt', './images/81YDJlSKOlL._AC_UX56
 -- https://www.amazon.ca/Wrangler-Authentics-Sleeve-Classic-Bright/dp/B01N810106/ref=sr_1_101?qid=1689979167&s=fashion&sr=1-101
 INSERT INTO ITEMS (Item_Name, Price, Category, Image_Pathway)
 VALUES ('Plaid Shirt', 35.99, 'Men', 'shirt', './images/91jZGdsQujL._AC_UX679_.jpg');
+
+-- https://www.amazon.ca/Signature-Levi-Strauss-Gold-Label/dp/B073V3TQHL?ref_=Oct_d_orecs_d_10287260011_0&pd_rd_w=ATfmC&content-id=amzn1.sym.e9443a82-1e85-46ac-a327-f05a3d24bc0e&pf_rd_p=e9443a82-1e85-46ac-a327-f05a3d24bc0e&pf_rd_r=SMRMB3NK6YZV7NYZFDCK&pd_rd_wg=EaEU8&pd_rd_r=62287175-eb41-4499-862b-4b34eb9acc4c&pd_rd_i=B073V3TQHL
+INSERT INTO ITEMS (Item_Name, Price, Category, Image_Pathway)
+VALUES ('Levi Jeans', 42.81, 'Men', 'jeans', './images/81sS0a1dgjL._AC_UX569_.jpg');
+
+-- https://www.amazon.ca/Gingtto-Ripped-Repaired-Skinny-Stretch/dp/B076JC3N4V?ref_=Oct_d_orecs_d_10287260011_1&pd_rd_w=ATfmC&content-id=amzn1.sym.e9443a82-1e85-46ac-a327-f05a3d24bc0e&pf_rd_p=e9443a82-1e85-46ac-a327-f05a3d24bc0e&pf_rd_r=SMRMB3NK6YZV7NYZFDCK&pd_rd_wg=EaEU8&pd_rd_r=62287175-eb41-4499-862b-4b34eb9acc4c&pd_rd_i=B076JC3N4V
+INSERT INTO ITEMS (Item_Name, Price, Category, Image_Pathway)
+VALUES ('Skinny Jeans', 64.86, 'Men', 'jeans', './images/51VVIcQ83DL._AC_UY741_.jpg');
+
+INSERT INTO ITEMS (Item_Name, Price, Category, Image_Pathway)
+VALUES ('Wrangler Jeans', 44.39, 'Men', 'jeans', './images/71bxUBa7ysL._AC_UX569_.jpg');
