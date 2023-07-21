@@ -67,3 +67,29 @@ VALUES ('Fujeak Shoes', 46.99, 'Men', 'shoes', './images/71R3GjjWMyL._AC_UY575_.
 INSERT INTO ITEMS (Item_Name, Price, Category, Image_Pathway)
 VALUES ('Work Boots', 63.99, 'Men', 'shoes', './images/81ToCrQe5gL._AC_SY575._SX._UX._SY._UY_.jpg');
 
+-- https://www.amazon.ca/Alex-Vando-Womens-Button-Stretch/dp/B07JVFGXRX/ref=sr_1_3_sspa?qid=1689980102&s=fashion&sr=1-3-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGZfYnJvd3Nl&psc=1
+INSERT INTO ITEMS (Item_Name, Price, Category, Image_Pathway)
+VALUES ('Dress Shirt', 34.99, 'women', 'shirt', './images/711DVmlvM1L._AC_UX679_.jpg');
+
+-- https://www.amazon.ca/dp/B0BWNBKRNF/ref=sspa_dk_detail_6?psc=1&pd_rd_i=B0BWNBKRNF&pd_rd_w=36EF2&content-id=amzn1.sym.d8c43617-c625-45bd-a63f-ad8715c2c055&pf_rd_p=d8c43617-c625-45bd-a63f-ad8715c2c055&pf_rd_r=FEC7MEDDBV4XFZEJCHBN&pd_rd_wg=ch6Ei&pd_rd_r=cc769ae3-ef3a-4df0-9104-24c808d2a668&s=fashion&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw
+INSERT INTO ITEMS (Item_Name, Price, Category, Image_Pathway)
+VALUES ('Long Sleeve', 49.99, 'women', 'shirt', './images/51AJlajii7L._AC_UX679_.jpg');
+
+-- https://www.amazon.ca/dp/B07B3QJNRF/ref=sspa_dk_detail_3?psc=1&pd_rd_i=B07B3QJNRF&pd_rd_w=RcUxd&content-id=amzn1.sym.d8c43617-c625-45bd-a63f-ad8715c2c055&pf_rd_p=d8c43617-c625-45bd-a63f-ad8715c2c055&pf_rd_r=B5E5DKH3VY6HWF0Z1NXQ&pd_rd_wg=wEEYU&pd_rd_r=43419656-b086-4c87-ba35-d22526448250&s=fashion&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw
+INSERT INTO ITEMS (Item_Name, Price, Category, Image_Pathway)
+VALUES ('EZEN Shirt', 30.62, 'women', 'shirt', './images/714dww+R8sL._AC_UX569_.jpg');
+
+-- https://www.amazon.ca/dp/B0B6J49ZHN/ref=sspa_dk_detail_7?psc=1&pd_rd_i=B0B6J49ZHN&pd_rd_w=ESAq5&content-id=amzn1.sym.d8c43617-c625-45bd-a63f-ad8715c2c055&pf_rd_p=d8c43617-c625-45bd-a63f-ad8715c2c055&pf_rd_r=S98RBKQS9VGRQRPDV0FD&pd_rd_wg=GCYNR&pd_rd_r=f49cb4bc-a9bb-49ab-936e-061fdbca5be6&s=fashion&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw
+INSERT INTO ITEMS (Item_Name, Price, Category, Image_Pathway)
+VALUES ('Dress Shirt', 36.99, 'women', 'shirt', './images/71OGjHpQQGL._AC_UX569_.jpg');
+
+-- https://www.amazon.ca/dp/B0B96V6CK8/ref=sspa_dk_detail_7?psc=1&pd_rd_i=B0B96V6CK8&pd_rd_w=YWjvT&content-id=amzn1.sym.d8c43617-c625-45bd-a63f-ad8715c2c055&pf_rd_p=d8c43617-c625-45bd-a63f-ad8715c2c055&pf_rd_r=0XN78BVXWK346B4J0VY9&pd_rd_wg=Pc7su&pd_rd_r=37df9607-0101-49c9-ba6f-43883ce1d972&s=fashion&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw
+INSERT INTO ITEMS (Item_Name, Price, Category, Image_Pathway)
+VALUES ('Loose Blouse', 21.99, 'women', 'shirt', './images/813RrNyE0TL._AC_UX569_.jpg');
+
+-- https://www.amazon.ca/dp/B0B747PH59/ref=sspa_dk_detail_11?psc=1&pf_rd_p=14f07b63-de09-4b1a-8753-fdcce0125efd&pf_rd_r=1CM3TNBYJ9EZTZ40EYAA&pd_rd_wg=JC4aX&pd_rd_w=VURyp&content-id=amzn1.sym.14f07b63-de09-4b1a-8753-fdcce0125efd&pd_rd_r=ba5e6028-a7e0-4634-aeac-8c9a6f7318be&s=fashion&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEzNEJHRFBKQlpPUDM4JmVuY3J5cHRlZElkPUEwNjg1MDU4V0NXQ1BUNVNNU1ZQJmVuY3J5cHRlZEFkSWQ9QTA5MjUxNzYxUzUzOEdaUDA5QVdBJndpZGdldE5hbWU9c3BfZGV0YWlsX3RoZW1hdGljJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ==
+INSERT INTO ITEMS (Item_Name, Price, Category, Image_Pathway)
+VALUES ('Viracy Blouse', 34.99, 'women', 'shirt', './images/71kHpnRY22L._AC_UX569_.jpg');
+
+
+
