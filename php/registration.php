@@ -12,7 +12,6 @@ $queryCheckEmail = "SELECT Email FROM users WHERE email = '$email';";
 $resultCheckEmail = mysqli_query($conn, $queryCheckEmail);
 
 if (mysqli_num_rows($resultCheckEmail) == 0) {
-    $encryptedPassword = md5($password); // encrypting the password
     $queryRegistration = "INSERT INTO USERS(
                                             First_Name,
                                             Last_Name,
@@ -21,7 +20,7 @@ if (mysqli_num_rows($resultCheckEmail) == 0) {
                                             Email,
                                             Password
                                         ) 
-                                    VALUES ('$firstName', '$lastName', '$address', '$dateOfBird', '$email', '$encryptedPassword');";
+                                    VALUES ('$firstName', '$lastName', '$address', '$dateOfBird', '$email', '$password');";
     $resultRegistration = mysqli_query($conn, $queryRegistration);
 
     $querySelectNewId = "SELECT id FROM USERS WHERE email = '$email';";

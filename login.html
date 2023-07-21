@@ -7,6 +7,8 @@
     <title>Log in Page</title>
     <link rel="stylesheet" type="text/css" href="./styles/style.css">
 
+    <script src="./script/login.js" defer></script>
+
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
@@ -34,18 +36,18 @@
     </header>
     <main id="main">
         <section class="registration-section-content" id="user-login">
-            <h2 class="secondary-title">Log In</h2>
+            <h2 class="secondary-title">Log In</h2> <!-- put span for email or password error instead of error on each input-->
             <form class="form-layout" id="log-in-form" name="log-in-form" method="post"
                 action="https://sirajsaleem.com/web/ticket-master/php/user-login.php">
                 <div class="form-element-package">
                     <label for="username">Email</label>
-                    <input class="form-control" id="log-in-email" type="text" name="log-in-email"
+                    <input class="form-control" id="log-in-email" type="text" name="email"
                         placeholder="Email..." maxlength="70" required>
-                    <span id="username-error">Username does not exit.</span>
+                    <span id="email-error">Username does not exit.</span>
                 </div>
                 <div class="form-element-package">
                     <label for="password">Password:</label>
-                    <input class="form-control" id="log-in-password" type="password" name="log-in-password"
+                    <input class="form-control" id="log-in-password" type="password" name="password"
                         placeholder="Password..." maxlength="30" required>
                     <span id="password-error">Wrong Password.</span>
                 </div>
