@@ -12,6 +12,9 @@ if(firstName != null && lastName != null){
 
 let signOutButton = document.getElementById("sign-out");
 signOutButton.addEventListener("click", () => {
+    document.getElementById("log-in").style.display = "inline";
+    document.getElementById("register").style.display = "inline";
+    document.getElementById("sign-out").style.display = "none";   
     sessionStorage.clear();
     firstName = null;
     lastName = null;
