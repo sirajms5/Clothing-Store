@@ -55,3 +55,15 @@ VALUES ('Skinny Jeans', 64.86, 'Men', 'jeans', './images/51VVIcQ83DL._AC_UY741_.
 INSERT INTO ITEMS (Item_Name, Price, Category, Image_Pathway)
 VALUES ('Wrangler Jeans', 44.39, 'Men', 'jeans', './images/71bxUBa7ysL._AC_UX569_.jpg');
 
+-- https://www.amazon.ca/GoodValue-Running-Waterproof-Non-Slip-All-Terrain/dp/B09YTXKN1R/?_encoding=UTF8&pd_rd_i=B09MYPX8NC&pd_rd_w=QsFvl&content-id=amzn1.sym.a5045f39-0cc2-46cc-8eac-176a9b09d68c&pf_rd_p=a5045f39-0cc2-46cc-8eac-176a9b09d68c&pf_rd_r=J6E5Z493B50P0NK8YJP1&pd_rd_wg=7TRTq&pd_rd_r=5bdd080c-571d-479f-b7b0-4861a911bf2e&ref_=oct_dx_dotd
+INSERT INTO ITEMS (Item_Name, Price, Category, Image_Pathway)
+VALUES ('Running Shoes', 38.39, 'Men', 'shoes', './images/71hq8jllLlL._AC_UX575_.jpg');
+
+-- https://www.amazon.ca/FUJEAK-Breathable-Athletic-Comfortable-Lightweight/dp/B08HWXSK6Q/?_encoding=UTF8&pd_rd_i=B08G4KXPLH&pd_rd_w=QsFvl&content-id=amzn1.sym.a5045f39-0cc2-46cc-8eac-176a9b09d68c&pf_rd_p=a5045f39-0cc2-46cc-8eac-176a9b09d68c&pf_rd_r=J6E5Z493B50P0NK8YJP1&pd_rd_wg=7TRTq&pd_rd_r=5bdd080c-571d-479f-b7b0-4861a911bf2e&ref_=oct_dx_dotd
+INSERT INTO ITEMS (Item_Name, Price, Category, Image_Pathway)
+VALUES ('Fujeak Shoes', 46.99, 'Men', 'shoes', './images/71R3GjjWMyL._AC_UY575_.jpg');
+
+-- https://www.amazon.ca/RIELD-Military-Tactical-Zipper-Jungle/dp/B087GCXKWZ/?_encoding=UTF8&pd_rd_i=B087G9G48H&pd_rd_w=QsFvl&content-id=amzn1.sym.a5045f39-0cc2-46cc-8eac-176a9b09d68c&pf_rd_p=a5045f39-0cc2-46cc-8eac-176a9b09d68c&pf_rd_r=J6E5Z493B50P0NK8YJP1&pd_rd_wg=7TRTq&pd_rd_r=5bdd080c-571d-479f-b7b0-4861a911bf2e&ref_=oct_dx_dotd&th=1
+INSERT INTO ITEMS (Item_Name, Price, Category, Image_Pathway)
+VALUES ('Work Boots', 63.99, 'Men', 'shoes', './images/81ToCrQe5gL._AC_SY575._SX._UX._SY._UY_.jpg');
+
