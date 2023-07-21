@@ -7,11 +7,13 @@ registrationButton.addEventListener("click", (event) => {
 
     xmlHttpRequest.onload = () => {
         if(xmlHttpRequest.status === 200){
-            if(xmlHttpRequest.responseText == "success"){
+            if(xmlHttpRequest.responseText != "email already registered"){
                 let firstName = document.getElementById("first-name").value;
                 let lastName = document.getElementById("last-name").value;
+                let id = xmlHttpRequest.responseText;
                 sessionStorage.setItem("first-name", firstName);
                 sessionStorage.setItem("last-name", lastName);
+                sessionStoratge.setItem("id", id);
                 window.location.href = "./index.html";
             } else {
                 document.getElementById("username-error").style.display = "inline";

@@ -23,7 +23,16 @@ if (mysqli_num_rows($resultCheckEmail) == 0) {
                                         ) 
                                     VALUES ('$firstName', '$lastName', '$address', '$dateOfBird', '$email', '$encryptedPassword');";
     $resultRegistration = mysqli_query($conn, $queryRegistration);
-    echo "success";
+
+    $querySelectNewId = "SELECT id FROM USERS WHERE email = '$email';";
+    $resultSelectNewId = mysqli_query($conn, $querySelectNewId);
+    $data = mysqli_fetch_all($resultSelectNewId, MYSQLI_ASSOC);
+
+    $toReturn = "";
+    foreach($data as $row){
+        $toReturn = $toReturn . $row['id'];
+    }
+    echo $toReturn;
 } else {
     echo "email already registered";
 }
