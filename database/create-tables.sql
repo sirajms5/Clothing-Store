@@ -91,5 +91,17 @@ VALUES ('Loose Blouse', 21.99, 'women', 'shirt', './images/813RrNyE0TL._AC_UX569
 INSERT INTO ITEMS (Item_Name, Price, Category, Image_Pathway)
 VALUES ('Viracy Blouse', 34.99, 'women', 'shirt', './images/71kHpnRY22L._AC_UX569_.jpg');
 
+-- https://www.amazon.ca/Oprah-Favorite-Jeans-Wide-Leg/dp/B0C9JVNG1C?ref_=Oct_d_onr_d_10287512011_2&pd_rd_w=0ISOa&content-id=amzn1.sym.61e66258-eef5-45fe-a8dc-635cc7a35f8b&pf_rd_p=61e66258-eef5-45fe-a8dc-635cc7a35f8b&pf_rd_r=KQKDFW85V5E8BVDND1H0&pd_rd_wg=nP4st&pd_rd_r=1f5752cd-c387-4955-b1e9-2a477d6c5ba6&pd_rd_i=B0C9JVNG1C
+INSERT INTO ITEMS (Item_Name, Price, Category, Image_Pathway)
+VALUES ('Oprah Jeans', 47.72, 'women', 'jeans', './images/61bmJ7TX8eL._AC_UX679_.jpg');
+
+-- https://www.amazon.ca/TKMUNY-Lace-up-Stretchy-Juniors-Leggings/dp/B0C4T1B25S?ref_=Oct_d_onr_d_10287512011_4&pd_rd_w=0ISOa&content-id=amzn1.sym.61e66258-eef5-45fe-a8dc-635cc7a35f8b&pf_rd_p=61e66258-eef5-45fe-a8dc-635cc7a35f8b&pf_rd_r=KQKDFW85V5E8BVDND1H0&pd_rd_wg=nP4st&pd_rd_r=1f5752cd-c387-4955-b1e9-2a477d6c5ba6&pd_rd_i=B0C4T1B25S
+INSERT INTO ITEMS (Item_Name, Price, Category, Image_Pathway)
+VALUES ('Tkmuny Jeans', 43.49, 'women', 'jeans', './images/416M8ND1Q6L._AC_UY741_.jpg');
+
+-- https://www.amazon.ca/Womens-Elastic-Distressed-Pants-Trousers/dp/B0C5MYJ1CS?ref_=Oct_d_onr_d_10287512011_5&pd_rd_w=0ISOa&content-id=amzn1.sym.61e66258-eef5-45fe-a8dc-635cc7a35f8b&pf_rd_p=61e66258-eef5-45fe-a8dc-635cc7a35f8b&pf_rd_r=KQKDFW85V5E8BVDND1H0&pd_rd_wg=nP4st&pd_rd_r=1f5752cd-c387-4955-b1e9-2a477d6c5ba6&pd_rd_i=B0C5MYJ1CS
+INSERT INTO ITEMS (Item_Name, Price, Category, Image_Pathway)
+VALUES ('Casual Jeans', 16.99, 'women', 'jeans', './images/61RwWH3ifxL._AC_UX679_.jpg');
+
 
 
