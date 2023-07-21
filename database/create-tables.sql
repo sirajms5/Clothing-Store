@@ -51,5 +51,7 @@ VALUES ('Levi Jeans', 42.81, 'Men', 'jeans', './images/81sS0a1dgjL._AC_UX569_.jp
 INSERT INTO ITEMS (Item_Name, Price, Category, Image_Pathway)
 VALUES ('Skinny Jeans', 64.86, 'Men', 'jeans', './images/51VVIcQ83DL._AC_UY741_.jpg');
 
+-- https://www.amazon.ca/Wrangler-Authentics-Classic-5-Pocket-Twilight/dp/B074KK9K7B?ref_=Oct_d_orecs_d_10287260011_2&pd_rd_w=ATfmC&content-id=amzn1.sym.e9443a82-1e85-46ac-a327-f05a3d24bc0e&pf_rd_p=e9443a82-1e85-46ac-a327-f05a3d24bc0e&pf_rd_r=SMRMB3NK6YZV7NYZFDCK&pd_rd_wg=EaEU8&pd_rd_r=62287175-eb41-4499-862b-4b34eb9acc4c&pd_rd_i=B074KK9K7B
 INSERT INTO ITEMS (Item_Name, Price, Category, Image_Pathway)
 VALUES ('Wrangler Jeans', 44.39, 'Men', 'jeans', './images/71bxUBa7ysL._AC_UX569_.jpg');
+
