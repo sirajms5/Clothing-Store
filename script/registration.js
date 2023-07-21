@@ -13,7 +13,7 @@ registrationButton.addEventListener("click", (event) => {
                 let id = xmlHttpRequest.responseText;
                 sessionStorage.setItem("first-name", firstName);
                 sessionStorage.setItem("last-name", lastName);
-                sessionStoratge.setItem("id", id);
+                sessionStorage.setItem("id", id);
                 window.location.href = "./index.html";
             } else {
                 document.getElementById("username-error").style.display = "inline";
