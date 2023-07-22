@@ -2,6 +2,7 @@ let firstName = sessionStorage.getItem("first-name");
 let lastName = sessionStorage.getItem("last-name");
 let userId = sessionStorage.getItem("id");
 let username = document.getElementById("logged-in-name");
+let cartCountElement = document.getElementById("cart-count");
 
 // checking if user is logged in
 if (firstName != null && lastName != null) {
@@ -10,6 +11,31 @@ if (firstName != null && lastName != null) {
     document.getElementById("sign-out").style.display = "inline";
     username.innerText = firstName + " " + lastName;
 }
+
+function getCartCount() {
+    xmlHttpRequestGetCartCount = new XMLHttpRequest();
+    xmlHttpRequestGetCartCount.open("POST", "./php/cart-count.php", true);
+    xmlHttpRequestGetCartCount.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded                    
+    xmlHttpRequestGetCartCount.onload = () => {
+        if (xmlHttpRequestGetCartCount.status === 200) {
+            let cartCount = parseInt(xmlHttpRequestGetCartCount.responseText);
+            if (cartCount < 99) {
+                cartCountElement.innerText = cartCount;
+            } else {
+                cartCountElement.innerText = "99+";
+            }
+
+        } else {
+            alert("can't connect to cart-count php")
+        }
+
+    }
+
+    let params = "user_id=" + userId;
+    xmlHttpRequestGetCartCount.send(params);
+}
+
+getCartCount();
 
 // sing out button
 let signOutButton = document.getElementById("sign-out");
@@ -22,7 +48,7 @@ signOutButton.addEventListener("click", () => {
     lastName = null;
     id = null;
     username.innerText = "";
-})
+});
 
 // item constructor
 class item {
@@ -95,21 +121,30 @@ function itemButtonClicked(itemButton) {
     if (userId !== null) {
         let itemButtonId = itemButton.id.split("-");
         let itemId = itemButtonId[1];
-        let xmlHttpRequest = new XMLHttpRequest();
-        xmlHttpRequest.open("POST", "./php/cart-post.php", true);
-        xmlHttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        let xmlHttpRequestAddToCart = new XMLHttpRequest();
+        xmlHttpRequestAddToCart.open("POST", "./php/cart-post.php", true); // adding item to cart
+        xmlHttpRequestAddToCart.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded
 
-        xmlHttpRequest.onload = () => {
-            if (xmlHttpRequest.status === 200) {
-                
+        xmlHttpRequestAddToCart.onload = () => {
+            if (xmlHttpRequestAddToCart.status === 200) {
+                if (xmlHttpRequestAddToCart.responseText == "added") {
+                    getCartCount();
+                } else {
+                    alert("Item not available, try again later");
+                }
+
             } else {
                 alert("Can't connect to cart-post php");
             }
+
         }
         let params = "item_id=" + itemId + "&user_id=" + userId;
-        xmlHttpRequest.send(params);
+        xmlHttpRequestAddToCart.send(params);
     } else {
         window.location.href = "./login.html";
     }
+    
 }
+
+
 
