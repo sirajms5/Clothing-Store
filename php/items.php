@@ -1,8 +1,7 @@
 <?php
-    include 'conn.php';
+    include 'conn.php';    
 
-    
-
+    // if true it will get user cart items otherwise all items
     if(isset($_POST['user_id'])){
         $userId = intval($_POST['user_id']);
 
@@ -14,7 +13,7 @@
     } else {
         $query = "SELECT * FROM items;";
     }
-        
+
     $result = mysqli_query($conn, $query);
     $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
