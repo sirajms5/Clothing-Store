@@ -105,7 +105,7 @@ VALUES ('Casual Jeans', 16.99, 'women', 'jeans', './images/61RwWH3ifxL._AC_UX679
 
 -- https://www.amazon.ca/FRSHANIAH-Athletic-Walking-Non-Slip-Sneakers/dp/B093VJHJF1/ref=sr_1_22_sspa?qid=1689981199&s=fashion&sr=1-22-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9tdGZfYnJvd3Nl&psc=1
 INSERT INTO ITEMS (Item_Name, Price, Sex, Category, Image_Pathway)
-VALUES ('Athletic Shoes', 66.93, 'women', 'shoes', './images/81eROaqm-BS._AC_SY575._SX._UX._SY._UY_.jpg');
+VALUES ('Athletic Shoes', 66.93, 'women', 'shoes', './images/81eROaqmBS._AC_SY575._SX._UX._SY._UY_.jpg');
 
 -- https://www.amazon.ca/dp/B09BCLDDCD/?_encoding=UTF8&pd_rd_i=B09BCMCKV2&pd_rd_w=I0tQ3&content-id=amzn1.sym.6ff60254-e724-49de-b28a-ef9e4fa611a5&pf_rd_p=6ff60254-e724-49de-b28a-ef9e4fa611a5&pf_rd_r=H8BPCCB642PSGXKJ0J3H&pd_rd_wg=avyro&pd_rd_r=18a094f9-e4e1-40e1-9581-391b2580f6b7&ref_=oct_dx_ld
 INSERT INTO ITEMS (Item_Name, Price, Sex, Category, Image_Pathway)

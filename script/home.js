@@ -26,17 +26,19 @@ signOutButton.addEventListener("click", () => {
 
 // item constructor
 class item {
-    constructor(id, name, price, sex, category, image) {
+    constructor(id, name, price, sex, category, image, altText) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.sex = sex;
         this.category = category;
         this.image = image;
+        this.altText = altText;
     }
 };
 
 let items = []; // will contain all items
+let shoppingList = document.getElementById("shopping-items");
 let xmlHttpRequest = new XMLHttpRequest();
 xmlHttpRequest.open("GET", "./php/home.php", true);
 xmlHttpRequest.onload = () => {
@@ -45,11 +47,41 @@ xmlHttpRequest.onload = () => {
         result.pop();
         for(let index = 0; index < result.length; index++){
             let singleItem = result[index].split("-"); // - is separating between each column
-            let itemObject = new item(singleItem[0], singleItem[1], singleItem[2], singleItem[3], singleItem[4], singleItem[5]);
+            let itemObject = new item(singleItem[0], singleItem[1], singleItem[2], singleItem[3], singleItem[4], singleItem[5], singleItem[6]);
             items.push(itemObject);
         }
         
-        
+        for(let index = 0; index < items.length; index++){
+            let listItem = document.createElement("li");
+            listItem.classList.add("card", "shopping-grid-item");
+
+            let itemImage = document.createElement("img");
+            itemImage.setAttribute("src", items[index]["image"]);
+            itemImage.setAttribute("alt", items[index]["altText"]);
+            itemImage.classList.add("card-img-top");
+            listItem.appendChild(itemImage);
+
+            let itemDiv = document.createElement("div");
+            itemDiv.classList.add("card-body");
+
+            let itemTitle = document.createElement("p");
+            itemTitle.classList.add("card-title");
+            itemTitle.innerText = items[index]["name"];
+            itemDiv.appendChild(itemTitle);
+
+            let itemPrice = document.createElement("p");
+            itemPrice.classList.add("card-text");
+            itemPrice.innerText = items[index]["price"];
+            itemDiv.appendChild(itemPrice);
+
+            let addToCartButton = document.createElement("button");
+            addToCartButton.classList.add("btn", "btn-primary");
+            addToCartButton.innerText = "Add To Cart";
+            itemDiv.appendChild(addToCartButton);
+
+            listItem.appendChild(itemDiv);
+            shoppingList.appendChild(listItem);
+        }
     } else {
         alert("Can't connect to php");
     }
