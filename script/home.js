@@ -91,9 +91,25 @@ xmlHttpRequest.onload = () => {
 
 xmlHttpRequest.send();
 
-function itemButtonClicked(itemButton){
-    let itemButtonId = itemButton.id.split("-");
-    let itemId = itemButtonId[1];
-    // send the id to data base to add it to cart table
+function itemButtonClicked(itemButton) {
+    if (userId !== null) {
+        let itemButtonId = itemButton.id.split("-");
+        let itemId = itemButtonId[1];
+        let xmlHttpRequest = new XMLHttpRequest();
+        xmlHttpRequest.open("POST", "./php/cart-post.php", true);
+        xmlHttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        xmlHttpRequest.onload = () => {
+            if (xmlHttpRequest.status === 200) {
+                
+            } else {
+                alert("Can't connect to cart-post php");
+            }
+        }
+        let params = "item_id=" + itemId + "&user_id=" + userId;
+        xmlHttpRequest.send(params);
+    } else {
+        window.location.href = "./login.html";
+    }
 }
 
