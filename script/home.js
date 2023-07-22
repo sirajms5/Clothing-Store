@@ -49,6 +49,7 @@ xmlHttpRequest.onload = () => {
         for (let index = 0; index < result.length; index++) {
             let singleItem = result[index].split("-"); // - is separating between each column
             let itemObject = new item(singleItem[0], singleItem[1], singleItem[2], singleItem[3], singleItem[4], singleItem[5], singleItem[6]);
+            items.push(itemObject);
         }
 
         for (let index = 0; index < items.length; index++) {
