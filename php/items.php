@@ -1,7 +1,20 @@
 <?php
     include 'conn.php';
 
-    $query = "SELECT * FROM items;";
+    
+
+    if(isset($_POST['user_id'])){
+        $userId = intval($_POST['user_id']);
+
+        $query = "SELECT items.id, items.Item_Name, items.Price, items.Sex, items.Category, items.Image_Pathway, items.Alt_Text
+                    FROM items
+                    JOIN carts ON items.id = carts.Item_Id
+                    JOIN users ON carts.User_Id = users.id
+                    WHERE User_Id = $userId AND End_Date IS NULL;";
+    } else {
+        $query = "SELECT * FROM items;";
+    }
+        
     $result = mysqli_query($conn, $query);
     $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
 

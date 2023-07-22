@@ -45,19 +45,6 @@ function getCartCount() {
 
 getCartCount();
 
-// sing out button
-let signOutButton = document.getElementById("sign-out");
-signOutButton.addEventListener("click", () => {
-    document.getElementById("log-in").style.display = "inline";
-    document.getElementById("register").style.display = "inline";
-    document.getElementById("sign-out").style.display = "none";
-    sessionStorage.clear();
-    firstName = null;
-    lastName = null;
-    id = null;
-    username.innerText = "";
-});
-
 // item constructor
 class item {
     constructor(id, name, price, sex, category, image, altText) { // add alt to the database content
@@ -73,11 +60,12 @@ class item {
 
 let items = []; // will contain all items
 let shoppingList = document.getElementById("shopping-items");
-let xmlHttpRequest = new XMLHttpRequest();
-xmlHttpRequest.open("POST", "./php/items.php", true);
-xmlHttpRequest.onload = () => {
-    if (xmlHttpRequest.status === 200) {
-        let result = xmlHttpRequest.responseText.split("*"); // * is separating between each row
+let xmlHttpRequestCartItems = new XMLHttpRequest();
+xmlHttpRequestCartItems.open("POST", "./php/items.php", true);
+xmlHttpRequestCartItems.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded
+xmlHttpRequestCartItems.onload = () => {
+    if (xmlHttpRequestCartItems.status === 200) {
+        let result = xmlHttpRequestCartItems.responseText.split("*"); // * is separating between each row
         result.pop();
         for (let index = 0; index < result.length; index++) {
             let singleItem = result[index].split("-"); // - is separating between each column
@@ -111,8 +99,8 @@ xmlHttpRequest.onload = () => {
             let addToCartButton = document.createElement("button"); // adding add to cart button
             addToCartButton.setAttribute("onclick", "itemButtonClicked(this)");
             addToCartButton.id = "itemButton-" + items[index]["id"];
-            addToCartButton.classList.add("btn", "btn-primary");
-            addToCartButton.innerText = "Add To Cart";
+            addToCartButton.classList.add("btn", "btn-danger");
+            addToCartButton.innerText = "Remove From Cart";
             itemDiv.appendChild(addToCartButton);
 
             listItem.appendChild(itemDiv);
@@ -121,35 +109,20 @@ xmlHttpRequest.onload = () => {
     } else {
         alert("Can't connect to php");
     }
-}
-
-xmlHttpRequest.send();
-
-function itemButtonClicked(itemButton) {
-    if (userId !== null) {
-        let itemButtonId = itemButton.id.split("-");
-        let itemId = itemButtonId[1];
-        let xmlHttpRequestAddToCart = new XMLHttpRequest();
-        xmlHttpRequestAddToCart.open("POST", "./php/cart-post.php", true); // adding item to cart
-        xmlHttpRequestAddToCart.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded
-
-        xmlHttpRequestAddToCart.onload = () => {
-            if (xmlHttpRequestAddToCart.status === 200) {
-                if (xmlHttpRequestAddToCart.responseText == "added") {
-                    getCartCount();
-                } else {
-                    alert("Item not available, try again later");
-                }
-
-            } else {
-                alert("Can't connect to cart-post php");
-            }
-
-        }
-        let params = "item_id=" + itemId + "&user_id=" + userId;
-        xmlHttpRequestAddToCart.send(params);
-    } else {
-        window.location.href = "./login.html";
-    }
 
 }
+
+let params = "user_id=" + userId;
+xmlHttpRequestCartItems.send(params);
+
+function itemButtonClicked(itemButton){
+    // remove item from list
+}
+
+let paymentButton = document.getElementById("button-payment");
+paymentButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    // wrap it with input validity check
+
+
+})
