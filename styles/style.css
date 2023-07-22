@@ -19,6 +19,7 @@
   width: 100%;
   display: flex;
   top: 0;
+  z-index: 2;
 }
 
 #ss-logo {
@@ -100,14 +101,18 @@
 .shopping-grid-item {
   margin-left: auto;
   margin-right: auto;
-  max-width: 18rem;
+  max-width: 19rem;
+  border: 1px solid #8B635C !important;
+  box-shadow: 2px 2px #8B635C;
+}
+
+.card-img-top {
+  width: 17rem !important;
+  height: 20rem !important;
 }
 
 #footer {
-  position: absolute;
-  bottom: 0;
-  margin-left: 50%;
-  transform: translateX(-50%);
+  text-align: center;
 }
 
 /* registration and log in pages */

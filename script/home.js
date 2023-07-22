@@ -1,6 +1,6 @@
 let firstName = sessionStorage.getItem("first-name");
 let lastName = sessionStorage.getItem("last-name");
-let id = sessionStorage.getItem("id");
+let userId = sessionStorage.getItem("id");
 let username = document.getElementById("logged-in-name");
 
 // checking if user is logged in
@@ -44,7 +44,6 @@ xmlHttpRequest.open("GET", "./php/home.php", true);
 xmlHttpRequest.onload = () => {
     if (xmlHttpRequest.status === 200) {
         let result = xmlHttpRequest.responseText.split("*"); // * is separating between each row
-        console.log(result);
         result.pop();
         for (let index = 0; index < result.length; index++) {
             let singleItem = result[index].split("-"); // - is separating between each column
@@ -76,6 +75,8 @@ xmlHttpRequest.onload = () => {
             itemDiv.appendChild(itemPrice);
 
             let addToCartButton = document.createElement("button"); // adding add to cart button
+            addToCartButton.setAttribute("onclick", "itemButtonClicked(this)");
+            addToCartButton.id = "itemButton-" + items[index]["id"];
             addToCartButton.classList.add("btn", "btn-primary");
             addToCartButton.innerText = "Add To Cart";
             itemDiv.appendChild(addToCartButton);
@@ -89,4 +90,10 @@ xmlHttpRequest.onload = () => {
 }
 
 xmlHttpRequest.send();
+
+function itemButtonClicked(itemButton){
+    let itemButtonId = itemButton.id.split("-");
+    let itemId = itemButtonId[1];
+    // send the id to data base to add it to cart table
+}
 
