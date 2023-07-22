@@ -26,7 +26,7 @@ signOutButton.addEventListener("click", () => {
 
 // item constructor
 class item {
-    constructor(id, name, price, sex, category, image, altText) {
+    constructor(id, name, price, sex, category, image, altText) { // add alt to the database content
         this.id = id;
         this.name = name;
         this.price = price;
@@ -55,7 +55,7 @@ xmlHttpRequest.onload = () => {
             let listItem = document.createElement("li");
             listItem.classList.add("card", "shopping-grid-item");
 
-            let itemImage = document.createElement("img");
+            let itemImage = document.createElement("img"); // adding image to the list
             itemImage.setAttribute("src", items[index]["image"]);
             itemImage.setAttribute("alt", items[index]["altText"]);
             itemImage.classList.add("card-img-top");
@@ -64,17 +64,17 @@ xmlHttpRequest.onload = () => {
             let itemDiv = document.createElement("div");
             itemDiv.classList.add("card-body");
 
-            let itemTitle = document.createElement("p");
+            let itemTitle = document.createElement("p"); // adding shopping item title to the list
             itemTitle.classList.add("card-title");
             itemTitle.innerText = items[index]["name"];
             itemDiv.appendChild(itemTitle);
 
-            let itemPrice = document.createElement("p");
+            let itemPrice = document.createElement("p"); // adding shopping item price
             itemPrice.classList.add("card-text");
             itemPrice.innerText = items[index]["price"];
             itemDiv.appendChild(itemPrice);
 
-            let addToCartButton = document.createElement("button");
+            let addToCartButton = document.createElement("button"); // adding add to cart button
             addToCartButton.classList.add("btn", "btn-primary");
             addToCartButton.innerText = "Add To Cart";
             itemDiv.appendChild(addToCartButton);
