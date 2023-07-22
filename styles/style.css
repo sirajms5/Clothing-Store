@@ -62,13 +62,18 @@
   padding: initial;
 }
 
+.nav-bar-item:hover {
+  color: black;
+  transition: 1s;
+}
+
 #sign-out {
   display: none;
 }
 
-.nav-bar-item:hover {
-  color: black;
-  transition: 1s;
+#cart-count {
+  font-size: 1.1rem;
+  margin-left: 0.25rem;
 }
 
 #main {

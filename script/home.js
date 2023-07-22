@@ -20,9 +20,9 @@ function getCartCount() {
         if (xmlHttpRequestGetCartCount.status === 200) {
             let cartCount = parseInt(xmlHttpRequestGetCartCount.responseText);
             if (cartCount < 99) {
-                cartCountElement.innerText = cartCount;
+                cartCountElement.innerText = "(" + cartCount + ")";
             } else {
-                cartCountElement.innerText = "99+";
+                cartCountElement.innerText = "(99+)";
             }
 
         } else {
@@ -143,8 +143,5 @@ function itemButtonClicked(itemButton) {
     } else {
         window.location.href = "./login.html";
     }
-    
+
 }
-
-
-
