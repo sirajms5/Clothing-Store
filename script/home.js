@@ -44,14 +44,14 @@ xmlHttpRequest.open("GET", "./php/home.php", true);
 xmlHttpRequest.onload = () => {
     if (xmlHttpRequest.status === 200) {
         let result = xmlHttpRequest.responseText.split("*"); // * is separating between each row
+        console.log(result);
         result.pop();
-        for(let index = 0; index < result.length; index++){
+        for (let index = 0; index < result.length; index++) {
             let singleItem = result[index].split("-"); // - is separating between each column
             let itemObject = new item(singleItem[0], singleItem[1], singleItem[2], singleItem[3], singleItem[4], singleItem[5], singleItem[6]);
-            items.push(itemObject);
         }
-        
-        for(let index = 0; index < items.length; index++){
+
+        for (let index = 0; index < items.length; index++) {
             let listItem = document.createElement("li");
             listItem.classList.add("card", "shopping-grid-item");
 
@@ -71,7 +71,7 @@ xmlHttpRequest.onload = () => {
 
             let itemPrice = document.createElement("p"); // adding shopping item price
             itemPrice.classList.add("card-text");
-            itemPrice.innerText = items[index]["price"];
+            itemPrice.innerText = "C$" + items[index]["price"];
             itemDiv.appendChild(itemPrice);
 
             let addToCartButton = document.createElement("button"); // adding add to cart button

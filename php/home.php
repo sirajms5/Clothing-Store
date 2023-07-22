@@ -8,7 +8,15 @@
     if($data){
         $toReturn = "";
         foreach($data as $row){
-            $toReturn = $toReturn . $row["id"] . "-" . $row["Item_Name"] . "-" . $row["Price"] . "-" . $row["Sex"] . "-" . $row["Category"] . "-" . $row["Image_Pathway"] . "*";
+            $toReturn = $toReturn 
+                . $row["id"] 
+                . "-" . $row["Item_Name"] 
+                . "-" . $row["Price"] 
+                . "-" . $row["Sex"] 
+                . "-" . $row["Category"] 
+                . "-" . $row["Image_Pathway"] 
+                . "-" . $row["Alt_Text"] 
+                . "*";
         }
         
         echo $toReturn;
