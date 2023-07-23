@@ -182,6 +182,14 @@ function itemButtonClicked(itemButton) {
     xmlHttpRequestRemoveFromCart.send(params);
 }
 
+class itemBought{
+    constructor(name, price, transactionId){
+        this.name = name;
+        this.price = price;
+        this.transactionId = transactionId;
+    }
+}
+
 let paymentButton = document.getElementById("button-payment");
 paymentButton.addEventListener("click", (event) => {
     event.preventDefault();
@@ -191,11 +199,12 @@ paymentButton.addEventListener("click", (event) => {
     xmlHttpRequestPayment.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded
     xmlHttpRequestPayment.onload = () => {
         if (xmlHttpRequestPayment.status === 200) {
-            if (xmlHttpRequestPayment.responseText == "paid") {
+            if (xmlHttpRequestPayment.responseText !== null) {
                 getCartItems();
                 getCartCount();
                 getPaymentAmount();
                 // show receipt
+                
             } else {
                 alert("payment declined");
             }
