@@ -4,11 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Siraj's Store</title>
+  <title>Previous Purchases</title>
 
   <link rel="stylesheet" type="text/css" href="./styles/style.css">
 
-  <script src="./script/home.js" defer></script>
+  <script src="./script/history.js" defer></script>
 
   <!-- bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -39,19 +39,16 @@
       </div>
     </nav>
   </header>
-  <main id="main">
-    <section class="search-form container">
-      <input class="form-control search-form-content" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-success search-form-content" type="submit">Search</button>
-    </section>
 
-    <section> <!-- shopping items grid -->
-      <ul id="shopping-items"></ul> <!-- list is filled using js/php/mysql -->
-    </section>
+  <main id="main">
+    <h1>Purchase History</h1>
+    <ul id="history-list"></ul>
   </main>
+
   <footer id="footer">
     <p>Developed By Siraj</p>
   </footer>
+
 </body>
 
 </html>

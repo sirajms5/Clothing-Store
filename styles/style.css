@@ -91,11 +91,15 @@
   max-width: 40rem !important;
 }
 
-#shopping-items {
+#shopping-items,
+.shopping-history {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 5rem;  
+  gap: 5rem;
   list-style: none;
+}
+
+#shopping-items {
   margin-top: 5rem;
 }
 
@@ -120,14 +124,14 @@
 /* registration and log in pages */
 
 .registration-section-content {
-  border: 2px solid red;  
+  border: 2px solid red;
   border-radius: 30px;
-  box-shadow: 0px 0px 20px palevioletred;  
+  box-shadow: 0px 0px 20px palevioletred;
   padding: 2.5rem 3rem 2.5rem 3rem;
   width: 1000px;
 }
 
-.form-layout {  
+.form-layout {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -171,4 +175,25 @@
 
 .receipt-total {
   margin-top: 1rem;
+}
+
+/* history */
+
+#history-list {
+  list-style: none;
+}
+
+.shopping-history,
+.transaction-header,
+.transaction-total-amount {
+  margin-top: 3rem;
+}
+
+.transaction-header,
+.transaction-total-amount {
+  font-size: 1.6rem;
+}
+
+.transaction-total-amount {
+  text-align: right;
 }
