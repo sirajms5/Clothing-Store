@@ -5,6 +5,7 @@ let userId = sessionStorage.getItem("id");
 let username = document.getElementById("logged-in-name");
 let cartCountElement = document.getElementsByClassName("cart-count");
 let amountDueElement = document.getElementById("amount-due");
+let cartContentDetails = document.getElementById("cart-contents");
 
 // checking if user is logged in
 if (firstName != null && lastName != null) {
@@ -37,7 +38,10 @@ function getCartCount() {
         if (xmlHttpRequestGetCartCount.status === 200) {
             let cartCount = parseInt(xmlHttpRequestGetCartCount.responseText);
             let cartCountArray = Array.from(cartCountElement);
-            if (cartCount <= 99) {
+            if (cartCount <= 0) {
+                cartContentDetails.style.display = "none";
+                cartCountArray[0].style.display = "none"; // will hide the cart number in the nav bar
+            } else if (cartCount <= 99) {
                 cartCountArray.forEach(element => {
                     element.innerText = "(" + cartCount + ")";
                 });
@@ -74,13 +78,13 @@ class item {
 };
 
 let amountDue = 0;
-function getPaymentAmount() {
+function getPaymentAmount(arrayOfItems) {
     amountDue = 0;
-    items.forEach(index => {
+    arrayOfItems.forEach(index => {
         amountDue = amountDue + parseFloat(index["price"]);
     });
 
-    amountDueElement.innerText = "C$" + amountDue.toFixed(2); // showing only two decimal points
+    return amountDue.toFixed(2); // showing only two decimal points
 }
 
 let items = []; // will contain all items
@@ -135,7 +139,8 @@ function getCartItems() {
                 listItem.appendChild(itemDiv);
                 shoppingList.appendChild(listItem);
             }
-            getPaymentAmount();
+
+            amountDueElement.innerText = "C$" + getPaymentAmount(items);
         } else {
             alert("Can't connect to php");
         }
@@ -168,7 +173,7 @@ function itemButtonClicked(itemButton) {
                 };
                 deleteItemElement.remove();
                 getCartCount();
-                getPaymentAmount();
+                amountDueElement.innerText = "C$" + getPaymentAmount(items);
             } else {
                 alert("Item not available, try again later");
             }
@@ -182,8 +187,8 @@ function itemButtonClicked(itemButton) {
     xmlHttpRequestRemoveFromCart.send(params);
 }
 
-class itemBought{
-    constructor(name, price, transactionId){
+class itemBought {
+    constructor(name, price, transactionId) {
         this.name = name;
         this.price = price;
         this.transactionId = transactionId;
@@ -202,9 +207,61 @@ paymentButton.addEventListener("click", (event) => {
             if (xmlHttpRequestPayment.responseText !== null) {
                 getCartItems();
                 getCartCount();
-                getPaymentAmount();
+                amountDueElement.innerText = "C$" + getPaymentAmount(items);                
+                cartContentDetails.innerText = "";
+
                 // show receipt
-                
+                let result = xmlHttpRequestPayment.responseText.split("*"); // * is separating between each row                
+                result.pop();
+                let receiptItems = [];
+                for (let index = 0; index < result.length; index++) {
+                    let singleItem = result[index].split("-"); // - is separating between each column
+                    let itemObject = new itemBought(singleItem[0], singleItem[1], singleItem[2]);
+                    receiptItems.push(itemObject);
+                }
+
+                let main = document.getElementById("main");
+                let receiptElement = document.createElement("div");
+                receiptElement.classList.add("receipt");
+                let receiptHeader = document.createElement("p");
+                receiptHeader.innerText = "Thank you for your purchase"
+                receiptHeader.classList.add("secondary-title");
+                receiptElement.appendChild(receiptHeader);
+
+                let transactionNumber = document.createElement("p");
+                transactionNumber.classList.add("receipt-transaction");
+                transactionNumber.innerText = "Transaction ID: " + receiptItems[0]["transactionId"];
+                receiptElement.appendChild(transactionNumber);
+
+                for (let index = 0; index < receiptItems.length; index++) {
+                    let itemDetails = document.createElement("div");
+                    itemDetails.classList.add("receipt-item");
+
+                    let itemName = document.createElement("span");
+                    itemName.innerText = receiptItems[index]["name"];
+                    itemDetails.appendChild(itemName);
+
+                    let itemPrice = document.createElement("span");
+                    itemPrice.innerText = "C$" + receiptItems[index]["price"];
+                    itemDetails.appendChild(itemPrice);
+
+                    receiptElement.appendChild(itemDetails);
+                }
+
+                let totalDiv = document.createElement("div");
+                totalDiv.classList.add("receipt-item", "receipt-total");
+
+                let totalTitle = document.createElement("span");
+                totalTitle.innerText = "Total";
+                totalDiv.appendChild(totalTitle);
+
+                let totalAmount = document.createElement("span");
+                totalAmount.innerText = "C$" + getPaymentAmount(receiptItems);
+                totalDiv.appendChild(totalAmount);
+
+                receiptElement.appendChild(totalDiv);
+                main.appendChild(receiptElement);
+
             } else {
                 alert("payment declined");
             }

@@ -114,6 +114,7 @@
 
 #footer {
   text-align: center;
+  margin-top: 3rem;
 }
 
 /* registration and log in pages */
@@ -140,6 +141,7 @@
 .secondary-title {
   margin-bottom: 2rem;
   text-align: center;
+  font-size: 2rem;
 }
 
 #email-error,
@@ -152,6 +154,21 @@
 /* payment page */
 
 #cart-contents,
-#cart-details-list {
+#cart-details-list,
+.receipt {
   margin-top: 3rem;
+}
+
+.receipt-transaction,
+.receipt-item {
+  font-size: 1.6rem;
+}
+
+.receipt-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.receipt-total {
+  margin-top: 1rem;
 }
