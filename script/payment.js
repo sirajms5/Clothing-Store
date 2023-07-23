@@ -4,6 +4,7 @@ let userId = sessionStorage.getItem("id");
 
 let username = document.getElementById("logged-in-name");
 let cartCountElement = document.getElementsByClassName("cart-count");
+let amountDueElement = document.getElementById("amount-due");
 
 // checking if user is logged in
 if (firstName != null && lastName != null) {
@@ -72,9 +73,9 @@ class item {
     }
 };
 
+let amountDue = 0;
 function getPaymentAmount() {
-    let amountDueElement = document.getElementById("amount-due");
-    let amountDue = 0;
+    amountDue = 0;
     items.forEach(index => {
         amountDue = amountDue + parseFloat(index["price"]);
     });
@@ -83,63 +84,69 @@ function getPaymentAmount() {
 }
 
 let items = []; // will contain all items
-let shoppingList = document.getElementById("shopping-items");
-let xmlHttpRequestCartItems = new XMLHttpRequest();
-xmlHttpRequestCartItems.open("POST", "./php/items.php", true);
-xmlHttpRequestCartItems.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded
-xmlHttpRequestCartItems.onload = () => {
-    if (xmlHttpRequestCartItems.status === 200) {
-        let result = xmlHttpRequestCartItems.responseText.split("*"); // * is separating between each row
-        result.pop();
-        for (let index = 0; index < result.length; index++) {
-            let singleItem = result[index].split("-"); // - is separating between each column
-            let itemObject = new item(singleItem[0], singleItem[1], singleItem[2], singleItem[3], singleItem[4], singleItem[5], singleItem[6]);
-            items.push(itemObject);
+function getCartItems() {
+    items = []; // resetting items array
+    let shoppingList = document.getElementById("shopping-items");
+    shoppingList.innerText = ""; // resetting list
+    let xmlHttpRequestCartItems = new XMLHttpRequest();
+    xmlHttpRequestCartItems.open("POST", "./php/items.php", true);
+    xmlHttpRequestCartItems.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded
+    xmlHttpRequestCartItems.onload = () => {
+        if (xmlHttpRequestCartItems.status === 200) {
+            let result = xmlHttpRequestCartItems.responseText.split("*"); // * is separating between each row
+            result.pop();
+            for (let index = 0; index < result.length; index++) {
+                let singleItem = result[index].split("-"); // - is separating between each column
+                let itemObject = new item(singleItem[0], singleItem[1], singleItem[2], singleItem[3], singleItem[4], singleItem[5], singleItem[6]);
+                items.push(itemObject);
+            }
+
+            for (let index = 0; index < items.length; index++) {
+                let listItem = document.createElement("li");
+                listItem.classList.add("card", "shopping-grid-item");
+                listItem.id = "list-item-" + items[index]["id"];
+
+                let itemImage = document.createElement("img"); // adding image to the list
+                itemImage.setAttribute("src", items[index]["image"]);
+                itemImage.setAttribute("alt", items[index]["altText"]);
+                itemImage.classList.add("card-img-top");
+                listItem.appendChild(itemImage);
+
+                let itemDiv = document.createElement("div");
+                itemDiv.classList.add("card-body");
+
+                let itemTitle = document.createElement("p"); // adding shopping item title to the list
+                itemTitle.classList.add("card-title");
+                itemTitle.innerText = items[index]["name"];
+                itemDiv.appendChild(itemTitle);
+
+                let itemPrice = document.createElement("p"); // adding shopping item price
+                itemPrice.classList.add("card-text");
+                itemPrice.innerText = "C$" + items[index]["price"];
+                itemDiv.appendChild(itemPrice);
+
+                let addToCartButton = document.createElement("button"); // adding add to cart button
+                addToCartButton.setAttribute("onclick", "itemButtonClicked(this)");
+                addToCartButton.id = "itemButton-" + items[index]["id"];
+                addToCartButton.classList.add("btn", "btn-danger");
+                addToCartButton.innerText = "Remove From Cart";
+                itemDiv.appendChild(addToCartButton);
+
+                listItem.appendChild(itemDiv);
+                shoppingList.appendChild(listItem);
+            }
+            getPaymentAmount();
+        } else {
+            alert("Can't connect to php");
         }
 
-        for (let index = 0; index < items.length; index++) {
-            let listItem = document.createElement("li");
-            listItem.classList.add("card", "shopping-grid-item");
-            listItem.id = "list-item-" + items[index]["id"];
-
-            let itemImage = document.createElement("img"); // adding image to the list
-            itemImage.setAttribute("src", items[index]["image"]);
-            itemImage.setAttribute("alt", items[index]["altText"]);
-            itemImage.classList.add("card-img-top");
-            listItem.appendChild(itemImage);
-
-            let itemDiv = document.createElement("div");
-            itemDiv.classList.add("card-body");
-
-            let itemTitle = document.createElement("p"); // adding shopping item title to the list
-            itemTitle.classList.add("card-title");
-            itemTitle.innerText = items[index]["name"];
-            itemDiv.appendChild(itemTitle);
-
-            let itemPrice = document.createElement("p"); // adding shopping item price
-            itemPrice.classList.add("card-text");
-            itemPrice.innerText = "C$" + items[index]["price"];
-            itemDiv.appendChild(itemPrice);
-
-            let addToCartButton = document.createElement("button"); // adding add to cart button
-            addToCartButton.setAttribute("onclick", "itemButtonClicked(this)");
-            addToCartButton.id = "itemButton-" + items[index]["id"];
-            addToCartButton.classList.add("btn", "btn-danger");
-            addToCartButton.innerText = "Remove From Cart";
-            itemDiv.appendChild(addToCartButton);
-
-            listItem.appendChild(itemDiv);
-            shoppingList.appendChild(listItem);
-        }
-        getPaymentAmount();
-    } else {
-        alert("Can't connect to php");
     }
 
+    let params = "user_id=" + userId;
+    xmlHttpRequestCartItems.send(params);
 }
 
-let params = "user_id=" + userId;
-xmlHttpRequestCartItems.send(params);
+getCartItems();
 
 function itemButtonClicked(itemButton) {
     let itemButtonId = itemButton.id.split("-");
@@ -178,5 +185,27 @@ function itemButtonClicked(itemButton) {
 let paymentButton = document.getElementById("button-payment");
 paymentButton.addEventListener("click", (event) => {
     event.preventDefault();
-    // wrap it with input validity check
+    // put payment form validator
+    let xmlHttpRequestPayment = new XMLHttpRequest();
+    xmlHttpRequestPayment.open("POST", "./php/payment.php", true);
+    xmlHttpRequestPayment.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded
+    xmlHttpRequestPayment.onload = () => {
+        if (xmlHttpRequestPayment.status === 200) {
+            if (xmlHttpRequestPayment.responseText == "paid") {
+                getCartItems();
+                getCartCount();
+                getPaymentAmount();
+                // show receipt
+            } else {
+                alert("payment declined");
+            }
+
+        } else {
+            alert("Can't connect to payment php")
+        }
+
+    }
+
+    let params = "user_id=" + userId + "&payment=" + amountDue;
+    xmlHttpRequestPayment.send(params);
 });
