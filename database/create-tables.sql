@@ -20,16 +20,6 @@ CREATE TABLE ITEMS(
     Alt_Text VARCHAR(255)
 );
 
-CREATE TABLE CARTS (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    User_Id INT NOT NULL,
-    Item_Id INT NOT NULL,
-    Start_Date DATE NOT NULL,
-    End_Date DATE DEFAULT NULL,
-    FOREIGN KEY (User_Id) REFERENCES USERS(id) ON DELETE CASCADE,
-    FOREIGN KEY (Item_Id) REFERENCES ITEMS(id) ON DELETE CASCADE
-);
-
 CREATE TABLE transactions(
     id INT PRIMARY KEY AUTO_INCREMENT,
     Amount_Paid DECIMAL(8, 2),
@@ -37,13 +27,16 @@ CREATE TABLE transactions(
     FOREIGN KEY (User_Id) REFERENCES users(id) ON DELETE CASCADE
 );
 
-CREATE TABLE receipts(
-	id INT PRIMARY KEY AUTO_INCREMENT,
-    Carts_Id INT NOT NULL,
-    Transaction_Id INT NOT NULL,
-    date DATE,
-    FOREIGN KEY (Carts_Id) REFERENCES carts(id) ON DELETE CASCADE,
-    FOREIGN KEY (Transaction_Id) REFERENCES transactions(id) ON DELETE CASCADE
+CREATE TABLE CARTS (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    User_Id INT NOT NULL,
+    Item_Id INT NOT NULL,
+    Start_Date DATE NOT NULL,
+    End_Date DATE DEFAULT NULL,
+    Transaction_Id INT DEFAULT NULL,
+    FOREIGN KEY (User_Id) REFERENCES USERS(id) ON DELETE CASCADE,
+    FOREIGN KEY (Item_Id) REFERENCES ITEMS(id) ON DELETE CASCADE,
+    FOREIGN KEY (Transaction_Id) REFERENCES TRANSACTIONS(id) ON DELETE CASCADE
 );
 
 -- https://www.amazon.ca/BGOWATU-Shirts-Sleeve-Pocket-Casual/dp/B0C5XM2M8P?ref_=Oct_d_onr_d_10287298011_7&pd_rd_w=Fv1vn&content-id=amzn1.sym.61e66258-eef5-45fe-a8dc-635cc7a35f8b&pf_rd_p=61e66258-eef5-45fe-a8dc-635cc7a35f8b&pf_rd_r=A7ZYBZJN4CQ91HWS9R2R&pd_rd_wg=5jaIN&pd_rd_r=ae3f476a-b3a3-4dae-9998-f1d02e035f60&pd_rd_i=B0C5XM2M8P
