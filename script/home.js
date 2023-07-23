@@ -135,7 +135,7 @@ function itemButtonClicked(itemButton) {
 
         xmlHttpRequestAddToCart.onload = () => {
             if (xmlHttpRequestAddToCart.status === 200) {
-                if (xmlHttpRequestAddToCart.responseText == "added") {
+                if (xmlHttpRequestAddToCart.responseText == "success") {
                     getCartCount();
                 } else {
                     alert("Item not available, try again later");

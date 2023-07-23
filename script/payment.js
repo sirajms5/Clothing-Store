@@ -76,6 +76,7 @@ xmlHttpRequestCartItems.onload = () => {
         for (let index = 0; index < items.length; index++) {
             let listItem = document.createElement("li");
             listItem.classList.add("card", "shopping-grid-item");
+            listItem.id = "list-item-" + items[index]["id"];
 
             let itemImage = document.createElement("img"); // adding image to the list
             itemImage.setAttribute("src", items[index]["image"]);
@@ -115,14 +116,34 @@ xmlHttpRequestCartItems.onload = () => {
 let params = "user_id=" + userId;
 xmlHttpRequestCartItems.send(params);
 
-function itemButtonClicked(itemButton){
-    // remove item from list
+function itemButtonClicked(itemButton) {
+    let itemButtonId = itemButton.id.split("-");
+    let itemId = itemButtonId[1];
+    let xmlHttpRequestAddToCart = new XMLHttpRequest();
+    xmlHttpRequestAddToCart.open("POST", "./php/cart-post.php", true); // adding item to cart
+    xmlHttpRequestAddToCart.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded
+
+    xmlHttpRequestAddToCart.onload = () => {
+        if (xmlHttpRequestAddToCart.status === 200) {
+            if (xmlHttpRequestAddToCart.responseText == "success") {
+                let deleteItemElement = document.getElementById("list-item-" + itemId);
+                deleteItemElement.remove();
+                getCartCount();
+            } else {
+                alert("Item not available, try again later");
+            }
+
+        } else {
+            alert("Can't connect to cart-post php");
+        }
+
+    }
+    let params = "item_id=" + itemId + "&user_id=" + userId + "&source=delete";
+    xmlHttpRequestAddToCart.send(params);
 }
 
 let paymentButton = document.getElementById("button-payment");
 paymentButton.addEventListener("click", (event) => {
     event.preventDefault();
     // wrap it with input validity check
-
-
-})
+});

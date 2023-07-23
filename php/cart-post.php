@@ -4,11 +4,15 @@
     $itemId = intval($_POST['item_id']);
     $userId = intval($_POST['user_id']);
 
-    $queryInsertIntoCarts = "INSERT INTO carts(User_Id, Item_Id, Start_Date) VALUES($userId, $itemId, NOW());";
+    if(isset($_POST['source'])){ // delete from or add to cart
+        $query = "DELETE FROM carts WHERE User_Id = $userId AND Item_Id = $itemId AND End_Date IS NULL LIMIT 1;";
+    } else {
+        $query = "INSERT INTO carts(User_Id, Item_Id, Start_Date) VALUES($userId, $itemId, NOW());";
+    }    
 
-    $result = mysqli_query($conn, $queryInsertIntoCarts);
+    $result = mysqli_query($conn, $query);
 
     if($result){
-        echo "added";
+        echo "success";
     }
 ?>

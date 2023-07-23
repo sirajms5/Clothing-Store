@@ -96,9 +96,6 @@
   grid-template-columns: 1fr 1fr 1fr;
   gap: 5rem;  
   list-style: none;
-}
-
-#shopping-items {
   margin-top: 5rem;
 }
 
