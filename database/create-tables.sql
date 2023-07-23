@@ -30,6 +30,13 @@ CREATE TABLE CARTS (
     FOREIGN KEY (Item_Id) REFERENCES ITEMS(id) ON DELETE CASCADE
 );
 
+CREATE TABLE transactions(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    Amount_Paid DECIMAL(8, 2),
+    User_Id INT NOT NULL,
+    FOREIGN KEY (User_Id) REFERENCES users(id) ON DELETE CASCADE
+);
+
 -- https://www.amazon.ca/BGOWATU-Shirts-Sleeve-Pocket-Casual/dp/B0C5XM2M8P?ref_=Oct_d_onr_d_10287298011_7&pd_rd_w=Fv1vn&content-id=amzn1.sym.61e66258-eef5-45fe-a8dc-635cc7a35f8b&pf_rd_p=61e66258-eef5-45fe-a8dc-635cc7a35f8b&pf_rd_r=A7ZYBZJN4CQ91HWS9R2R&pd_rd_wg=5jaIN&pd_rd_r=ae3f476a-b3a3-4dae-9998-f1d02e035f60&pd_rd_i=B0C5XM2M8P
 INSERT INTO ITEMS (Item_Name, Price, Sex, Category, Image_Pathway, Alt_Text)
 VALUES ('Golf Shirt', 29.99, 'Men', 'shirt', './images/61PSmKgGjrL._AC._SR360,460.jpg', 'BGOWATU Men Polo Shirts Short Sleeve Golf Shirt with Pocket Dry Fit 1/4 Zip Casual Sports T Shirts');
