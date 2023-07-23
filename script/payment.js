@@ -13,6 +13,20 @@ if (firstName != null && lastName != null) {
     username.innerText = firstName + " " + lastName;
 }
 
+// sing out button
+let signOutButton = document.getElementById("sign-out");
+signOutButton.addEventListener("click", () => {
+    document.getElementById("log-in").style.display = "inline";
+    document.getElementById("register").style.display = "inline";
+    document.getElementById("sign-out").style.display = "none";
+    sessionStorage.clear();
+    firstName = null;
+    lastName = null;
+    id = null;
+    username.innerText = "";
+    window.location.href = "./index.html";
+});
+
 // get cart count
 function getCartCount() {
     xmlHttpRequestGetCartCount = new XMLHttpRequest();
@@ -57,6 +71,16 @@ class item {
         this.altText = altText;
     }
 };
+
+function getPaymentAmount() {
+    let amountDueElement = document.getElementById("amount-due");
+    let amountDue = 0;
+    items.forEach(index => {
+        amountDue = amountDue + parseFloat(index["price"]);
+    });
+
+    amountDueElement.innerText = "C$" + amountDue.toFixed(2); // showing only two decimal points
+}
 
 let items = []; // will contain all items
 let shoppingList = document.getElementById("shopping-items");
@@ -107,6 +131,7 @@ xmlHttpRequestCartItems.onload = () => {
             listItem.appendChild(itemDiv);
             shoppingList.appendChild(listItem);
         }
+        getPaymentAmount();
     } else {
         alert("Can't connect to php");
     }
@@ -119,16 +144,24 @@ xmlHttpRequestCartItems.send(params);
 function itemButtonClicked(itemButton) {
     let itemButtonId = itemButton.id.split("-");
     let itemId = itemButtonId[1];
-    let xmlHttpRequestAddToCart = new XMLHttpRequest();
-    xmlHttpRequestAddToCart.open("POST", "./php/cart-post.php", true); // adding item to cart
-    xmlHttpRequestAddToCart.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded
+    let xmlHttpRequestRemoveFromCart = new XMLHttpRequest();
+    xmlHttpRequestRemoveFromCart.open("POST", "./php/cart-post.php", true); // adding item to cart
+    xmlHttpRequestRemoveFromCart.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded
 
-    xmlHttpRequestAddToCart.onload = () => {
-        if (xmlHttpRequestAddToCart.status === 200) {
-            if (xmlHttpRequestAddToCart.responseText == "success") {
+    xmlHttpRequestRemoveFromCart.onload = () => {
+        if (xmlHttpRequestRemoveFromCart.status === 200) {
+            if (xmlHttpRequestRemoveFromCart.responseText == "success") {
                 let deleteItemElement = document.getElementById("list-item-" + itemId);
+                // removing item from the items array
+                for (let index = 0; index < items.length; index++) {
+                    if (items[index]["id"] == itemId) {
+                        items.splice(index, 1);
+                        break; // will break out of the loop to not delete more than one item per click
+                    }
+                };
                 deleteItemElement.remove();
                 getCartCount();
+                getPaymentAmount();
             } else {
                 alert("Item not available, try again later");
             }
@@ -139,7 +172,7 @@ function itemButtonClicked(itemButton) {
 
     }
     let params = "item_id=" + itemId + "&user_id=" + userId + "&source=delete";
-    xmlHttpRequestAddToCart.send(params);
+    xmlHttpRequestRemoveFromCart.send(params);
 }
 
 let paymentButton = document.getElementById("button-payment");
