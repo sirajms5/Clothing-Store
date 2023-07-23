@@ -6,6 +6,9 @@ let username = document.getElementById("logged-in-name");
 let cartCountElement = document.getElementsByClassName("cart-count");
 let amountDueElement = document.getElementById("amount-due");
 let cartContentDetails = document.getElementById("cart-contents");
+let amountDueSection = document.getElementById("amount-due-section");
+let cartCountSection = document.getElementById("cart-count-section");
+let shoppingList = document.getElementById("shopping-items");
 
 // checking if user is logged in
 if (firstName != null && lastName != null) {
@@ -30,6 +33,7 @@ signOutButton.addEventListener("click", () => {
 });
 
 // get cart count
+let isPaid = false;
 function getCartCount() {
     xmlHttpRequestGetCartCount = new XMLHttpRequest();
     xmlHttpRequestGetCartCount.open("POST", "./php/cart-count.php", true);
@@ -39,8 +43,16 @@ function getCartCount() {
             let cartCount = parseInt(xmlHttpRequestGetCartCount.responseText);
             let cartCountArray = Array.from(cartCountElement);
             if (cartCount <= 0) {
-                cartContentDetails.style.display = "none";
+                amountDueSection.style.display = "none";
+                cartCountSection.style.display = "none";
                 cartCountArray[0].style.display = "none"; // will hide the cart number in the nav bar
+                shoppingList.style.display = "none";
+                if (!isPaid) {
+                    let emptyCart = document.createElement("p");
+                    emptyCart.classList.add("secondary-title");
+                    emptyCart.innerText = "Cart is Empty";
+                    cartContentDetails.appendChild(emptyCart);
+                }
             } else if (cartCount <= 99) {
                 cartCountArray.forEach(element => {
                     element.innerText = "(" + cartCount + ")";
@@ -90,7 +102,6 @@ function getPaymentAmount(arrayOfItems) {
 let items = []; // will contain all items
 function getCartItems() {
     items = []; // resetting items array
-    let shoppingList = document.getElementById("shopping-items");
     shoppingList.innerText = ""; // resetting list
     let xmlHttpRequestCartItems = new XMLHttpRequest();
     xmlHttpRequestCartItems.open("POST", "./php/items.php", true);
@@ -205,9 +216,10 @@ paymentButton.addEventListener("click", (event) => {
     xmlHttpRequestPayment.onload = () => {
         if (xmlHttpRequestPayment.status === 200) {
             if (xmlHttpRequestPayment.responseText !== null) {
+                isPaid = true;
                 getCartItems();
                 getCartCount();
-                amountDueElement.innerText = "C$" + getPaymentAmount(items);                
+                amountDueElement.innerText = "C$" + getPaymentAmount(items);
                 cartContentDetails.innerText = "";
 
                 // show receipt
@@ -220,7 +232,6 @@ paymentButton.addEventListener("click", (event) => {
                     receiptItems.push(itemObject);
                 }
 
-                let main = document.getElementById("main");
                 let receiptElement = document.createElement("div");
                 receiptElement.classList.add("receipt");
                 let receiptHeader = document.createElement("p");
@@ -260,7 +271,7 @@ paymentButton.addEventListener("click", (event) => {
                 totalDiv.appendChild(totalAmount);
 
                 receiptElement.appendChild(totalDiv);
-                main.appendChild(receiptElement);
+                cartContentDetails.appendChild(receiptElement);
 
             } else {
                 alert("payment declined");
