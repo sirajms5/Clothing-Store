@@ -62,8 +62,23 @@
   </header>
   <main id="main">
     <section class="search-form container">
-      <input class="form-control search-form-content" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-success search-form-content" type="submit">Search</button>
+      <input class="form-control" id="search-bar" type="search" placeholder="Search">
+      <select id="gender-menu">
+        <option disabled selected>Gender</option>
+        <option>Men</option>
+        <option>Women</option>
+        <option>Both</option>
+      </select>
+      <select id="category-menu">
+        <option disabled selected>Category</option>        
+        <option>Jeans</option>
+        <option>Shirts</option>
+        <option>Shoes</option>
+        <option>Show All</option>
+      </select>
+      <input class="form-control" type="text" id="min-price" placeholder="Min Price">
+      <input class="form-control" type="text" id="max-price" placeholder="Max Price">
+      <button class="btn btn-success search-form-content" id="search-button" type="submit">Search</button>
     </section>
 
     <section> <!-- shopping items grid -->
