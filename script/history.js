@@ -98,11 +98,11 @@ xmlHttpRequest.onload = () => {
             }
             transactions[transactionId].push(items[index]);
         }
-
-        let horizontalLine = document.createElement("hr");
+        
         for (let key in transactions) {            
-            let transactionList = document.createElement("li"); // list for items in each transaction         
-            transactionList.appendChild(horizontalLine);
+            let transactionList = document.createElement("li"); // list for items in each transaction     
+            let separatorHorizontalLine = document.createElement("hr");    
+            transactionList.appendChild(separatorHorizontalLine);
             let transactionNumber = document.createElement("p");
             transactionNumber.classList.add("transaction-header");
             transactionNumber.innerText = "Transaction Number: " + key;
@@ -146,7 +146,8 @@ xmlHttpRequest.onload = () => {
 
             previousPurchasesList.appendChild(transactionList)
         }
-        previousPurchasesList.appendChild(horizontalLine);
+        let endHorizontalLine = document.createElement("hr");
+        previousPurchasesList.appendChild(endHorizontalLine);
     } else {
         alert("can't connect to history.php")
     }
