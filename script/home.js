@@ -9,7 +9,8 @@ let cartCountElement = document.getElementsByClassName("cart-count");
 if (firstName != null && lastName != null) {
     document.getElementById("log-in").style.display = "none";
     document.getElementById("register").style.display = "none";
-    document.getElementById("sign-out").style.display = "inline";
+    document.getElementById("shopping-cart").style.display = "inline";
+    username.classList.add("dropdown-toggle");
     username.innerText = firstName + " " + lastName;
 }
 

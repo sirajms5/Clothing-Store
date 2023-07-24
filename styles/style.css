@@ -44,14 +44,8 @@
 }
 
 .nav-bar-items {
-  margin-left: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
   font-size: 1.25rem;
-  font-weight: 500;
-  margin-right: 1rem;
+  list-style: none;
 }
 
 .nav-bar-item {
@@ -60,6 +54,7 @@
   display: block;
   cursor: pointer;
   padding: initial;
+  margin-left: 1.5rem; /* adjust it in small window */
 }
 
 .nav-bar-item:hover {
@@ -67,8 +62,12 @@
   transition: 1s;
 }
 
-#sign-out {
+#shopping-cart {
   display: none;
+}
+
+#sign-out {
+  cursor: pointer;
 }
 
 #nav-cart-count {
