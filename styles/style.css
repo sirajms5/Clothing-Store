@@ -228,3 +228,41 @@
 .transaction-total-amount {
   text-align: right;
 }
+
+/* media control */
+@media(max-width: 991px){
+  .search-form{
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  #search-bar {
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+  
+  #search-button {
+    grid-column: 1/2;
+    grid-row: 6/7
+  }
+  
+  #gender-menu {
+    grid-column: 1/2;
+    grid-row: 2/3
+  }
+  
+  #category-menu{
+    grid-column: 1/2;
+    grid-row: 3/4
+  }
+  
+  #min-price{
+    grid-column: 1/2;
+    grid-row: 4/5
+  }
+  
+  #max-price{
+    grid-column: 1/2;
+    grid-row: 5/6
+  }
+}
