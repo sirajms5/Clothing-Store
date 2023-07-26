@@ -163,9 +163,17 @@ function itemButtonClicked(itemButton) {
 
 }
 
-// min price entry
-let searchMin = document.getElementById("min-price");
-let searchMax = document.getElementById("max-price");
+// min and max price input
+function checkInput(event){
+    let input = event.key;
+    let numberRegEx = /\d/;
+    let isNumber = numberRegEx.test(input);
+    let isBackspaceOrDelete = ["Backspace", "Delete"].includes(input);
+    if(!isNumber && !isBackspaceOrDelete){
+        event.preventDefault();
+    }
+}
+
 
 // search form
 let searchButton = document.getElementById("search-button");
@@ -174,8 +182,8 @@ searchButton.addEventListener("click", (event) => {
     let searchInput = document.getElementById("search-bar").value.toLowerCase().trim();
     let searchsex = document.getElementById("sex-list").value.toLowerCase();
     let searchCategory = document.getElementById("category-list").value.toLowerCase();
-    let searchMinValue = searchMin.value;
-    let searchMaxValue = searchMax.value;
+    let searchMin = document.getElementById("min-price").value;
+    let searchMax = document.getElementById("max-price").value;
 
 
     for (let index of items) {
@@ -189,7 +197,7 @@ searchButton.addEventListener("click", (event) => {
             shoppingItemName.includes(searchInput)
             && (shoppingItemsex == searchsex || searchsex == "both" || searchsex == "sex")
             && (shoppingItemCategory == searchCategory || searchCategory == "show all" || searchCategory == "category")
-            && ((shoppingItemPrice > searchMinValue || searchMinValue == "" ) && (shoppingItemPrice < searchMaxValue || searchMaxValue == ""))
+            && ((shoppingItemPrice > searchMin || searchMin == "" ) && (shoppingItemPrice < searchMax || searchMax == ""))
         ) {
             shoppingItemElement.style.display = "inline";
         } else {
