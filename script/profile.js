@@ -89,19 +89,26 @@ xmlHttpRequestGetProfileDetails.send(params);
 let changePasswordButton = document.getElementById("change-password-button");
 changePasswordButton.addEventListener("click", (event) => {
     event.preventDefault();
+    let currentPasswordError = document.getElementById("current-password-error");
+    let newPasswordError = document.getElementById("new-password-error");
+    let reNewPasswordError = document.getElementById("re-new-password-error");
     let currentPassword = document.getElementById("current-password").value;
     let newPassword = document.getElementById("new-password").value;
     let reNewPassword = document.getElementById("re-new-password").value;
-    if (newPassword.length >= 6 && (newPassword == reNewPassword)) {        
+    if (newPassword.length >= 6 && (newPassword == reNewPassword)) {
+        newPasswordError.style.display = "none";
+        reNewPasswordError.style.display = "none";
         let xmlChangePassword = new XMLHttpRequest();
         xmlChangePassword.open("POST", "./php/change-password.php");
         xmlChangePassword.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded
         xmlChangePassword.onload = () => {
             if (xmlChangePassword.status === 200) {
-                console.log(xmlChangePassword.responseText);
-                if(xmlChangePassword.responseText == "success"){
+                if (xmlChangePassword.responseText == "success") {
                     document.getElementById("password-change-success").style.display = "inline";
+                    currentPasswordError.style.display = "none";
                     document.getElementById("change-password-form").reset();
+                } else {
+                    currentPasswordError.style.display = "inline";
                 }
             } else {
                 alert("can't connect to change-password.php");
@@ -111,6 +118,7 @@ changePasswordButton.addEventListener("click", (event) => {
         params = "current_password=" + currentPassword + "&new_password=" + newPassword + "&user_id=" + userId;
         xmlChangePassword.send(params);
     } else {
-        //show error message
+        newPasswordError.style.display = "inline";
+        reNewPasswordError.style.display = "inline";
     }
 })

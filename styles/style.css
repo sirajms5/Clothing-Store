@@ -181,7 +181,10 @@
 }
 
 #email-error,
-#password-error {
+#password-error,
+#current-password-error,
+#new-password-error,
+#re-new-password-error {
   color: orange;
   display: none;
   grid-column: 2/3;
