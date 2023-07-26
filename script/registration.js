@@ -16,7 +16,7 @@ registrationButton.addEventListener("click", (event) => {
                 sessionStorage.setItem("id", id);
                 window.location.href = "./index.html";
             } else {
-                document.getElementById("username-error").style.display = "inline";
+                document.getElementById("email-error").style.display = "inline";
             }
         } else {
             alert("failure");
