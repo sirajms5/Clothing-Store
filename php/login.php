@@ -4,18 +4,29 @@
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $querySelectUser = "SELECT First_Name, Last_Name, id FROM users WHERE email = '$email' AND Password = '$password';";
+    $queryCheckEmail = "SELECT First_Name, Last_Name, id FROM users WHERE email = '$email';";
+    $resultCheckEmail = mysqli_query($conn, $queryCheckEmail);
 
-    $result = mysqli_query($conn, $querySelectUser);
-    $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    if(mysqli_num_rows($resultCheckEmail) > 0){
+        $querySelectUser = "SELECT First_Name, Last_Name, id FROM users WHERE email = '$email' AND Password = '$password';";
+        $resultSelectUser = mysqli_query($conn, $querySelectUser);
 
-    if ($data) {     
-        $toReturn = "";   
-        foreach ($data as $row) {
-            $toReturn = $row['First_Name'] . "-" . $row['Last_Name'] . "-" . $row['id'];
+        if(mysqli_num_rows($resultSelectUser) > 0){
+            $data = mysqli_fetch_all($resultSelectUser, MYSQLI_ASSOC);
+
+            if ($data) {     
+                $toReturn = "";   
+                foreach ($data as $row) {
+                    $toReturn = $row['First_Name'] . "-" . $row['Last_Name'] . "-" . $row['id'];
+                }
+                echo $toReturn;
+            }
+        } else {
+            echo "wrong password";
         }
-        echo $toReturn;
     } else {
-        echo "Unregistered email";
-    }    
+        echo "unregistered email";
+    }
+
+        
 ?>
