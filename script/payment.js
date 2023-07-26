@@ -42,11 +42,14 @@ function getCartCount() {
         if (xmlHttpRequestGetCartCount.status === 200) {
             let cartCount = parseInt(xmlHttpRequestGetCartCount.responseText);
             let cartCountArray = Array.from(cartCountElement);
+            let paymentSection = document.getElementById("payment-section-content");
             if (cartCount <= 0) {
                 amountDueSection.style.display = "none";
                 cartCountSection.style.display = "none";
                 cartCountArray[0].style.display = "none"; // will hide the cart number in the nav bar
                 shoppingList.style.display = "none";
+                paymentSection.style.display = "none";
+
                 if (!isPaid) {
                     let emptyCart = document.createElement("p");
                     emptyCart.classList.add("secondary-title");
@@ -54,11 +57,13 @@ function getCartCount() {
                     cartContentDetails.appendChild(emptyCart);
                 }
             } else if (cartCount <= 99) {
+                paymentSection.style.display = "block";
                 cartCountArray.forEach(element => {
                     element.innerText = "(" + cartCount + ")";
                 });
 
             } else {
+                paymentSection.style.display = "block";
                 cartCountArray.forEach(element => {
                     element.innerText = "(99+)";
                 });
@@ -206,83 +211,177 @@ class itemBought {
     }
 }
 
+let cardName = document.getElementById("name-on-card");
+let cardNumber = document.getElementById("card-number");
+
+// card number input control
+cardNumber.addEventListener("keydown", (event) => {
+    let input = event.key;
+    let numberRegEx = /\d/;
+    let isNumber = numberRegEx.test(input);
+    let isBackspaceOrDelete = ["Backspace", "Delete"].includes(input);
+    let cardNumberValue = cardNumber.value.trim();
+    if (!isNumber || cardNumberValue.length > 15) { // length will increase after the function ends
+        if (!isBackspaceOrDelete) {
+            event.preventDefault();
+        }
+    }
+})
+
+// card expiration date input control
+let cardExpirationDate = document.getElementById("card-expiration-date");
+cardExpirationDate.addEventListener("keydown", (event) => {
+    let input = event.key;
+    let numberRegEx = /[\d\/]/;
+    let isNumber = numberRegEx.test(input);
+    let isBackspaceOrDelete = ["Backspace", "Delete"].includes(input);
+    let cardExpirationDateValue = cardExpirationDate.value.trim();
+
+    if (!isNumber || cardExpirationDateValue.length > 4) { // length will increase after the function ends
+        if (!isBackspaceOrDelete) {
+            event.preventDefault();
+        }
+    }
+})
+
+// card cvc number input control
+let cardCvcNumber = document.getElementById("card-cvc-number");
+cardCvcNumber.addEventListener("keydown", (event) => {
+    let input = event.key;
+    let numberRegEx = /\d/;
+    let isNumber = numberRegEx.test(input);
+    let isBackspaceOrDelete = ["Backspace", "Delete"].includes(input);
+    let cardCvcNumberValue = cardCvcNumber.value.trim();
+
+    if (!isNumber || cardCvcNumberValue.length > 2) { // length will increase after the function ends
+        if (!isBackspaceOrDelete) {
+            event.preventDefault();
+        }
+    }
+})
+
+let cardNameError = document.getElementById("card-name-error");
+let cardNumberError = document.getElementById("card-number-error");
+let cardExpirationError = document.getElementById("card-expiration-error");
+let cardCvcError = document.getElementById("card-cvc-error");
 let paymentButton = document.getElementById("button-payment");
 paymentButton.addEventListener("click", (event) => {
     event.preventDefault();
-    // put payment form validator
-    let xmlHttpRequestPayment = new XMLHttpRequest();
-    xmlHttpRequestPayment.open("POST", "./php/payment.php", true);
-    xmlHttpRequestPayment.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded
-    xmlHttpRequestPayment.onload = () => {
-        if (xmlHttpRequestPayment.status === 200) {
-            if (xmlHttpRequestPayment.responseText !== null) {
-                isPaid = true;
-                getCartItems();
-                getCartCount();
-                amountDueElement.innerText = "C$" + getPaymentAmount(items);
-                cartContentDetails.innerText = "";
+    let cardNameValue = cardName.value.trim();
+    let cardNumberValue = cardNumber.value.trim();
+    let cardExpirationDateValue = cardExpirationDate.value.trim();
+    let cardCvcNumberValue = cardCvcNumber.value.trim();
+    // add cart number checker should be more than 0
+    let exiprationForamtRegEx = /^\d\d[\/]\d\d$/;
+    if (
+        cardNameValue != ""
+        && cardNumberValue.length == 16
+        && exiprationForamtRegEx.test(cardExpirationDateValue)
+        && cardCvcNumberValue.length == 3
+    ) {
+        cardNameError.style.display = "none";
+        cardNumberError.style.display = "none";
+        cardExpirationError.style.display = "none";
+        cardCvcError.style.display = "none";
+        let xmlHttpRequestPayment = new XMLHttpRequest();
+        xmlHttpRequestPayment.open("POST", "./php/payment.php", true);
+        xmlHttpRequestPayment.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded
+        xmlHttpRequestPayment.onload = () => {
+            if (xmlHttpRequestPayment.status === 200) {
+                if (xmlHttpRequestPayment.responseText !== null) {
+                    isPaid = true;
+                    getCartItems();
+                    getCartCount();
+                    amountDueElement.innerText = "C$" + getPaymentAmount(items);
+                    cartContentDetails.innerText = "";
 
-                // show receipt
-                let result = xmlHttpRequestPayment.responseText.split("*"); // * is separating between each row                
-                result.pop();
-                let receiptItems = [];
-                for (let index = 0; index < result.length; index++) {
-                    let singleItem = result[index].split("-"); // - is separating between each column
-                    let itemObject = new itemBought(singleItem[0], singleItem[1], singleItem[2]);
-                    receiptItems.push(itemObject);
+                    // show receipt
+                    let result = xmlHttpRequestPayment.responseText.split("*"); // * is separating between each row                
+                    result.pop();
+                    let receiptItems = [];
+                    for (let index = 0; index < result.length; index++) {
+                        let singleItem = result[index].split("-"); // - is separating between each column
+                        let itemObject = new itemBought(singleItem[0], singleItem[1], singleItem[2]);
+                        receiptItems.push(itemObject);
+                    }
+
+                    let receiptElement = document.createElement("div");
+                    receiptElement.classList.add("receipt");
+                    let receiptHeader = document.createElement("p");
+                    receiptHeader.innerText = "Thank you for your purchase"
+                    receiptHeader.classList.add("secondary-title");
+                    receiptElement.appendChild(receiptHeader);
+
+                    let transactionNumber = document.createElement("p");
+                    transactionNumber.classList.add("receipt-transaction");
+                    transactionNumber.innerText = "Transaction ID: " + receiptItems[0]["transactionId"];
+                    receiptElement.appendChild(transactionNumber);
+
+                    for (let index = 0; index < receiptItems.length; index++) {
+                        let itemDetails = document.createElement("div");
+                        itemDetails.classList.add("receipt-item");
+
+                        let itemName = document.createElement("span");
+                        itemName.innerText = receiptItems[index]["name"];
+                        itemDetails.appendChild(itemName);
+
+                        let itemPrice = document.createElement("span");
+                        itemPrice.innerText = "C$" + receiptItems[index]["price"];
+                        itemDetails.appendChild(itemPrice);
+
+                        receiptElement.appendChild(itemDetails);
+                    }
+
+                    let totalDiv = document.createElement("div");
+                    totalDiv.classList.add("receipt-item", "receipt-total");
+
+                    let totalTitle = document.createElement("span");
+                    totalTitle.innerText = "Total";
+                    totalDiv.appendChild(totalTitle);
+
+                    let totalAmount = document.createElement("span");
+                    totalAmount.innerText = "C$" + getPaymentAmount(receiptItems);
+                    totalDiv.appendChild(totalAmount);
+
+                    receiptElement.appendChild(totalDiv);
+                    cartContentDetails.appendChild(receiptElement);
+
+                } else {
+                    alert("payment declined");
                 }
-
-                let receiptElement = document.createElement("div");
-                receiptElement.classList.add("receipt");
-                let receiptHeader = document.createElement("p");
-                receiptHeader.innerText = "Thank you for your purchase"
-                receiptHeader.classList.add("secondary-title");
-                receiptElement.appendChild(receiptHeader);
-
-                let transactionNumber = document.createElement("p");
-                transactionNumber.classList.add("receipt-transaction");
-                transactionNumber.innerText = "Transaction ID: " + receiptItems[0]["transactionId"];
-                receiptElement.appendChild(transactionNumber);
-
-                for (let index = 0; index < receiptItems.length; index++) {
-                    let itemDetails = document.createElement("div");
-                    itemDetails.classList.add("receipt-item");
-
-                    let itemName = document.createElement("span");
-                    itemName.innerText = receiptItems[index]["name"];
-                    itemDetails.appendChild(itemName);
-
-                    let itemPrice = document.createElement("span");
-                    itemPrice.innerText = "C$" + receiptItems[index]["price"];
-                    itemDetails.appendChild(itemPrice);
-
-                    receiptElement.appendChild(itemDetails);
-                }
-
-                let totalDiv = document.createElement("div");
-                totalDiv.classList.add("receipt-item", "receipt-total");
-
-                let totalTitle = document.createElement("span");
-                totalTitle.innerText = "Total";
-                totalDiv.appendChild(totalTitle);
-
-                let totalAmount = document.createElement("span");
-                totalAmount.innerText = "C$" + getPaymentAmount(receiptItems);
-                totalDiv.appendChild(totalAmount);
-
-                receiptElement.appendChild(totalDiv);
-                cartContentDetails.appendChild(receiptElement);
 
             } else {
-                alert("payment declined");
+                alert("Can't connect to payment php")
             }
 
-        } else {
-            alert("Can't connect to payment php")
         }
 
+        let params = "user_id=" + userId + "&payment=" + amountDue;
+        xmlHttpRequestPayment.send(params);
+    } else {
+        if (cardNameValue == "") {
+            cardNameError.style.display = "inline";
+        } else {
+            cardNameError.style.display = "none";
+        }
+
+        if (cardNumberValue.length != 16) {
+            cardNumberError.style.display = "inline";
+        } else {
+            cardNumberError.style.display = "none";
+        }
+
+        if (cardExpirationDateValue == "") {
+            cardExpirationError.style.display = "inline";
+        } else {
+            cardExpirationError.style.display = "none";
+        }
+
+        if (cardCvcNumberValue.length != 3) {
+            cardCvcError.style.display = "inline";
+        } else {
+            cardCvcError.style.display = "none";
+        }
     }
 
-    let params = "user_id=" + userId + "&payment=" + amountDue;
-    xmlHttpRequestPayment.send(params);
 });

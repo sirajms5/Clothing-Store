@@ -63,28 +63,32 @@
         </nav>
     </header>
     <main id="main">
-        <section class="registration-section-content">
+        <section id="payment-section-content">
             <h2 class="secondary-title">Payment Details</h2>
             <form class="form-layout" id="payment-form" method="post" action="./php/payment.php">
                 <div class="form-element-package">
                     <label for="name-on-card">Name On Card:</label>
-                    <input class="input-details" id="name-on-card" type="text" name="name-on-card"
-                        placeholder="Name On Card..." maxlength="50">
+                    <input class="form-control" id="name-on-card" type="text" name="name-on-card"
+                        placeholder="Bob Smith" maxlength="50">
+                    <span id="card-name-error">Enter your name.</span>
                 </div>
                 <div class="form-element-package">
                     <label for="card-number">Card Number:</label>
-                    <input class="input-details" id="card-number" type="text" name="card-number"
-                        placeholder="Card Number..." maxlength="16">
+                    <input class="form-control" id="card-number" type="text" name="card-number"
+                        placeholder="1234567890123456">
+                    <span id="card-number-error">Enter enter 16 digits.</span>
                 </div>
                 <div class="form-element-package">
                     <label for="card-expiration-date">Expiration Date:</label>
-                    <input class="input-details" id="card-expiration-date" type="text" name="card-expiration-date"
-                        placeholder="MM/YY" maxlength="5">
+                    <input class="form-control" id="card-expiration-date" type="text" name="card-expiration-date"
+                        placeholder="MM/YY">
+                    <span id="card-expiration-error">Enter Expiration Date in MM/YY format.</span>
                 </div>
                 <div class="form-element-package">
                     <label for="card-cvc-number">CVC:</label>
-                    <input class="input-details" id="card-cvc-number" type="text" name="card-cvc-number"
-                        placeholder="XXX" maxlength="3">
+                    <input class="form-control" id="card-cvc-number" type="text" name="card-cvc-number"
+                        placeholder="123">
+                    <span id="card-cvc-error">Enter 3 digits</span>
                 </div>
                 <button class="btn btn-success" id="button-payment">Confirm Payment</button>
             </form>

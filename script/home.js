@@ -164,12 +164,12 @@ function itemButtonClicked(itemButton) {
 }
 
 // min and max price input
-function checkInput(event){
+function checkInput(event) {
     let input = event.key;
     let numberRegEx = /\d/;
     let isNumber = numberRegEx.test(input);
     let isBackspaceOrDelete = ["Backspace", "Delete"].includes(input);
-    if(!isNumber && !isBackspaceOrDelete){
+    if (!isNumber && !isBackspaceOrDelete) {
         event.preventDefault();
     }
 }
@@ -197,7 +197,7 @@ searchButton.addEventListener("click", (event) => {
             shoppingItemName.includes(searchInput)
             && (shoppingItemsex == searchsex || searchsex == "both" || searchsex == "sex")
             && (shoppingItemCategory == searchCategory || searchCategory == "show all" || searchCategory == "category")
-            && ((shoppingItemPrice > searchMin || searchMin == "" ) && (shoppingItemPrice < searchMax || searchMax == ""))
+            && ((shoppingItemPrice > searchMin || searchMin == "") && (shoppingItemPrice < searchMax || searchMax == ""))
         ) {
             shoppingItemElement.style.display = "inline";
         } else {

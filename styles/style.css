@@ -54,7 +54,8 @@
   display: block;
   cursor: pointer;
   padding: initial;
-  margin-left: 1.5rem; /* adjust it in small window */
+  margin-left: 1.5rem;
+  /* adjust it in small window */
 }
 
 .nav-bar-item:hover {
@@ -107,17 +108,17 @@
   grid-row: 2/3
 }
 
-#category-list{
+#category-list {
   grid-column: 2/3;
   grid-row: 2/3
 }
 
-#min-price{
+#min-price {
   grid-column: 3/4;
   grid-row: 2/3
 }
 
-#max-price{
+#max-price {
   grid-column: 4/5;
   grid-row: 2/3
 }
@@ -154,7 +155,8 @@
 
 /* registration and log in pages */
 
-.registration-section-content {
+#registration-section-content,
+#payment-section-content {
   border: 2px solid red;
   border-radius: 30px;
   box-shadow: 0px 0px 20px palevioletred;
@@ -172,6 +174,7 @@
 .account-element-package {
   display: grid;
   grid-template-columns: 1fr 4fr;
+  font-size: 1.1rem;
 }
 
 .secondary-title {
@@ -184,13 +187,21 @@
 #password-error,
 #current-password-error,
 #new-password-error,
-#re-new-password-error {
+#re-new-password-error,
+#card-name-error,
+#card-number-error,
+#card-expiration-error,
+#card-cvc-error {
   color: orange;
   display: none;
   grid-column: 2/3;
 }
 
 /* payment page */
+
+#payment-section-content {
+  display: none;
+}
 
 #cart-contents,
 #cart-details-list,
@@ -237,7 +248,6 @@
 
 .account-element-package {
   margin-top: 2rem;
-  font-size: 1.1rem;
 }
 
 #change-password {
@@ -254,8 +264,8 @@
 
 /* media control */
 
-@media(max-width: 991px){
-  .search-form{
+@media(max-width: 991px) {
+  .search-form {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   }
@@ -264,28 +274,28 @@
     grid-column: 1/2;
     grid-row: 1/2;
   }
-  
+
   #search-button {
     grid-column: 1/2;
     grid-row: 6/7
   }
-  
+
   #gender-list {
     grid-column: 1/2;
     grid-row: 2/3
   }
-  
-  #category-list{
+
+  #category-list {
     grid-column: 1/2;
     grid-row: 3/4
   }
-  
-  #min-price{
+
+  #min-price {
     grid-column: 1/2;
     grid-row: 4/5
   }
-  
-  #max-price{
+
+  #max-price {
     grid-column: 1/2;
     grid-row: 5/6
   }
