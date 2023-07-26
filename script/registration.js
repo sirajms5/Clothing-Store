@@ -102,7 +102,6 @@ registrationButton.addEventListener("click", (event) => {
         }
 
         if (passwordValue.length < 6) {
-            passwordError.innerText = "Password should be more than 6 digits."
             passwordError.style.display = "inline";
         } else {
             passwordError.style.display = "none";

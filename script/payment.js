@@ -83,7 +83,7 @@ getCartCount();
 
 // item constructor
 class item {
-    constructor(id, name, price, sex, category, image, altText) { // add alt to the database content
+    constructor(id, name, price, sex, category, image, altText) {
         this.id = id;
         this.name = name;
         this.price = price;

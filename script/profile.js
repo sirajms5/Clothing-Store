@@ -24,7 +24,6 @@ function getCartCount() {
             let cartCount = parseInt(xmlHttpRequestGetCartCount.responseText);
             let cartCountArray = Array.from(cartCountElement);
             if (cartCount <= 0) {
-                // cartContentDetails.style.display = "none";
                 cartCountArray[0].style.display = "none"; // will hide the cart number in the nav bar
             } else if (cartCount <= 99) {
                 cartCountArray.forEach(element => {

@@ -184,8 +184,6 @@ searchButton.addEventListener("click", (event) => {
     let searchCategory = document.getElementById("category-list").value.toLowerCase();
     let searchMin = document.getElementById("min-price").value;
     let searchMax = document.getElementById("max-price").value;
-
-
     for (let index of items) {
         let shoppingItemName = index["name"].toLowerCase();
         let shoppingItemId = "shopping-item-id-" + index["id"];
