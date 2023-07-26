@@ -163,6 +163,10 @@ function itemButtonClicked(itemButton) {
 
 }
 
+// min price entry
+let searchMin = document.getElementById("min-price");
+let searchMax = document.getElementById("max-price");
+
 // search form
 let searchButton = document.getElementById("search-button");
 searchButton.addEventListener("click", (event) => {
@@ -170,8 +174,9 @@ searchButton.addEventListener("click", (event) => {
     let searchInput = document.getElementById("search-bar").value.toLowerCase().trim();
     let searchsex = document.getElementById("sex-list").value.toLowerCase();
     let searchCategory = document.getElementById("category-list").value.toLowerCase();
-    let searchMin = document.getElementById("min-price").value;
-    let searchMax = document.getElementById("max-price").value;
+    let searchMinValue = searchMin.value;
+    let searchMaxValue = searchMax.value;
+
 
     for (let index of items) {
         let shoppingItemName = index["name"].toLowerCase();
@@ -184,7 +189,7 @@ searchButton.addEventListener("click", (event) => {
             shoppingItemName.includes(searchInput)
             && (shoppingItemsex == searchsex || searchsex == "both" || searchsex == "sex")
             && (shoppingItemCategory == searchCategory || searchCategory == "show all" || searchCategory == "category")
-            && (shoppingItemPrice > searchMin && shoppingItemPrice < searchMax)
+            && ((shoppingItemPrice > searchMinValue || searchMinValue == "" ) && (shoppingItemPrice < searchMaxValue || searchMaxValue == ""))
         ) {
             shoppingItemElement.style.display = "inline";
         } else {
