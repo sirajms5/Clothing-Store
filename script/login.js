@@ -11,7 +11,6 @@ emailInput.addEventListener("keydown", (event) => {
 })
 
 passwordInput.addEventListener("keydown", (event) => {
-    console.log(passwordInput.value.length)
     if(passwordInput.value.length > 29){ // length increases after function finishes
         event.preventDefault();
     }
