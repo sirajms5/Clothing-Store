@@ -3,6 +3,20 @@ let emailInput = document.getElementById("log-in-email");
 let passwordInput = document.getElementById("log-in-password");
 let emailError = document.getElementById("email-error");
 let passwordError = document.getElementById("password-error");
+
+emailInput.addEventListener("keydown", (event) => {
+    if(emailInput.value.length > 69){ // length increases after function finishes
+        event.preventDefault();
+    }
+})
+
+passwordInput.addEventListener("keydown", (event) => {
+    console.log(passwordInput.value.length)
+    if(passwordInput.value.length > 29){ // length increases after function finishes
+        event.preventDefault();
+    }
+})
+
 loginButton.addEventListener("click", (event) => {
     event.preventDefault();
     let emailValue = emailInput.value;
