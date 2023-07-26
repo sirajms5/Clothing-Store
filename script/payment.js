@@ -219,7 +219,7 @@ cardNumber.addEventListener("keydown", (event) => {
     let input = event.key;
     let numberRegEx = /\d/;
     let isNumber = numberRegEx.test(input);
-    let isBackspaceOrDelete = ["Backspace", "Delete"].includes(input);
+    let isBackspaceOrDelete = ["Backspace", "Delete", "ArrowLeft", "ArrowRight"].includes(input);
     let cardNumberValue = cardNumber.value.trim();
     if (!isNumber || cardNumberValue.length > 15) { // length will increase after the function ends
         if (!isBackspaceOrDelete) {
@@ -234,7 +234,7 @@ cardExpirationDate.addEventListener("keydown", (event) => {
     let input = event.key;
     let numberRegEx = /[\d\/]/;
     let isNumber = numberRegEx.test(input);
-    let isBackspaceOrDelete = ["Backspace", "Delete"].includes(input);
+    let isBackspaceOrDelete = ["Backspace", "Delete", "ArrowLeft", "ArrowRight"].includes(input);
     let cardExpirationDateValue = cardExpirationDate.value.trim();
 
     if (!isNumber || cardExpirationDateValue.length > 4) { // length will increase after the function ends
@@ -250,7 +250,7 @@ cardCvcNumber.addEventListener("keydown", (event) => {
     let input = event.key;
     let numberRegEx = /\d/;
     let isNumber = numberRegEx.test(input);
-    let isBackspaceOrDelete = ["Backspace", "Delete"].includes(input);
+    let isBackspaceOrDelete = ["Backspace", "Delete", "ArrowLeft", "ArrowRight"].includes(input);
     let cardCvcNumberValue = cardCvcNumber.value.trim();
 
     if (!isNumber || cardCvcNumberValue.length > 2) { // length will increase after the function ends
@@ -271,12 +271,13 @@ paymentButton.addEventListener("click", (event) => {
     let cardNumberValue = cardNumber.value.trim();
     let cardExpirationDateValue = cardExpirationDate.value.trim();
     let cardCvcNumberValue = cardCvcNumber.value.trim();
-    // add cart number checker should be more than 0
     let exiprationForamtRegEx = /^\d\d[\/]\d\d$/;
+    let months = ["01", "02", "03", "04", "05", "01", "02", "03", "04", "05", "11", "12"];
+    let isMonth = months.includes(cardExpirationDateValue.substr(0, 2));
     if (
         cardNameValue != ""
         && cardNumberValue.length == 16
-        && exiprationForamtRegEx.test(cardExpirationDateValue)
+        && (exiprationForamtRegEx.test(cardExpirationDateValue) && isMonth)
         && cardCvcNumberValue.length == 3
     ) {
         cardNameError.style.display = "none";
@@ -371,7 +372,7 @@ paymentButton.addEventListener("click", (event) => {
             cardNumberError.style.display = "none";
         }
 
-        if (cardExpirationDateValue == "") {
+        if (!(exiprationForamtRegEx.test(cardExpirationDateValue) && isMonth)) {
             cardExpirationError.style.display = "inline";
         } else {
             cardExpirationError.style.display = "none";
