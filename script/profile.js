@@ -63,6 +63,7 @@ signOutButton.addEventListener("click", () => {
     id = null;
     username.innerText = "";
     username.classList.remove("dropdown-toggle");
+    window.location.href = "./index.html";
 });
 
 // getting user details
@@ -70,7 +71,7 @@ let xmlHttpRequestGetProfileDetails = new XMLHttpRequest();
 xmlHttpRequestGetProfileDetails.open("POST", "./php/profile.php", true);
 xmlHttpRequestGetProfileDetails.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded
 xmlHttpRequestGetProfileDetails.onload = () => {
-    if(xmlHttpRequestGetProfileDetails.status === 200){
+    if (xmlHttpRequestGetProfileDetails.status === 200) {
         let result = xmlHttpRequestGetProfileDetails.responseText.split("*"); // * is column separator
         document.getElementById("first-name").innerText = result[0];
         document.getElementById("last-name").innerText = result[1];
@@ -84,3 +85,32 @@ xmlHttpRequestGetProfileDetails.onload = () => {
 
 let params = "user_id=" + userId;
 xmlHttpRequestGetProfileDetails.send(params);
+
+let changePasswordButton = document.getElementById("change-password-button");
+changePasswordButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    let currentPassword = document.getElementById("current-password").value;
+    let newPassword = document.getElementById("new-password").value;
+    let reNewPassword = document.getElementById("re-new-password").value;
+    if (newPassword.length >= 6 && (newPassword == reNewPassword)) {        
+        let xmlChangePassword = new XMLHttpRequest();
+        xmlChangePassword.open("POST", "./php/change-password.php");
+        xmlChangePassword.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded
+        xmlChangePassword.onload = () => {
+            if (xmlChangePassword.status === 200) {
+                console.log(xmlChangePassword.responseText);
+                if(xmlChangePassword.responseText == "success"){
+                    document.getElementById("password-change-success").style.display = "inline";
+                    document.getElementById("change-password-form").reset();
+                }
+            } else {
+                alert("can't connect to change-password.php");
+            }
+        }
+
+        params = "current_password=" + currentPassword + "&new_password=" + newPassword + "&user_id=" + userId;
+        xmlChangePassword.send(params);
+    } else {
+        //show error message
+    }
+})

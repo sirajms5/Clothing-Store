@@ -18,7 +18,7 @@ if (firstName != null && lastName != null) {
 function getCartCount() {
     xmlHttpRequestGetCartCount = new XMLHttpRequest();
     xmlHttpRequestGetCartCount.open("POST", "./php/cart-count.php", true);
-    xmlHttpRequestGetCartCount.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded             
+    xmlHttpRequestGetCartCount.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded         
     xmlHttpRequestGetCartCount.onload = () => {
         if (xmlHttpRequestGetCartCount.status === 200) {
             let cartCount = parseInt(xmlHttpRequestGetCartCount.responseText);

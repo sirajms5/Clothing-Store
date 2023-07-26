@@ -88,7 +88,7 @@
             <div class="card" id="change-password">
                 <div class="card-body">
                     <p class="card-title">Change your password?</p>
-                    <form method="post" action="./php/profile.php">
+                    <form id="change-password-form" method="post" action="./php/profile.php">
                         <div class="account-element-package">
                             <label for="current-password">Current Password:</label>
                             <input class="form-control" id="current-password" type="password" name="current_password"
@@ -107,7 +107,10 @@
                                 placeholder="Re-enter Password..." maxlength="30" required>
                             <span id="password-error">Password does not match.</span>
                         </div>
-                        <a class="btn btn-primary" id="change-password-button">Change Password</a>
+                        <div class="account-element-package">
+                            <a class="btn btn-primary" id="change-password-button">Change Password</a>
+                            <span id="password-change-success">Password has been changed successfully!</span>
+                        </div>
                     </form>
                 </div>
             </div>
