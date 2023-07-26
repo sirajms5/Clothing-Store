@@ -102,12 +102,12 @@
   grid-row: 1/3
 }
 
-#gender-menu {
+#gender-list {
   grid-column: 1/2;
   grid-row: 2/3
 }
 
-#category-menu{
+#category-list{
   grid-column: 2/3;
   grid-row: 2/3
 }
@@ -270,12 +270,12 @@
     grid-row: 6/7
   }
   
-  #gender-menu {
+  #gender-list {
     grid-column: 1/2;
     grid-row: 2/3
   }
   
-  #category-menu{
+  #category-list{
     grid-column: 1/2;
     grid-row: 3/4
   }

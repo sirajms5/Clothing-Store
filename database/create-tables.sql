@@ -89,51 +89,51 @@ VALUES ('Work Boots', 63.99, 'Men', 'shoes', './images/81ToCrQe5gL._AC_SY575._SX
 
 -- https://www.amazon.ca/Alex-Vando-Womens-Button-Stretch/dp/B07JVFGXRX/ref=sr_1_3_sspa?qid=1689980102&s=fashion&sr=1-3-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGZfYnJvd3Nl&psc=1
 INSERT INTO ITEMS (Item_Name, Price, Sex, Category, Image_Pathway, Alt_Text)
-VALUES ('Dress Shirt', 34.99, 'women', 'shirt', './images/711DVmlvM1L._AC_UX679_.jpg', 'ALEX VANDO Womens Dress Shirts Regular Fit Long Sleeve Stretch Work Shirt');
+VALUES ('Dress Shirt', 34.99, 'Women', 'shirt', './images/711DVmlvM1L._AC_UX679_.jpg', 'ALEX VANDO Womens Dress Shirts Regular Fit Long Sleeve Stretch Work Shirt');
 
 -- https://www.amazon.ca/dp/B0BWNBKRNF/ref=sspa_dk_detail_6?psc=1&pd_rd_i=B0BWNBKRNF&pd_rd_w=36EF2&content-id=amzn1.sym.d8c43617-c625-45bd-a63f-ad8715c2c055&pf_rd_p=d8c43617-c625-45bd-a63f-ad8715c2c055&pf_rd_r=FEC7MEDDBV4XFZEJCHBN&pd_rd_wg=ch6Ei&pd_rd_r=cc769ae3-ef3a-4df0-9104-24c808d2a668&s=fashion&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw
 INSERT INTO ITEMS (Item_Name, Price, Sex, Category, Image_Pathway, Alt_Text)
-VALUES ('Long Sleeve', 49.99, 'women', 'shirt', './images/51AJlajii7L._AC_UX679_.jpg', 'GRACE KARIN Womens Peplum Tops Button Down Blouse Long Sleeve Collared Shirts Smocked Back Top');
+VALUES ('Long Sleeve', 49.99, 'Women', 'shirt', './images/51AJlajii7L._AC_UX679_.jpg', 'GRACE KARIN Womens Peplum Tops Button Down Blouse Long Sleeve Collared Shirts Smocked Back Top');
 
 -- https://www.amazon.ca/dp/B07B3QJNRF/ref=sspa_dk_detail_3?psc=1&pd_rd_i=B07B3QJNRF&pd_rd_w=RcUxd&content-id=amzn1.sym.d8c43617-c625-45bd-a63f-ad8715c2c055&pf_rd_p=d8c43617-c625-45bd-a63f-ad8715c2c055&pf_rd_r=B5E5DKH3VY6HWF0Z1NXQ&pd_rd_wg=wEEYU&pd_rd_r=43419656-b086-4c87-ba35-d22526448250&s=fashion&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw
 INSERT INTO ITEMS (Item_Name, Price, Sex, Category, Image_Pathway, Alt_Text)
-VALUES ('EZEN Shirt', 30.62, 'women', 'shirt', './images/714dww+R8sL._AC_UX569_.jpg', 'EZEN Womens Women Button Down Blue Shirts');
+VALUES ('EZEN Shirt', 30.62, 'Women', 'shirt', './images/714dww+R8sL._AC_UX569_.jpg', 'EZEN Womens Women Button Down Blue Shirts');
 
 -- https://www.amazon.ca/dp/B0B6J49ZHN/ref=sspa_dk_detail_7?psc=1&pd_rd_i=B0B6J49ZHN&pd_rd_w=ESAq5&content-id=amzn1.sym.d8c43617-c625-45bd-a63f-ad8715c2c055&pf_rd_p=d8c43617-c625-45bd-a63f-ad8715c2c055&pf_rd_r=S98RBKQS9VGRQRPDV0FD&pd_rd_wg=GCYNR&pd_rd_r=f49cb4bc-a9bb-49ab-936e-061fdbca5be6&s=fashion&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw
 INSERT INTO ITEMS (Item_Name, Price, Sex, Category, Image_Pathway, Alt_Text)
-VALUES ('Dress Shirt', 36.99, 'women', 'shirt', './images/71OGjHpQQGL._AC_UX569_.jpg', 'Luranee Women 3/4 Roll Sleeve Blue Shirt Notch V Neck Flowy Plaid Tunic Blouses');
+VALUES ('Dress Shirt', 36.99, 'Women', 'shirt', './images/71OGjHpQQGL._AC_UX569_.jpg', 'Luranee Women 3/4 Roll Sleeve Blue Shirt Notch V Neck Flowy Plaid Tunic Blouses');
 
 -- https://www.amazon.ca/dp/B0B96V6CK8/ref=sspa_dk_detail_7?psc=1&pd_rd_i=B0B96V6CK8&pd_rd_w=YWjvT&content-id=amzn1.sym.d8c43617-c625-45bd-a63f-ad8715c2c055&pf_rd_p=d8c43617-c625-45bd-a63f-ad8715c2c055&pf_rd_r=0XN78BVXWK346B4J0VY9&pd_rd_wg=Pc7su&pd_rd_r=37df9607-0101-49c9-ba6f-43883ce1d972&s=fashion&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWw
 INSERT INTO ITEMS (Item_Name, Price, Sex, Category, Image_Pathway, Alt_Text)
-VALUES ('Loose Blouse', 21.99, 'women', 'shirt', './images/813RrNyE0TL._AC_UX569_.jpg', 'Tanst Sky Womens Ruffle 3/4 Sleeve Layered Mesh Blouses Loose Fit Flowy Tunic Tops');
+VALUES ('Loose Blouse', 21.99, 'Women', 'shirt', './images/813RrNyE0TL._AC_UX569_.jpg', 'Tanst Sky Womens Ruffle 3/4 Sleeve Layered Mesh Blouses Loose Fit Flowy Tunic Tops');
 
 -- https://www.amazon.ca/dp/B0B747PH59/ref=sspa_dk_detail_11?psc=1&pf_rd_p=14f07b63-de09-4b1a-8753-fdcce0125efd&pf_rd_r=1CM3TNBYJ9EZTZ40EYAA&pd_rd_wg=JC4aX&pd_rd_w=VURyp&content-id=amzn1.sym.14f07b63-de09-4b1a-8753-fdcce0125efd&pd_rd_r=ba5e6028-a7e0-4634-aeac-8c9a6f7318be&s=fashion&sp_csd=d2lkZ2V0TmFtZT1zcF9kZXRhaWxfdGhlbWF0aWM&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEzNEJHRFBKQlpPUDM4JmVuY3J5cHRlZElkPUEwNjg1MDU4V0NXQ1BUNVNNU1ZQJmVuY3J5cHRlZEFkSWQ9QTA5MjUxNzYxUzUzOEdaUDA5QVdBJndpZGdldE5hbWU9c3BfZGV0YWlsX3RoZW1hdGljJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ==
 INSERT INTO ITEMS (Item_Name, Price, Sex, Category, Image_Pathway, Alt_Text)
-VALUES ('Viracy Blouse', 34.99, 'women', 'shirt', './images/71kHpnRY22L._AC_UX569_.jpg', 'Viracy Womens Overlap Ruffle Sleeve V Neck Mesh Blouse Elastic Loose Flowy Tunic Tops');
+VALUES ('Viracy Blouse', 34.99, 'Women', 'shirt', './images/71kHpnRY22L._AC_UX569_.jpg', 'Viracy Womens Overlap Ruffle Sleeve V Neck Mesh Blouse Elastic Loose Flowy Tunic Tops');
 
 -- https://www.amazon.ca/Oprah-Favorite-Jeans-Wide-Leg/dp/B0C9JVNG1C?ref_=Oct_d_onr_d_10287512011_2&pd_rd_w=0ISOa&content-id=amzn1.sym.61e66258-eef5-45fe-a8dc-635cc7a35f8b&pf_rd_p=61e66258-eef5-45fe-a8dc-635cc7a35f8b&pf_rd_r=KQKDFW85V5E8BVDND1H0&pd_rd_wg=nP4st&pd_rd_r=1f5752cd-c387-4955-b1e9-2a477d6c5ba6&pd_rd_i=B0C9JVNG1C
 INSERT INTO ITEMS (Item_Name, Price, Sex, Category, Image_Pathway, Alt_Text)
-VALUES ('Oprah Jeans', 47.72, 'women', 'jeans', './images/61bmJ7TX8eL._AC_UX679_.jpg', 'Oprah Favorite Jeans Wide Leg Jeans - Women Seamed Front Wide Leg Jeans Elastic Wide Leg Denim Pants Plus Size');
+VALUES ('Oprah Jeans', 47.72, 'Women', 'jeans', './images/61bmJ7TX8eL._AC_UX679_.jpg', 'Oprah Favorite Jeans Wide Leg Jeans - Women Seamed Front Wide Leg Jeans Elastic Wide Leg Denim Pants Plus Size');
 
 -- https://www.amazon.ca/TKMUNY-Lace-up-Stretchy-Juniors-Leggings/dp/B0C4T1B25S?ref_=Oct_d_onr_d_10287512011_4&pd_rd_w=0ISOa&content-id=amzn1.sym.61e66258-eef5-45fe-a8dc-635cc7a35f8b&pf_rd_p=61e66258-eef5-45fe-a8dc-635cc7a35f8b&pf_rd_r=KQKDFW85V5E8BVDND1H0&pd_rd_wg=nP4st&pd_rd_r=1f5752cd-c387-4955-b1e9-2a477d6c5ba6&pd_rd_i=B0C4T1B25S
 INSERT INTO ITEMS (Item_Name, Price, Sex, Category, Image_Pathway, Alt_Text)
-VALUES ('Tkmuny Jeans', 43.49, 'women', 'jeans', './images/416M8ND1Q6L._AC_UY741_.jpg', 'TKMUNY Women Lace-up Bell Bottom Denim Pants Mid Waist Stretchy Flare Juniors Jeans Trouser Leggings');
+VALUES ('Tkmuny Jeans', 43.49, 'Women', 'jeans', './images/416M8ND1Q6L._AC_UY741_.jpg', 'TKMUNY Women Lace-up Bell Bottom Denim Pants Mid Waist Stretchy Flare Juniors Jeans Trouser Leggings');
 
 -- https://www.amazon.ca/Womens-Elastic-Distressed-Pants-Trousers/dp/B0C5MYJ1CS?ref_=Oct_d_onr_d_10287512011_5&pd_rd_w=0ISOa&content-id=amzn1.sym.61e66258-eef5-45fe-a8dc-635cc7a35f8b&pf_rd_p=61e66258-eef5-45fe-a8dc-635cc7a35f8b&pf_rd_r=KQKDFW85V5E8BVDND1H0&pd_rd_wg=nP4st&pd_rd_r=1f5752cd-c387-4955-b1e9-2a477d6c5ba6&pd_rd_i=B0C5MYJ1CS
 INSERT INTO ITEMS (Item_Name, Price, Sex, Category, Image_Pathway, Alt_Text)
-VALUES ('Casual Jeans', 16.99, 'women', 'jeans', './images/61RwWH3ifxL._AC_UX679_.jpg', 'Women Elastic High Waist Jeans Women Casual Distressed Flared Denim Pants Comfy Wide Leg Button Up Jean Trousers');
+VALUES ('Casual Jeans', 16.99, 'Women', 'jeans', './images/61RwWH3ifxL._AC_UX679_.jpg', 'Women Elastic High Waist Jeans Women Casual Distressed Flared Denim Pants Comfy Wide Leg Button Up Jean Trousers');
 
 -- https://www.amazon.ca/FRSHANIAH-Athletic-Walking-Non-Slip-Sneakers/dp/B093VJHJF1/ref=sr_1_22_sspa?qid=1689981199&s=fashion&sr=1-22-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9tdGZfYnJvd3Nl&psc=1
 INSERT INTO ITEMS (Item_Name, Price, Sex, Category, Image_Pathway, Alt_Text)
-VALUES ('Athletic Shoes', 66.93, 'women', 'shoes', './images/81eROaqmBS._AC_SY575._SX._UX._SY._UY_.jpg', 'FRSHANIAH Women Athletic Red Shoe Walking Running Shoes Non-Slip Fashion Sneakers');
+VALUES ('Athletic Shoes', 66.93, 'Women', 'shoes', './images/81eROaqmBS._AC_SY575._SX._UX._SY._UY_.jpg', 'FRSHANIAH Women Athletic Red Shoe Walking Running Shoes Non-Slip Fashion Sneakers');
 
 -- https://www.amazon.ca/dp/B09BCLDDCD/?_encoding=UTF8&pd_rd_i=B09BCMCKV2&pd_rd_w=I0tQ3&content-id=amzn1.sym.6ff60254-e724-49de-b28a-ef9e4fa611a5&pf_rd_p=6ff60254-e724-49de-b28a-ef9e4fa611a5&pf_rd_r=H8BPCCB642PSGXKJ0J3H&pd_rd_wg=avyro&pd_rd_r=18a094f9-e4e1-40e1-9581-391b2580f6b7&ref_=oct_dx_ld
 INSERT INTO ITEMS (Item_Name, Price, Sex, Category, Image_Pathway, Alt_Text)
-VALUES ('Tennis Shoes', 52.99, 'women', 'shoes', './images/71odtnnA9PL._AC_UY575_.jpg', 'Feethit Womens Walking Shoes Lightweight Running Tennis Shoes Non Slip Comfortable Fashion Sneakers');
+VALUES ('Tennis Shoes', 52.99, 'Women', 'shoes', './images/71odtnnA9PL._AC_UY575_.jpg', 'Feethit Womens Walking Shoes Lightweight Running Tennis Shoes Non Slip Comfortable Fashion Sneakers');
 
 -- https://www.amazon.ca/dp/B098T8HTKN/?_encoding=UTF8&pd_rd_i=B098T8HTKN&pd_rd_w=I0tQ3&content-id=amzn1.sym.6ff60254-e724-49de-b28a-ef9e4fa611a5&pf_rd_p=6ff60254-e724-49de-b28a-ef9e4fa611a5&pf_rd_r=H8BPCCB642PSGXKJ0J3H&pd_rd_wg=avyro&pd_rd_r=18a094f9-e4e1-40e1-9581-391b2580f6b7&ref_=oct_dx_ld
 INSERT INTO ITEMS (Item_Name, Price, Sex, Category, Image_Pathway, Alt_Text)
-VALUES ('Rain Boots', 39.98, 'women', 'shoes', './images/51Ak3477zlL._AC_UY575_.jpg', 'GoodValue Womens Rain Boots Waterproof Ankle Boots Womens Lightweight Chelsea Boots Elastic Garden Shoes Short Booties Ladies Slip On Walking Boots');
+VALUES ('Rain Boots', 39.98, 'Women', 'shoes', './images/51Ak3477zlL._AC_UY575_.jpg', 'GoodValue Womens Rain Boots Waterproof Ankle Boots Womens Lightweight Chelsea Boots Elastic Garden Shoes Short Booties Ladies Slip On Walking Boots');
 
 
 

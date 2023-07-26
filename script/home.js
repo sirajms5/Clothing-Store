@@ -95,6 +95,7 @@ xmlHttpRequest.onload = () => {
         for (let index = 0; index < items.length; index++) {
             let listItem = document.createElement("li");
             listItem.classList.add("card", "shopping-grid-item");
+            listItem.id = "shopping-item-id-" + items[index]["id"];
 
             let itemImage = document.createElement("img"); // adding image to the list
             itemImage.setAttribute("src", items[index]["image"]);
@@ -132,6 +133,7 @@ xmlHttpRequest.onload = () => {
 
 xmlHttpRequest.send();
 
+// when clicking add to cart
 function itemButtonClicked(itemButton) {
     if (userId !== null) {
         let itemButtonId = itemButton.id.split("-");
@@ -160,3 +162,34 @@ function itemButtonClicked(itemButton) {
     }
 
 }
+
+// search form
+let searchButton = document.getElementById("search-button");
+searchButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    let searchInput = document.getElementById("search-bar").value.toLowerCase().trim();
+    let searchsex = document.getElementById("sex-list").value.toLowerCase();
+    let searchCategory = document.getElementById("category-list").value.toLowerCase();
+    let searchMin = document.getElementById("min-price").value;
+    let searchMax = document.getElementById("max-price").value;
+
+    for (let index of items) {
+        let shoppingItemName = index["name"].toLowerCase();
+        let shoppingItemId = "shopping-item-id-" + index["id"];
+        let shoppingItemElement = document.getElementById(shoppingItemId);
+        let shoppingItemsex = index["sex"].toLowerCase();
+        let shoppingItemCategory = index["category"].toLowerCase();
+        let shoppingItemPrice = index["price"];
+        if (
+            shoppingItemName.includes(searchInput)
+            && (shoppingItemsex == searchsex || searchsex == "both" || searchsex == "sex")
+            && (shoppingItemCategory == searchCategory || searchCategory == "show all" || searchCategory == "category")
+            && (shoppingItemPrice > searchMin && shoppingItemPrice < searchMax)
+        ) {
+            shoppingItemElement.style.display = "inline";
+        } else {
+            shoppingItemElement.style.display = "none";
+        }
+
+    }
+})
