@@ -191,7 +191,11 @@
 #card-name-error,
 #card-number-error,
 #card-expiration-error,
-#card-cvc-error {
+#card-cvc-error,
+#first-name-error,
+#last-name-error,
+#address-error,
+#date-of-birth-error {
   color: orange;
   display: none;
   grid-column: 2/3;

@@ -70,33 +70,35 @@
                 <div class="form-element-package">
                     <label for="first-name">First Name:</label>
                     <input class="form-control" id="first-name" type="text" name="first-name"
-                        placeholder="First Name..." maxlength="50"> <!-- CONVERT VALIDATION TO JS -->
+                        placeholder="First Name..." maxlength="50">
+                    <span id="first-name-error">Enter First Name.</span>
                 </div>
                 <div class="form-element-package">
                     <label for="last-name">Last Name:</label>
                     <input class="form-control" id="last-name" type="text" name="last-name" placeholder="Last Name..."
                         maxlength="50">
+                    <span id="last-name-error">Enter Last Name.</span>
                 </div>
                 <div class="form-element-package">
                     <label for="address">Address:</label>
                     <input class="form-control" id="address" type="text" name="address" placeholder="Address..."
-                        maxlength="50">
+                        maxlength="255">
+                    <span id="address-error">Enter Address.</span>
                 </div>
                 <div class="form-element-package">
                     <label for="date-of-birth">Date of Birth:</label>
                     <input class="form-control" id="date-of-birth" type="date" name="date-of-birth">
+                    <span id="date-of-birth-error">Enter Date Of Birth</span>
                 </div>
                 <div class="form-element-package">
                     <label for="email">Email</label>
-                    <input class="form-control" id="email" type="text" name="email" placeholder="Email..."
-                        maxlength="70" required>
-                    <span id="email-error">Email already registered.</span>
+                    <input class="form-control" id="email" type="text" name="email" placeholder="Email...">
+                    <span id="email-error"></span>
                 </div>
                 <div class="form-element-package">
                     <label for="password">Password:</label>
-                    <input class="form-control" id="password" type="password" name="password" placeholder="Password..."
-                        maxlength="30" required>
-                    <span id="password-error">Wrong Password.</span>
+                    <input class="form-control" id="password" type="password" name="password" placeholder="Password...">
+                    <span id="password-error"></span>
                 </div>
                 <button class="btn btn-success" id="button-register">Register</button>
             </form>
