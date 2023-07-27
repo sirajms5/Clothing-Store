@@ -6,7 +6,7 @@
     $userId = intval($_POST['user_id']);
 
     $queryPasswordCheck = "SELECT Password
-                            FROM users
+                            FROM SIRAJ_STORE_USERS
                             WHERE id = $userId;";
     
     $resultPasswordCheck = mysqli_query($conn, $queryPasswordCheck);
@@ -16,7 +16,7 @@
         $storedHashedPassword = $data['Password'];
         if(password_verify($currentPassword, $storedHashedPassword)){
             $hashedNewPassword = password_hash($newPassowrd, PASSWORD_DEFAULT);
-            $queryChangePassword = "UPDATE users SET Password = '$hashedNewPassword' WHERE id = $userId;";
+            $queryChangePassword = "UPDATE SIRAJ_STORE_USERS SET Password = '$hashedNewPassword' WHERE id = $userId;";
             $resultChangePassword = mysqli_query($conn, $queryChangePassword);
             if($resultChangePassword){
                 echo "success";

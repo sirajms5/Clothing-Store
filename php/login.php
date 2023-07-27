@@ -4,7 +4,7 @@
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $queryCheckEmail = "SELECT First_Name, Last_Name, id, Password FROM users WHERE email = '$email';";
+    $queryCheckEmail = "SELECT First_Name, Last_Name, id, Password FROM SIRAJ_STORE_USERS WHERE email = '$email';";
     $resultCheckEmail = mysqli_query($conn, $queryCheckEmail);
 
     if(mysqli_num_rows($resultCheckEmail) > 0){

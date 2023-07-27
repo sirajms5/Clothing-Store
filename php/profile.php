@@ -4,7 +4,7 @@
     $userId = $_POST['user_id'];
 
     $query = "SELECT First_Name, Last_Name, Address, Date_Of_Birth, Email
-                FROM users
+                FROM SIRAJ_STORE_USERS
                 WHERE id = $userId;";
     
     $result = mysqli_query($conn, $query);    
