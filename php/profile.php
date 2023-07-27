@@ -10,15 +10,12 @@
     $result = mysqli_query($conn, $query);    
 
     if($result){
-        $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
-        $toReturn = "";
-        foreach($data as $row){
-            $toReturn = $toReturn . $row['First_Name']
-                        . "*" . $row['Last_Name']
-                        . "*" . $row['Address']
-                        . "*" . $row['Date_Of_Birth']
-                        . "*" . $row['Email'];
-        }
+        $data = mysqli_fetch_assoc($result);
+            $toReturn = $data['First_Name']
+                        . "*" . $data['Last_Name']
+                        . "*" . $data['Address']
+                        . "*" . $data['Date_Of_Birth']
+                        . "*" . $data['Email'];
         echo $toReturn;
     }
 ?>

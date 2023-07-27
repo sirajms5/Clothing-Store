@@ -7,19 +7,23 @@
 
     $queryPasswordCheck = "SELECT Password
                             FROM users
-                            WHERE id = $userId AND Password = '$currentPassword';";
+                            WHERE id = $userId;";
     
     $resultPasswordCheck = mysqli_query($conn, $queryPasswordCheck);
 
     if (mysqli_num_rows($resultPasswordCheck) > 0) {
-        $queryChangePassword = "UPDATE users SET Password = '$newPassowrd' WHERE id = $userId;";
-        $resultChangePassword = mysqli_query($conn, $queryChangePassword);
-        if($resultChangePassword){
-            echo "success";
-        } else {
-            echo "something went wrong";
-        }
-
+        $data = mysqli_fetch_assoc($resultPasswordCheck);
+        $storedHashedPassword = $data['Password'];
+        if(password_verify($currentPassword, $storedHashedPassword)){
+            $hashedNewPassword = password_hash($newPassowrd, PASSWORD_DEFAULT);
+            $queryChangePassword = "UPDATE users SET Password = '$hashedNewPassword' WHERE id = $userId;";
+            $resultChangePassword = mysqli_query($conn, $queryChangePassword);
+            if($resultChangePassword){
+                echo "success";
+            } else {
+                echo "something went wrong";
+            }
+        }      
     } else {
         echo "wrong password";
     }

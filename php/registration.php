@@ -27,12 +27,9 @@ if (mysqli_num_rows($resultCheckEmail) == 0) {
 
     $querySelectNewId = "SELECT id FROM USERS WHERE email = '$email';";
     $resultSelectNewId = mysqli_query($conn, $querySelectNewId);
-    $data = mysqli_fetch_all($resultSelectNewId, MYSQLI_ASSOC);
-
-    $toReturn = "";
-    foreach($data as $row){
-        $toReturn = $toReturn . $row['id'];
-    }
+    $data = mysqli_fetch_assoc($resultSelectNewId);
+    
+    $toReturn = $data['id'];
     echo $toReturn;
 } else {
     echo "email already registered";

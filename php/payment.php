@@ -15,7 +15,7 @@
                                 FROM items
                                 JOIN carts ON items.id = carts.Item_Id
                                 JOIN transactions ON carts.Transaction_Id = transactions.id
-                                WHERE transactions.id = (SELECT MAX(id) FROM transactions WHERE User_Id = 43);";
+                                WHERE transactions.id = (SELECT MAX(id) FROM transactions WHERE User_Id = $userId);";
 
             $resultGetReceipt = mysqli_query($conn, $queryGetReceipt);
             $data = mysqli_fetch_all($resultGetReceipt, MYSQLI_ASSOC);
