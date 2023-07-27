@@ -149,8 +149,21 @@
 }
 
 #footer {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
   margin-top: 3rem;
+}
+
+.profile-link {
+  cursor: pointer;
+  color: var(--salt, white);
+  text-decoration: none;
+  margin-top: 0.2rem;
+}
+
+.profile-link:hover {
+  color: red;
 }
 
 /* registration and log in pages */
@@ -391,11 +404,11 @@
     padding: 0;
   }
 
-  #payment-section-content{
+  #payment-section-content {
     padding: 1rem 0.5rem;
   }
 
-  #button-payment{
+  #button-payment {
     width: 75%;
     margin-left: auto;
     margin-right: auto;
