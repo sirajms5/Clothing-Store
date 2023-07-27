@@ -4,25 +4,20 @@
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $queryCheckEmail = "SELECT First_Name, Last_Name, id FROM users WHERE email = '$email';";
+    $queryCheckEmail = "SELECT First_Name, Last_Name, id, Password FROM users WHERE email = '$email';";
     $resultCheckEmail = mysqli_query($conn, $queryCheckEmail);
 
     if(mysqli_num_rows($resultCheckEmail) > 0){
-        $querySelectUser = "SELECT First_Name, Last_Name, id FROM users WHERE email = '$email' AND Password = '$password';";
-        $resultSelectUser = mysqli_query($conn, $querySelectUser);
+        $data = mysqli_fetch_assoc($resultCheckEmail);
+        $hashedPassword = $data['Password'];
 
-        if(mysqli_num_rows($resultSelectUser) > 0){
-            $data = mysqli_fetch_all($resultSelectUser, MYSQLI_ASSOC);
-
-            if ($data) {     
-                $toReturn = "";   
-                foreach ($data as $row) {
-                    $toReturn = $row['First_Name'] . "-" . $row['Last_Name'] . "-" . $row['id'];
-                }
+        if(password_verify($password, $hashedPassword)){
+                $toReturn = ""; 
+                $toReturn = $data['First_Name'] . "-" . $data['Last_Name'] . "-" . $data['id'];
                 echo $toReturn;
-            }
-        } else {
+            } else {
             echo "wrong password";
+            
         }
     } else {
         echo "unregistered email";

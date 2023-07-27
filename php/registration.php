@@ -10,6 +10,7 @@ $password = $_POST['password'];
 
 $queryCheckEmail = "SELECT Email FROM users WHERE email = '$email';";
 $resultCheckEmail = mysqli_query($conn, $queryCheckEmail);
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 if (mysqli_num_rows($resultCheckEmail) == 0) {
     $queryRegistration = "INSERT INTO USERS(
@@ -20,7 +21,8 @@ if (mysqli_num_rows($resultCheckEmail) == 0) {
                                             Email,
                                             Password
                                         ) 
-                                    VALUES ('$firstName', '$lastName', '$address', '$dateOfBird', '$email', '$password');";
+                                    VALUES ('$firstName', '$lastName', '$address', '$dateOfBird', '$email', '$hashedPassword');";
+                                    
     $resultRegistration = mysqli_query($conn, $queryRegistration);
 
     $querySelectNewId = "SELECT id FROM USERS WHERE email = '$email';";
