@@ -156,7 +156,8 @@
 /* registration and log in pages */
 
 #registration-section-content,
-#payment-section-content {
+#payment-section-content,
+#profile-section {
   border: 2px solid red;
   border-radius: 30px;
   box-shadow: 0px 0px 20px palevioletred;
@@ -313,13 +314,17 @@
 @media(max-width: 820px) {
 
   #shopping-items,
-  .shopping-history {
+  .shopping-history,
+  #history-list {
     grid-template-columns: 1fr;
+    padding: 0;
   }
 }
 
 @media(max-width: 767px) {
-  .form-element-package {
+
+  .form-element-package,
+  .account-element-package {
     grid-template-columns: 1fr;
   }
 
@@ -340,24 +345,59 @@
   }
 }
 
-@media(max-width: 575px){
-  #registration-section-content {
+@media(max-width: 575px) {
+
+  #registration-section-content,
+  #payment-section-content,
+  #profile-section {
     max-width: 500px;
   }
 }
 
-@media(max-width: 393px){
-  #registration-section-content {
+@media(max-width: 500px) {
+
+  #registration-section-content,
+  #payment-section-content,
+  #profile-section {
+    max-width: 400px;
+  }
+}
+
+@media(max-width: 400px) {
+
+  #registration-section-content,
+  #payment-section-content,
+  #profile-section {
     max-width: 300px;
   }
 
-  .secondary-title{
+  .secondary-title {
     font-size: 1.4rem;
   }
 }
 
-@media(max-width: 300px){
-  #registration-section-content {
+@media(max-width: 300px) {
+
+  #registration-section-content,
+  #payment-section-content,
+  #profile-section {
     max-width: 200px;
+  }
+
+  #profile-section {
+    border: 0px none transparent;
+    border-radius: 0px;
+    box-shadow: 0px 0px 0px transparent;
+    padding: 0;
+  }
+
+  #payment-section-content{
+    padding: 1rem 0.5rem;
+  }
+
+  #button-payment{
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
