@@ -16,6 +16,7 @@ passwordInput.addEventListener("keydown", (event) => {
     }
 })
 
+// logging in
 loginButton.addEventListener("click", (event) => {
     event.preventDefault();
     let emailValue = emailInput.value;
