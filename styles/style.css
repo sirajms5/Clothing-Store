@@ -52,11 +52,11 @@
   cursor: pointer;
   padding: initial;
   margin-left: 1.5rem;  
-  transition: 0.5s;
 }
 
 .nav-bar-item:hover {
   color: lightblue;
+  transition: 0.5s;
 }
 
 #shopping-cart {
