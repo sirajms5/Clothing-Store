@@ -1,20 +1,17 @@
 :root {
   --salt: #f3fafd;
-  --prussian-blue: #0B3954;
-  --metalic-seaweed: #087E8B;
-  --pale-yellow: #F0F3BD;
 }
 
 .master {
   margin: 0 0 0 0;
   padding: 0;
-  background-color: var(--prussian-blue);
+  background-color: #424242;
   color: var(--salt, white);
   overflow-x: hidden;
 }
 
 #nav-bar {
-  background-color: #FC7753 !important;
+  background-color: black !important;
   position: fixed;
   width: 100%;
   display: flex;
@@ -54,13 +51,12 @@
   display: block;
   cursor: pointer;
   padding: initial;
-  margin-left: 1.5rem;
-  /* adjust it in small window */
+  margin-left: 1.5rem;  
+  transition: 0.5s;
 }
 
 .nav-bar-item:hover {
-  color: black;
-  transition: 1s;
+  color: lightblue;
 }
 
 #shopping-cart {
@@ -139,8 +135,13 @@
   margin-left: auto;
   margin-right: auto;
   max-width: 19rem;
-  border: 1px solid #8B635C !important;
-  box-shadow: 2px 2px #8B635C;
+  border: 1px solid black !important;
+  box-shadow: 2px 2px black;
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: 1.2rem;
 }
 
 .card-img-top {
@@ -173,7 +174,7 @@
 #profile-section {
   border: 2px solid red;
   border-radius: 30px;
-  box-shadow: 0px 0px 20px palevioletred;
+  box-shadow: 0px 0px 12px palevioletred;
   padding: 2.5rem 3rem 2.5rem 3rem;
   width: 1000px;
 }

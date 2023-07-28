@@ -30,7 +30,8 @@ loginButton.addEventListener("click", (event) => {
                     emailError.innerText = "Email is not registered."
                     emailError.style.display = "inline";                    
                 } else if (xmlHttpRequest.responseText == "wrong password") {
-                    passwordError.innerText = "Wrong Password."
+                    emailError.style.display = "none";
+                    passwordError.innerText = "Wrong Password.";
                     passwordError.style.display = "inline";
                 } else {
                     let result = xmlHttpRequest.responseText.split("-");
