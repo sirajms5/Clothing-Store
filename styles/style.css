@@ -59,6 +59,10 @@
   transition: 0.5s;
 }
 
+#nav-menu {
+  color: var(--salt, white);
+}
+
 #shopping-cart {
   display: none;
 }
