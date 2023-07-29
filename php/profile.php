@@ -11,11 +11,6 @@
 
     if($result){
         $data = mysqli_fetch_assoc($result);
-            $toReturn = $data['First_Name']
-                        . "*" . $data['Last_Name']
-                        . "*" . $data['Address']
-                        . "*" . $data['Date_Of_Birth']
-                        . "*" . $data['Email'];
-        echo $toReturn;
+        echo json_encode($data);
     }
 ?>

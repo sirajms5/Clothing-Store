@@ -64,16 +64,16 @@ signOutButton.addEventListener("click", () => {
     window.location.href = "./index.html";
 });
 
-class item {
-    constructor(name, price, imagePathway, altText, transactionId, amountPaid) {
-        this.name = name;
-        this.price = price;
-        this.imagePathway = imagePathway;
-        this.altText = altText;
-        this.transactionId = transactionId;
-        this.amountPaid = amountPaid;
-    }
-}
+// class item {
+//     constructor(name, price, imagePathway, altText, transactionId, amountPaid) {
+//         this.name = name;
+//         this.price = price;
+//         this.imagePathway = imagePathway;
+//         this.altText = altText;
+//         this.transactionId = transactionId;
+//         this.amountPaid = amountPaid;
+//     }
+// }
 
 let previousPurchasesList = document.getElementById("history-list");
 let xmlHttpRequest = new XMLHttpRequest();
@@ -81,73 +81,67 @@ xmlHttpRequest.open("POST", "./php/history.php", true);
 xmlHttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded
 xmlHttpRequest.onload = () => {
     if (xmlHttpRequest.status === 200) {
-        let result = xmlHttpRequest.responseText.split("*"); // * is separating between each row
-        result.pop();
-        let items = [];
-        for (let index = 0; index < result.length; index++) {
-            let singleItem = result[index].split("-"); // - is separating between each column
-            let itemObject = new item(singleItem[0], singleItem[1], singleItem[2], singleItem[3], singleItem[4], singleItem[5]);
-            items.push(itemObject);
-        }
-
-        let transactions = {};
-        for (let index = 0; index < items.length; index++) {
-            let transactionId = items[index]["transactionId"];
-            if (!transactions[transactionId]) {
-                transactions[transactionId] = [];
-            }
-            transactions[transactionId].push(items[index]);
-        }
-        
-        for (let key in transactions) {            
-            let transactionList = document.createElement("li"); // list for items in each transaction     
-            let separatorHorizontalLine = document.createElement("hr");    
-            transactionList.appendChild(separatorHorizontalLine);
-            let transactionNumber = document.createElement("p");
-            transactionNumber.classList.add("transaction-header");
-            transactionNumber.innerText = "Transaction Number: " + key;
-            transactionList.appendChild(transactionNumber);
-            let transactionItemList = document.createElement("ul");
-            transactionItemList.classList.add("shopping-history");
-
-            for (index = 0; index < transactions[key].length; index++) {
-                let listItem = document.createElement("li");
-                listItem.classList.add("card", "shopping-grid-item");
-
-                let itemImage = document.createElement("img"); // adding image to the list
-                itemImage.setAttribute("src", transactions[key][index]["imagePathway"]);
-                itemImage.setAttribute("alt", transactions[key][index]["altText"]);
-                itemImage.classList.add("card-img-top");
-                listItem.appendChild(itemImage);
-
-                let itemDiv = document.createElement("div");
-                itemDiv.classList.add("card-body");
-
-                let itemTitle = document.createElement("p"); // adding shopping item title to the list
-                itemTitle.classList.add("card-title");
-                itemTitle.innerText = transactions[key][index]["name"];
-                itemDiv.appendChild(itemTitle);
-
-                let itemPrice = document.createElement("p"); // adding shopping item price
-                itemPrice.classList.add("card-text");
-                itemPrice.innerText = "C$" + transactions[key][index]["price"];
-                itemDiv.appendChild(itemPrice);
-
-                listItem.appendChild(itemDiv);
-                transactionItemList.appendChild(listItem);
+        let items = JSON.parse(xmlHttpRequest.responseText); // * is separating between each row
+        if (!items.hasOwnProperty("empty")) {
+            let transactions = {};
+            for (let object of items) {
+                let transactionId = object["Transaction_Id"];
+                if (!transactions[transactionId]) {
+                    transactions[transactionId] = [];
+                }
+                transactions[transactionId].push(object);
             }
 
-            transactionList.appendChild(transactionItemList);
+            for (let key in transactions) {
+                let transactionList = document.createElement("li"); // list for items in each transaction     
+                let separatorHorizontalLine = document.createElement("hr");
+                transactionList.appendChild(separatorHorizontalLine);
+                let transactionNumber = document.createElement("p");
+                transactionNumber.classList.add("transaction-header");
+                transactionNumber.innerText = "Transaction Number: " + key;
+                transactionList.appendChild(transactionNumber);
+                let transactionItemList = document.createElement("ul");
+                transactionItemList.classList.add("shopping-history");
 
-            let totalAmountPaid = document.createElement("p");
-            totalAmountPaid.classList.add("transaction-total-amount");
-            totalAmountPaid.innerText = "Total: " + transactions[key][0]["amountPaid"];
-            transactionList.appendChild(totalAmountPaid);
+                for (index = 0; index < transactions[key].length; index++) {
+                    let listItem = document.createElement("li");
+                    listItem.classList.add("card", "shopping-grid-item");
 
-            previousPurchasesList.appendChild(transactionList)
+                    let itemImage = document.createElement("img"); // adding image to the list
+                    itemImage.setAttribute("src", transactions[key][index]["Image_Pathway"]);
+                    itemImage.setAttribute("alt", transactions[key][index]["Alt_Text"]);
+                    itemImage.classList.add("card-img-top");
+                    listItem.appendChild(itemImage);
+
+                    let itemDiv = document.createElement("div");
+                    itemDiv.classList.add("card-body");
+
+                    let itemTitle = document.createElement("p"); // adding shopping item title to the list
+                    itemTitle.classList.add("card-title");
+                    itemTitle.innerText = transactions[key][index]["Item_Name"];
+                    itemDiv.appendChild(itemTitle);
+
+                    let itemPrice = document.createElement("p"); // adding shopping item price
+                    itemPrice.classList.add("card-text");
+                    itemPrice.innerText = "C$" + transactions[key][index]["Price"];
+                    itemDiv.appendChild(itemPrice);
+
+                    listItem.appendChild(itemDiv);
+                    transactionItemList.appendChild(listItem);
+                }
+
+                transactionList.appendChild(transactionItemList);
+
+                let totalAmountPaid = document.createElement("p");
+                totalAmountPaid.classList.add("transaction-total-amount");
+                totalAmountPaid.innerText = "Total: " + transactions[key][0]["Amount_Paid"];
+                transactionList.appendChild(totalAmountPaid);
+
+                previousPurchasesList.appendChild(transactionList)
+            }
+            let endHorizontalLine = document.createElement("hr");
+            previousPurchasesList.appendChild(endHorizontalLine);
         }
-        let endHorizontalLine = document.createElement("hr");
-        previousPurchasesList.appendChild(endHorizontalLine);
     } else {
         alert("can't connect to history.php")
     }

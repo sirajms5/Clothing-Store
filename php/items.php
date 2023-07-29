@@ -17,22 +17,9 @@
     $result = mysqli_query($conn, $query);
     $data = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-    if($data){
-        $toReturn = "";
-        foreach($data as $row){
-            $toReturn = $toReturn 
-                . $row["id"] 
-                . "-" . $row["Item_Name"] 
-                . "-" . $row["Price"] 
-                . "-" . $row["Sex"] 
-                . "-" . $row["Category"] 
-                . "-" . $row["Image_Pathway"] 
-                . "-" . $row["Alt_Text"] 
-                . "*";
-        }
-        
-        echo $toReturn;
+    if($data){        
+        echo json_encode($data);
     } else {
-        echo "Store is empty";
+        echo json_encode(array("empty" => "no items available"));
     }
 ?>

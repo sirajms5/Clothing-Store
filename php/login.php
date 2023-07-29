@@ -12,16 +12,11 @@
         $hashedPassword = $data['Password'];
 
         if(password_verify($password, $hashedPassword)){
-                $toReturn = ""; 
-                $toReturn = $data['First_Name'] . "-" . $data['Last_Name'] . "-" . $data['id'];
-                echo $toReturn;
+                echo json_encode($data);
             } else {
-            echo "wrong password";
-            
-        }
-    } else {
-        echo "unregistered email";
-    }
-
-        
+                echo json_encode(array("error" => "wrong password"));            
+            }
+        } else {
+            echo json_encode(array("error" => "unregistered email"));
+        }       
 ?>

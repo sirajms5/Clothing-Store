@@ -19,17 +19,8 @@
 
             $resultGetReceipt = mysqli_query($conn, $queryGetReceipt);
             $data = mysqli_fetch_all($resultGetReceipt, MYSQLI_ASSOC);
-            if($data){
-                $toReturn = "";
-                foreach($data as $row){
-                    $toReturn = $toReturn 
-                        . $row["Item_Name"] 
-                        . "-" . $row["Price"] 
-                        . "-" . $row["id"]
-                        . "*";
-                }
-                
-                echo $toReturn;
+            if($data){                
+                echo json_encode($data);
             }
         }
 

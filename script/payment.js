@@ -81,24 +81,11 @@ function getCartCount() {
 
 getCartCount();
 
-// item constructor
-class item {
-    constructor(id, name, price, sex, category, image, altText) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.sex = sex;
-        this.category = category;
-        this.image = image;
-        this.altText = altText;
-    }
-};
-
 let amountDue = 0;
 function getPaymentAmount(arrayOfItems) {
     amountDue = 0;
     arrayOfItems.forEach(index => {
-        amountDue = amountDue + parseFloat(index["price"]);
+        amountDue = amountDue + parseFloat(index["Price"]);
     });
 
     return amountDue.toFixed(2); // showing only two decimal points
@@ -113,50 +100,46 @@ function getCartItems() {
     xmlHttpRequestCartItems.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded
     xmlHttpRequestCartItems.onload = () => {
         if (xmlHttpRequestCartItems.status === 200) {
-            let result = xmlHttpRequestCartItems.responseText.split("*"); // * is separating between each row
-            result.pop();
-            for (let index = 0; index < result.length; index++) {
-                let singleItem = result[index].split("-"); // - is separating between each column
-                let itemObject = new item(singleItem[0], singleItem[1], singleItem[2], singleItem[3], singleItem[4], singleItem[5], singleItem[6]);
-                items.push(itemObject);
+            items = JSON.parse(xmlHttpRequestCartItems.responseText);
+            if (!items.hasOwnProperty("empty")) {
+                for (let object of items) {
+                    let listItem = document.createElement("li");
+                    listItem.classList.add("card", "shopping-grid-item");
+                    listItem.id = "list-item-" + object["id"];
+    
+                    let itemImage = document.createElement("img"); // adding image to the list
+                    itemImage.setAttribute("src", object["Image_Pathway"]);
+                    itemImage.setAttribute("alt", object["Alt-Text"]);
+                    itemImage.classList.add("card-img-top");
+                    listItem.appendChild(itemImage);
+    
+                    let itemDiv = document.createElement("div");
+                    itemDiv.classList.add("card-body");
+    
+                    let itemTitle = document.createElement("p"); // adding shopping item title to the list
+                    itemTitle.classList.add("card-title");
+                    itemTitle.innerText = object["Item_Name"];
+                    itemDiv.appendChild(itemTitle);
+    
+                    let itemPrice = document.createElement("p"); // adding shopping item price
+                    itemPrice.classList.add("card-text");
+                    itemPrice.innerText = "C$" + object["Price"];
+                    itemDiv.appendChild(itemPrice);
+    
+                    let removeFromCartButton = document.createElement("button"); // adding add to cart button
+                    removeFromCartButton.setAttribute("onclick", "itemButtonClicked(this)");
+                    removeFromCartButton.id = "itemButton-" + object["id"];
+                    removeFromCartButton.classList.add("btn", "btn-danger");
+                    removeFromCartButton.innerText = "Remove From Cart";
+                    itemDiv.appendChild(removeFromCartButton);
+    
+                    listItem.appendChild(itemDiv);
+                    shoppingList.appendChild(listItem);
+                }
+    
+                amountDueElement.innerText = "C$" + getPaymentAmount(items);
             }
 
-            for (let index = 0; index < items.length; index++) {
-                let listItem = document.createElement("li");
-                listItem.classList.add("card", "shopping-grid-item");
-                listItem.id = "list-item-" + items[index]["id"];
-
-                let itemImage = document.createElement("img"); // adding image to the list
-                itemImage.setAttribute("src", items[index]["image"]);
-                itemImage.setAttribute("alt", items[index]["altText"]);
-                itemImage.classList.add("card-img-top");
-                listItem.appendChild(itemImage);
-
-                let itemDiv = document.createElement("div");
-                itemDiv.classList.add("card-body");
-
-                let itemTitle = document.createElement("p"); // adding shopping item title to the list
-                itemTitle.classList.add("card-title");
-                itemTitle.innerText = items[index]["name"];
-                itemDiv.appendChild(itemTitle);
-
-                let itemPrice = document.createElement("p"); // adding shopping item price
-                itemPrice.classList.add("card-text");
-                itemPrice.innerText = "C$" + items[index]["price"];
-                itemDiv.appendChild(itemPrice);
-
-                let addToCartButton = document.createElement("button"); // adding add to cart button
-                addToCartButton.setAttribute("onclick", "itemButtonClicked(this)");
-                addToCartButton.id = "itemButton-" + items[index]["id"];
-                addToCartButton.classList.add("btn", "btn-danger");
-                addToCartButton.innerText = "Remove From Cart";
-                itemDiv.appendChild(addToCartButton);
-
-                listItem.appendChild(itemDiv);
-                shoppingList.appendChild(listItem);
-            }
-
-            amountDueElement.innerText = "C$" + getPaymentAmount(items);
         } else {
             alert("Can't connect to php");
         }
@@ -201,14 +184,6 @@ function itemButtonClicked(itemButton) {
     }
     let params = "item_id=" + itemId + "&user_id=" + userId + "&source=delete";
     xmlHttpRequestRemoveFromCart.send(params);
-}
-
-class itemBought {
-    constructor(name, price, transactionId) {
-        this.name = name;
-        this.price = price;
-        this.transactionId = transactionId;
-    }
 }
 
 let cardName = document.getElementById("name-on-card");
@@ -297,15 +272,7 @@ paymentButton.addEventListener("click", (event) => {
                     cartContentDetails.innerText = "";
 
                     // show receipt
-                    let result = xmlHttpRequestPayment.responseText.split("*"); // * is separating between each row                
-                    result.pop();
-                    let receiptItems = [];
-                    for (let index = 0; index < result.length; index++) {
-                        let singleItem = result[index].split("-"); // - is separating between each column
-                        let itemObject = new itemBought(singleItem[0], singleItem[1], singleItem[2]);
-                        receiptItems.push(itemObject);
-                    }
-
+                    let receiptItems = JSON.parse(xmlHttpRequestPayment.responseText);
                     let receiptElement = document.createElement("div");
                     receiptElement.classList.add("receipt");
                     let receiptHeader = document.createElement("p");
@@ -315,19 +282,19 @@ paymentButton.addEventListener("click", (event) => {
 
                     let transactionNumber = document.createElement("p");
                     transactionNumber.classList.add("receipt-transaction");
-                    transactionNumber.innerText = "Transaction ID: " + receiptItems[0]["transactionId"];
+                    transactionNumber.innerText = "Transaction ID: " + receiptItems[0]["id"]; // all indices will have the same transaction id
                     receiptElement.appendChild(transactionNumber);
 
-                    for (let index = 0; index < receiptItems.length; index++) {
+                    for (let object of receiptItems) {
                         let itemDetails = document.createElement("div");
                         itemDetails.classList.add("receipt-item");
 
                         let itemName = document.createElement("span");
-                        itemName.innerText = receiptItems[index]["name"];
+                        itemName.innerText = object["Item_Name"];
                         itemDetails.appendChild(itemName);
 
                         let itemPrice = document.createElement("span");
-                        itemPrice.innerText = "C$" + receiptItems[index]["price"];
+                        itemPrice.innerText = "C$" + object["Price"];
                         itemDetails.appendChild(itemPrice);
 
                         receiptElement.appendChild(itemDetails);

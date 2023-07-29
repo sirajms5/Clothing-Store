@@ -71,12 +71,12 @@ xmlHttpRequestGetProfileDetails.open("POST", "./php/profile.php", true);
 xmlHttpRequestGetProfileDetails.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded
 xmlHttpRequestGetProfileDetails.onload = () => {
     if (xmlHttpRequestGetProfileDetails.status === 200) {
-        let result = xmlHttpRequestGetProfileDetails.responseText.split("*"); // * is column separator
-        document.getElementById("first-name").innerText = result[0];
-        document.getElementById("last-name").innerText = result[1];
-        document.getElementById("address").innerText = result[2];
-        document.getElementById("date-of-birth").innerText = result[3];
-        document.getElementById("email").innerText = result[4];
+        let result = JSON.parse(xmlHttpRequestGetProfileDetails.responseText)
+        document.getElementById("first-name").innerText = result["First_Name"];
+        document.getElementById("last-name").innerText = result["Last_Name"];
+        document.getElementById("address").innerText = result["Address"];
+        document.getElementById("date-of-birth").innerText = result["Date_Of_Birth"];
+        document.getElementById("email").innerText = result["Email"];
     } else {
         alert("profile.php can't be reached");
     }

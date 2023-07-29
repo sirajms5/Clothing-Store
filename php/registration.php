@@ -29,8 +29,7 @@ if (mysqli_num_rows($resultCheckEmail) == 0) {
     $resultSelectNewId = mysqli_query($conn, $querySelectNewId);
     $data = mysqli_fetch_assoc($resultSelectNewId);
     
-    $toReturn = $data['id'];
-    echo $toReturn;
+    echo $data['id'];
 } else {
     echo "email already registered";
 }

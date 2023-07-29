@@ -13,21 +13,9 @@
     $resultPreviousPurchases = mysqli_query($conn, $queryPreviousPurchases);
     $data = mysqli_fetch_all($resultPreviousPurchases, MYSQLI_ASSOC);
 
-    if($data){
-        $toReturn = "";
-        foreach($data as $row){
-            $toReturn = $toReturn 
-                . $row["Item_Name"] 
-                . "-" . $row["Price"]
-                . "-" . $row["Image_Pathway"] 
-                . "-" . $row["Alt_Text"] 
-                . "-" . $row["Transaction_Id"] 
-                . "-" . $row["Amount_Paid"] 
-                . "*";
-        }
-        
-        echo $toReturn;
+    if($data){        
+        echo json_encode($data);
     } else {
-        echo "No Previous Purchases";
+        echo json_encode(array("empty" => "no purchases"));
     }
 ?>

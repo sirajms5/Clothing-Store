@@ -27,18 +27,18 @@ loginButton.addEventListener("click", (event) => {
 
         xmlHttpRequest.onload = () => {
             if (xmlHttpRequest.status === 200) {
-                if (xmlHttpRequest.responseText == "unregistered email") {
+                let result = JSON.parse(xmlHttpRequest.responseText);
+                if (result["error"] == "unregistered email") {
                     emailError.innerText = "Email is not registered."
                     emailError.style.display = "inline";                    
-                } else if (xmlHttpRequest.responseText == "wrong password") {
+                } else if (result["error"] == "wrong password") {
                     emailError.style.display = "none";
                     passwordError.innerText = "Wrong Password.";
                     passwordError.style.display = "inline";
                 } else {
-                    let result = xmlHttpRequest.responseText.split("-");
-                    let firstName = result[0];
-                    let lastName = result[1];
-                    let id = result[2];
+                    let firstName = result["First_Name"];
+                    let lastName = result["Last_Name"];
+                    let id = result["id"];
                     sessionStorage.setItem("first-name", firstName);
                     sessionStorage.setItem("last-name", lastName);
                     sessionStorage.setItem("id", id);

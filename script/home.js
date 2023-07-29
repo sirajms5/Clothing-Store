@@ -65,41 +65,21 @@ signOutButton.addEventListener("click", () => {
     username.classList.remove("dropdown-toggle");
 });
 
-// item constructor
-class item {
-    constructor(id, name, price, sex, category, image, altText) { // add alt to the database content
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.sex = sex;
-        this.category = category;
-        this.image = image;
-        this.altText = altText;
-    }
-};
-
 let items = []; // will contain all items
 let shoppingList = document.getElementById("shopping-items");
 let xmlHttpRequest = new XMLHttpRequest();
 xmlHttpRequest.open("POST", "./php/items.php", true);
 xmlHttpRequest.onload = () => {
     if (xmlHttpRequest.status === 200) {
-        let result = xmlHttpRequest.responseText.split("*"); // * is separating between each row
-        result.pop();
-        for (let index = 0; index < result.length; index++) {
-            let singleItem = result[index].split("-"); // - is separating between each column
-            let itemObject = new item(singleItem[0], singleItem[1], singleItem[2], singleItem[3], singleItem[4], singleItem[5], singleItem[6]);
-            items.push(itemObject);
-        }
-
-        for (let index = 0; index < items.length; index++) {
+        items = JSON.parse(xmlHttpRequest.responseText);
+        for (let object of items) {
             let listItem = document.createElement("li");
             listItem.classList.add("card", "shopping-grid-item");
-            listItem.id = "shopping-item-id-" + items[index]["id"];
+            listItem.id = "shopping-item-id-" + object["id"];
 
             let itemImage = document.createElement("img"); // adding image to the list
-            itemImage.setAttribute("src", items[index]["image"]);
-            itemImage.setAttribute("alt", items[index]["altText"]);
+            itemImage.setAttribute("src", object["Image_Pathway"]);
+            itemImage.setAttribute("alt", object["Alt-Text"]);
             itemImage.classList.add("card-img-top");
             listItem.appendChild(itemImage);
 
@@ -108,17 +88,17 @@ xmlHttpRequest.onload = () => {
 
             let itemTitle = document.createElement("p"); // adding shopping item title to the list
             itemTitle.classList.add("card-title");
-            itemTitle.innerText = items[index]["name"];
+            itemTitle.innerText = object["Item_Name"];
             itemDiv.appendChild(itemTitle);
 
             let itemPrice = document.createElement("p"); // adding shopping item price
             itemPrice.classList.add("card-text");
-            itemPrice.innerText = "C$" + items[index]["price"];
+            itemPrice.innerText = "C$" + object["Price"];
             itemDiv.appendChild(itemPrice);
 
             let addToCartButton = document.createElement("button"); // adding add to cart button
             addToCartButton.setAttribute("onclick", "itemButtonClicked(this)");
-            addToCartButton.id = "itemButton-" + items[index]["id"];
+            addToCartButton.id = "itemButton-" + object["id"];
             addToCartButton.classList.add("btn", "btn-primary");
             addToCartButton.innerText = "Add To Cart";
             itemDiv.appendChild(addToCartButton);
@@ -184,13 +164,13 @@ searchButton.addEventListener("click", (event) => {
     let searchCategory = document.getElementById("category-list").value.toLowerCase();
     let searchMin = document.getElementById("min-price").value;
     let searchMax = document.getElementById("max-price").value;
-    for (let index of items) {
-        let shoppingItemName = index["name"].toLowerCase();
-        let shoppingItemId = "shopping-item-id-" + index["id"];
+    for (let object of items) {
+        let shoppingItemName = object["Item_Name"].toLowerCase();
+        let shoppingItemId = "shopping-item-id-" + object["id"];
         let shoppingItemElement = document.getElementById(shoppingItemId);
-        let shoppingItemsex = index["sex"].toLowerCase();
-        let shoppingItemCategory = index["category"].toLowerCase();
-        let shoppingItemPrice = index["price"];
+        let shoppingItemsex = object["Sex"].toLowerCase();
+        let shoppingItemCategory = object["Category"].toLowerCase();
+        let shoppingItemPrice = object["Price"];
         if (
             shoppingItemName.includes(searchInput)
             && (shoppingItemsex == searchsex || searchsex == "both" || searchsex == "sex")
