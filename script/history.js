@@ -81,7 +81,7 @@ xmlHttpRequest.open("POST", "./php/history.php", true);
 xmlHttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded
 xmlHttpRequest.onload = () => {
     if (xmlHttpRequest.status === 200) {
-        let items = JSON.parse(xmlHttpRequest.responseText); // * is separating between each row
+        let items = JSON.parse(xmlHttpRequest.responseText);
         if (!items.hasOwnProperty("empty")) {
             let transactions = {};
             for (let object of items) {
