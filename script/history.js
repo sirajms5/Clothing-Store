@@ -64,17 +64,6 @@ signOutButton.addEventListener("click", () => {
     window.location.href = "./index.html";
 });
 
-// class item {
-//     constructor(name, price, imagePathway, altText, transactionId, amountPaid) {
-//         this.name = name;
-//         this.price = price;
-//         this.imagePathway = imagePathway;
-//         this.altText = altText;
-//         this.transactionId = transactionId;
-//         this.amountPaid = amountPaid;
-//     }
-// }
-
 let previousPurchasesList = document.getElementById("history-list");
 let xmlHttpRequest = new XMLHttpRequest();
 xmlHttpRequest.open("POST", "./php/history.php", true);
@@ -134,7 +123,7 @@ xmlHttpRequest.onload = () => {
 
                 let totalAmountPaid = document.createElement("p");
                 totalAmountPaid.classList.add("transaction-total-amount");
-                totalAmountPaid.innerText = "Total: " + transactions[key][0]["Amount_Paid"];
+                totalAmountPaid.innerText = "Total: C$" + transactions[key][0]["Amount_Paid"];
                 transactionList.appendChild(totalAmountPaid);
 
                 previousPurchasesList.appendChild(transactionList)

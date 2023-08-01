@@ -99,7 +99,7 @@ xmlHttpRequest.onload = () => {
             let addToCartButton = document.createElement("button"); // adding add to cart button
             addToCartButton.setAttribute("onclick", "itemButtonClicked(this)");
             addToCartButton.id = "itemButton-" + object["id"];
-            addToCartButton.classList.add("btn", "btn-primary");
+            addToCartButton.classList.add("btn", "btn-primary", "btn-control");
             addToCartButton.innerText = "Add To Cart";
             itemDiv.appendChild(addToCartButton);
 

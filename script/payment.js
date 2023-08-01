@@ -129,7 +129,7 @@ function getCartItems() {
                     let removeFromCartButton = document.createElement("button"); // adding add to cart button
                     removeFromCartButton.setAttribute("onclick", "itemButtonClicked(this)");
                     removeFromCartButton.id = "itemButton-" + object["id"];
-                    removeFromCartButton.classList.add("btn", "btn-danger");
+                    removeFromCartButton.classList.add("btn", "btn-primary", "btn-control");
                     removeFromCartButton.innerText = "Remove From Cart";
                     itemDiv.appendChild(removeFromCartButton);
     
