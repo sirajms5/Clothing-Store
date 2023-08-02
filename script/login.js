@@ -4,24 +4,36 @@ let passwordInput = document.getElementById("log-in-password");
 let emailError = document.getElementById("email-error");
 let passwordError = document.getElementById("password-error");
 
+// email input limit control
 emailInput.addEventListener("keydown", (event) => {
-    if(emailInput.value.length > 69){ // length increases after function finishes
-        event.preventDefault();
+    let input = event.key;
+    let isBackspaceOrDelete = ["Backspace", "Delete", "ArrowLeft", "ArrowRight"].includes(input);
+
+    if (emailInput.value.length > 69) { // length increases after function finishes
+        if (!isBackspaceOrDelete) {
+            event.preventDefault();
+        }
     }
 })
 
+// password input limit control
 passwordInput.addEventListener("keydown", (event) => {
-    if(passwordInput.value.length > 29){ // length increases after function finishes
-        event.preventDefault();
+    let input = event.key;
+    let isBackspaceOrDelete = ["Backspace", "Delete", "ArrowLeft", "ArrowRight"].includes(input);
+    if (passwordInput.value.length > 29) { // length increases after function finishes
+        if (!isBackspaceOrDelete) {
+            event.preventDefault();
+        }
     }
 })
 
 // logging in
 loginButton.addEventListener("click", (event) => {
     event.preventDefault();
-    let emailValue = emailInput.value;
+    let emailValue = emailInput.value.trim();
+    let emailRegEx = /^[^@.\s]+@[a-zA-Z]+\.[a-zA-Z]+$/;
     let passwordValue = passwordInput.value;
-    if (emailValue != "" && passwordValue != "") {
+    if (emailRegEx.test(emailValue) && passwordValue != "") {
         let xmlHttpRequest = new XMLHttpRequest();
         xmlHttpRequest.open("POST", "./php/login.php", true);
 
@@ -30,7 +42,7 @@ loginButton.addEventListener("click", (event) => {
                 let result = JSON.parse(xmlHttpRequest.responseText);
                 if (result["error"] == "unregistered email") {
                     emailError.innerText = "Email is not registered."
-                    emailError.style.display = "inline";                    
+                    emailError.style.display = "inline";
                 } else if (result["error"] == "wrong password") {
                     emailError.style.display = "none";
                     passwordError.innerText = "Wrong Password.";
@@ -50,14 +62,14 @@ loginButton.addEventListener("click", (event) => {
         }
         xmlHttpRequest.send(new FormData(document.getElementById("log-in-form")));
     } else {
-        if(emailValue == ""){
+        if (!emailRegEx.test(emailValue)) {
             emailError.style.display = "inline";
             emailError.innerText = "Email field can't be empty."
         } else {
             emailError.style.display = "none";
         }
 
-        if(passwordValue == ""){
+        if (passwordValue == "") {
             passwordError.style.display = "inline";
             passwordError.innerText = "Password field can't be empty."
         } else {

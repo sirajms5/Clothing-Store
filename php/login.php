@@ -1,7 +1,7 @@
 <?php
     include 'conn.php';
 
-    $email = $_POST['email'];
+    $email = trim($_POST['email']);
     $password = $_POST['password'];
 
     $queryCheckEmail = "SELECT First_Name, Last_Name, id, Password FROM SIRAJ_STORE_USERS WHERE email = '$email';";

@@ -12,26 +12,69 @@ let dateOfBirthError = document.getElementById("date-of-birth-error");
 let emailError = document.getElementById("email-error");
 let passwordError = document.getElementById("password-error");
 
-emailElement.addEventListener("keydown", (event) => {
-    if (emailElement.value.length > 69) { // length increases after function finishes
-        event.preventDefault();
+// first name input limit control
+firstNameElement.addEventListener("keydown", (event) => {
+    let input = event.key;
+    let isBackspaceOrDelete = ["Backspace", "Delete", "ArrowLeft", "ArrowRight"].includes(input);
+    if (firstNameElement.value.length > 49) { // length increases after function finishes
+        if (!isBackspaceOrDelete) {
+            event.preventDefault();
+        }
     }
 })
 
+// last name input limit control
+lastNameElement.addEventListener("keydown", (event) => {
+    let input = event.key;
+    let isBackspaceOrDelete = ["Backspace", "Delete", "ArrowLeft", "ArrowRight"].includes(input);
+    if (lastNameElement.value.length > 49) { // length increases after function finishes
+        if (!isBackspaceOrDelete) {
+            event.preventDefault();
+        }
+    }
+})
+
+// address input limit control
+addressElement.addEventListener("keydown", (event) => {
+    let input = event.key;
+    let isBackspaceOrDelete = ["Backspace", "Delete", "ArrowLeft", "ArrowRight"].includes(input);
+    if (addressElement.value.length > 254) { // length increases after function finishes
+        if (!isBackspaceOrDelete) {
+            event.preventDefault();
+        }
+    }
+})
+
+// email input limit control
+emailElement.addEventListener("keydown", (event) => {
+    let input = event.key;
+    let isBackspaceOrDelete = ["Backspace", "Delete", "ArrowLeft", "ArrowRight"].includes(input);
+    if (emailElement.value.length > 69) { // length increases after function finishes
+        if (!isBackspaceOrDelete) {
+            event.preventDefault();
+        }
+    }
+})
+
+// password input limit control
 passwordElement.addEventListener("keydown", (event) => {
+    let input = event.key;
+    let isBackspaceOrDelete = ["Backspace", "Delete", "ArrowLeft", "ArrowRight"].includes(input);
     if (passwordElement.value.length > 29) { // length increases after function finishes
-        event.preventDefault();
+        if (!isBackspaceOrDelete) {
+            event.preventDefault();
+        }
     }
 })
 
 let registrationButton = document.getElementById("button-register");
 registrationButton.addEventListener("click", (event) => {
     event.preventDefault();
-    let firstNameValue = firstNameElement.value;
-    let lastNameValue = lastNameElement.value;
-    let addressValue = addressElement.value;
+    let firstNameValue = firstNameElement.value.trim();
+    let lastNameValue = lastNameElement.value.trim();
+    let addressValue = addressElement.value.trim();
     let dateOfBirthValue = dateOfBirthElement.value;
-    let emailValue = emailElement.value;
+    let emailValue = emailElement.value.trim();
     let emailRegEx = /^[^@.\s]+@[a-zA-Z]+\.[a-zA-Z]+$/;
     let passwordValue = passwordElement.value;
     if (

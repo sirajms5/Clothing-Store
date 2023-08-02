@@ -195,7 +195,7 @@ cardNumber.addEventListener("keydown", (event) => {
     let numberRegEx = /\d/;
     let isNumber = numberRegEx.test(input);
     let isBackspaceOrDelete = ["Backspace", "Delete", "ArrowLeft", "ArrowRight"].includes(input);
-    let cardNumberValue = cardNumber.value.trim();
+    let cardNumberValue = cardNumber.value;
     if (!isNumber || cardNumberValue.length > 15) { // length will increase after the function ends
         if (!isBackspaceOrDelete) {
             event.preventDefault();
@@ -210,7 +210,7 @@ cardExpirationDate.addEventListener("keydown", (event) => {
     let numberRegEx = /[\d\/]/;
     let isNumber = numberRegEx.test(input);
     let isBackspaceOrDelete = ["Backspace", "Delete", "ArrowLeft", "ArrowRight"].includes(input);
-    let cardExpirationDateValue = cardExpirationDate.value.trim();
+    let cardExpirationDateValue = cardExpirationDate.value;
 
     if (!isNumber || cardExpirationDateValue.length > 4) { // length will increase after the function ends
         if (!isBackspaceOrDelete) {
@@ -226,7 +226,7 @@ cardCvcNumber.addEventListener("keydown", (event) => {
     let numberRegEx = /\d/;
     let isNumber = numberRegEx.test(input);
     let isBackspaceOrDelete = ["Backspace", "Delete", "ArrowLeft", "ArrowRight"].includes(input);
-    let cardCvcNumberValue = cardCvcNumber.value.trim();
+    let cardCvcNumberValue = cardCvcNumber.value;
 
     if (!isNumber || cardCvcNumberValue.length > 2) { // length will increase after the function ends
         if (!isBackspaceOrDelete) {
@@ -243,9 +243,9 @@ let paymentButton = document.getElementById("button-payment");
 paymentButton.addEventListener("click", (event) => {
     event.preventDefault();
     let cardNameValue = cardName.value.trim();
-    let cardNumberValue = cardNumber.value.trim();
-    let cardExpirationDateValue = cardExpirationDate.value.trim();
-    let cardCvcNumberValue = cardCvcNumber.value.trim();
+    let cardNumberValue = cardNumber.value;
+    let cardExpirationDateValue = cardExpirationDate.value;
+    let cardCvcNumberValue = cardCvcNumber.value;
     let exiprationForamtRegEx = /^\d\d[\/]\d\d$/;
     let months = ["01", "02", "03", "04", "05", "01", "02", "03", "04", "05", "11", "12"];
     let isMonth = months.includes(cardExpirationDateValue.substr(0, 2));
