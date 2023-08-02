@@ -74,6 +74,7 @@ registrationButton.addEventListener("click", (event) => {
     let lastNameValue = lastNameElement.value.trim();
     let addressValue = addressElement.value.trim();
     let dateOfBirthValue = dateOfBirthElement.value;
+    let parsedDate = Date.parse(dateOfBirthValue);
     let emailValue = emailElement.value.trim();
     let emailRegEx = /^[^@.\s]+@[a-zA-Z]+\.[a-zA-Z]+$/;
     let passwordValue = passwordElement.value;
@@ -81,7 +82,7 @@ registrationButton.addEventListener("click", (event) => {
         firstNameValue != ""
         && lastNameValue != ""
         && addressValue != ""
-        && dateOfBirthValue != ""
+        && (dateOfBirthValue != "" && parsedDate < Date.now())
         && emailRegEx.test(emailValue)
         && passwordValue.length >= 6
     ) {
@@ -131,7 +132,7 @@ registrationButton.addEventListener("click", (event) => {
             addressError.style.display = "none";
         }
 
-        if (dateOfBirthValue == "") {
+        if (!(dateOfBirthValue != "" && parsedDate < Date.now())) {
             dateOfBirthError.style.display = "inline";
         } else {
             dateOfBirthError.style.display = "none";
