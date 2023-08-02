@@ -82,7 +82,7 @@ registrationButton.addEventListener("click", (event) => {
         firstNameValue != ""
         && lastNameValue != ""
         && addressValue != ""
-        && (dateOfBirthValue != "" && parsedDate < Date.now())
+        && parsedDate < Date.now()
         && emailRegEx.test(emailValue)
         && passwordValue.length >= 6
     ) {
@@ -132,7 +132,7 @@ registrationButton.addEventListener("click", (event) => {
             addressError.style.display = "none";
         }
 
-        if (!(dateOfBirthValue != "" && parsedDate < Date.now())) {
+        if (!(parsedDate < Date.now())) {
             dateOfBirthError.style.display = "inline";
         } else {
             dateOfBirthError.style.display = "none";
