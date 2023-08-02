@@ -85,6 +85,7 @@ xmlHttpRequestGetProfileDetails.onload = () => {
 let params = "user_id=" + userId;
 xmlHttpRequestGetProfileDetails.send(params);
 
+// changing user password button
 let changePasswordButton = document.getElementById("change-password-button");
 changePasswordButton.addEventListener("click", (event) => {
     event.preventDefault();
@@ -94,6 +95,8 @@ changePasswordButton.addEventListener("click", (event) => {
     let currentPassword = document.getElementById("current-password").value;
     let newPassword = document.getElementById("new-password").value;
     let reNewPassword = document.getElementById("re-new-password").value;
+    let successMessage = document.getElementById("password-change-success");
+    successMessage.style.display = "none";
     if (newPassword.length >= 6 && (newPassword == reNewPassword)) {
         newPasswordError.style.display = "none";
         reNewPasswordError.style.display = "none";
@@ -103,7 +106,7 @@ changePasswordButton.addEventListener("click", (event) => {
         xmlChangePassword.onload = () => {
             if (xmlChangePassword.status === 200) {
                 if (xmlChangePassword.responseText == "success") {
-                    document.getElementById("password-change-success").style.display = "inline";
+                    successMessage.style.display = "inline";
                     currentPasswordError.style.display = "none";
                     document.getElementById("change-password-form").reset();
                 } else {
