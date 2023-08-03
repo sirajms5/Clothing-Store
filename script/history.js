@@ -12,6 +12,8 @@ if (firstName != null && lastName != null) {
     document.getElementById("shopping-cart").style.display = "inline";
     username.classList.add("dropdown-toggle");
     username.innerText = firstName + " " + lastName;
+} else { // if user is not logged in
+    window.location.href = "./index.html";
 }
 
 // get cart count
