@@ -4,6 +4,11 @@ let passwordInput = document.getElementById("log-in-password");
 let emailError = document.getElementById("email-error");
 let passwordError = document.getElementById("password-error");
 
+// alert to tell customer that we are having issues
+function errorAlert(){
+    alert("OOPS! Something went wrong. Please try again later.");
+}
+
 // email input limit control
 emailInput.addEventListener("keydown", (event) => {
     let input = event.key;
@@ -40,13 +45,16 @@ loginButton.addEventListener("click", (event) => {
         xmlHttpRequest.onload = () => {
             if (xmlHttpRequest.status === 200) {
                 let result = JSON.parse(xmlHttpRequest.responseText);
-                if (result["error"] == "unregistered email") {
+                if (result["wrong"] == "unregistered email") {
                     emailError.innerText = "Email is not registered."
                     emailError.style.display = "inline";
-                } else if (result["error"] == "wrong password") {
+                } else if (result["wrong"] == "wrong password") {
                     emailError.style.display = "none";
                     passwordError.innerText = "Wrong Password.";
                     passwordError.style.display = "inline";
+                } else if (result.hasOwnProperty("error")) {
+                    console.error(result["error"]);
+                    errorAlert()
                 } else {
                     let firstName = result["First_Name"];
                     let lastName = result["Last_Name"];
@@ -57,7 +65,8 @@ loginButton.addEventListener("click", (event) => {
                     window.location.href = "./index.html";
                 }
             } else {
-                alert("failure");
+                console.error("Can't connect to login.php");
+                errorAlert()
             }
         }
         xmlHttpRequest.send(new FormData(document.getElementById("log-in-form")));

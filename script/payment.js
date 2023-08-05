@@ -34,6 +34,11 @@ signOutButton.addEventListener("click", () => {
     window.location.href = "./index.html";
 });
 
+// alert to tell customer that we are having issues
+function errorAlert(){
+    alert("OOPS! Something went wrong. Please try again later.");
+}
+
 // get cart count
 let isPaid = false;
 function getCartCount() {
@@ -42,37 +47,47 @@ function getCartCount() {
     xmlHttpRequestGetCartCount.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded                    
     xmlHttpRequestGetCartCount.onload = () => {
         if (xmlHttpRequestGetCartCount.status === 200) {
-            let cartCount = parseInt(xmlHttpRequestGetCartCount.responseText);
-            let cartCountArray = Array.from(cartCountElement);
-            let paymentSection = document.getElementById("payment-section-content");
-            if (cartCount <= 0) {
-                amountDueSection.style.display = "none";
-                cartCountSection.style.display = "none";
-                cartCountArray[0].style.display = "none"; // will hide the cart number in the nav bar
-                shoppingList.style.display = "none";
-                paymentSection.style.display = "none";
+            let numberRegEx = /^\d+$/;
+            let requestResponeText = xmlHttpRequestGetCartCount.responseText;
+            if (requestResponeText != "no connection" && numberRegEx.test(requestResponeText)) {
+                let cartCount = parseInt(requestResponeText);
+                let cartCountArray = Array.from(cartCountElement);
+                let paymentSection = document.getElementById("payment-section-content");
+                if (cartCount <= 0) {
+                    amountDueSection.style.display = "none";
+                    cartCountSection.style.display = "none";
+                    cartCountArray[0].style.display = "none"; // will hide the cart number in the nav bar
+                    shoppingList.style.display = "none";
+                    paymentSection.style.display = "none";
 
-                if (!isPaid) {
-                    let emptyCart = document.createElement("p");
-                    emptyCart.classList.add("secondary-title");
-                    emptyCart.innerText = "Cart is Empty";
-                    cartContentDetails.appendChild(emptyCart);
+                    if (!isPaid) {
+                        let emptyCart = document.createElement("p");
+                        emptyCart.classList.add("secondary-title");
+                        emptyCart.innerText = "Cart is Empty";
+                        cartContentDetails.appendChild(emptyCart);
+                    }
+                } else if (cartCount <= 99) {
+                    paymentSection.style.display = "block";
+                    cartCountArray.forEach(element => {
+                        element.innerText = "(" + cartCount + ")";
+                    });
+
+                } else {
+                    paymentSection.style.display = "block";
+                    cartCountArray.forEach(element => {
+                        element.innerText = "(99+)";
+                    });
                 }
-            } else if (cartCount <= 99) {
-                paymentSection.style.display = "block";
-                cartCountArray.forEach(element => {
-                    element.innerText = "(" + cartCount + ")";
-                });
-
+            } else if (requestResponeText == "no connection") {
+                console.error("failed to connect to the database from cart-count.php");
+                errorAlert()
             } else {
-                paymentSection.style.display = "block";
-                cartCountArray.forEach(element => {
-                    element.innerText = "(99+)";
-                });
+                console.error(requestResponeText);
+                errorAlert()
             }
-
         } else {
-            alert("can't connect to cart-count php")
+            console.error("can't connect to cart-count php");
+            errorAlert()
         }
 
     }
@@ -103,49 +118,52 @@ function getCartItems() {
     xmlHttpRequestCartItems.onload = () => {
         if (xmlHttpRequestCartItems.status === 200) {
             items = JSON.parse(xmlHttpRequestCartItems.responseText);
-            if (!items.hasOwnProperty("empty")) {
+            if (!(items.hasOwnProperty("empty") || items.hasOwnProperty("error"))) {
                 for (let object of items) {
                     let listItem = document.createElement("li");
                     listItem.classList.add("card", "shopping-grid-item");
                     listItem.id = "list-item-" + object["id"];
-    
+
                     let itemImage = document.createElement("img"); // adding image to the list
                     itemImage.setAttribute("src", object["Image_Pathway"]);
                     itemImage.setAttribute("alt", object["Alt-Text"]);
                     itemImage.classList.add("card-img-top");
                     listItem.appendChild(itemImage);
-    
+
                     let itemDiv = document.createElement("div");
                     itemDiv.classList.add("card-body");
-    
+
                     let itemTitle = document.createElement("p"); // adding shopping item title to the list
                     itemTitle.classList.add("card-title");
                     itemTitle.innerText = object["Item_Name"];
                     itemDiv.appendChild(itemTitle);
-    
+
                     let itemPrice = document.createElement("p"); // adding shopping item price
                     itemPrice.classList.add("card-text");
                     itemPrice.innerText = "C$" + object["Price"];
                     itemDiv.appendChild(itemPrice);
-    
+
                     let removeFromCartButton = document.createElement("button"); // adding add to cart button
                     removeFromCartButton.setAttribute("onclick", "itemButtonClicked(this)");
                     removeFromCartButton.id = "itemButton-" + object["id"];
                     removeFromCartButton.classList.add("btn", "btn-primary", "btn-control");
                     removeFromCartButton.innerText = "Remove From Cart";
                     itemDiv.appendChild(removeFromCartButton);
-    
+
                     listItem.appendChild(itemDiv);
                     shoppingList.appendChild(listItem);
                 }
-    
+
                 amountDueElement.innerText = "C$" + getPaymentAmount(items);
+            } else if (items.hasOwnProperty("error")) {
+                console.error(items["error"]);
+                errorAlert()
             }
 
         } else {
-            alert("Can't connect to php");
+            console.error("Can't connect to items.php");
+            errorAlert()
         }
-
     }
 
     let params = "user_id=" + userId;
@@ -176,11 +194,13 @@ function itemButtonClicked(itemButton) {
                 getCartCount();
                 amountDueElement.innerText = "C$" + getPaymentAmount(items);
             } else {
-                alert("Item not available, try again later");
+                console.error("Error: Can't connect to database from cart-post.php");
+                errorAlert()
             }
 
         } else {
-            alert("Can't connect to cart-post php");
+            console.error("Can't connect to cart-post php");
+            errorAlert()
         }
 
     }
@@ -266,7 +286,9 @@ paymentButton.addEventListener("click", (event) => {
         xmlHttpRequestPayment.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded
         xmlHttpRequestPayment.onload = () => {
             if (xmlHttpRequestPayment.status === 200) {
-                if (xmlHttpRequestPayment.responseText !== null) {
+                let receiptItems = JSON.parse(xmlHttpRequestPayment.responseText);
+                if (!(receiptItems.hasOwnProperty("error") || receiptItems.hasOwnProperty("empty"))) {
+                    // if (xmlHttpRequestPayment.responseText !== null) {
                     isPaid = true;
                     getCartItems();
                     getCartCount();
@@ -274,7 +296,6 @@ paymentButton.addEventListener("click", (event) => {
                     cartContentDetails.innerText = "";
 
                     // show receipt
-                    let receiptItems = JSON.parse(xmlHttpRequestPayment.responseText);
                     let receiptElement = document.createElement("div");
                     receiptElement.classList.add("receipt");
                     let receiptHeader = document.createElement("p");
@@ -315,13 +336,17 @@ paymentButton.addEventListener("click", (event) => {
 
                     receiptElement.appendChild(totalDiv);
                     cartContentDetails.appendChild(receiptElement);
-
+                } else if(receiptItems.hasOwnProperty("empty")){
+                    console.error(receiptItems["empty"]);
+                    errorAlert()
                 } else {
-                    alert("payment declined");
+                    console.error(receiptItems["error"]);
+                    errorAlert()
                 }
 
             } else {
-                alert("Can't connect to payment php")
+                console.error("can't connect to payment.php");
+                errorAlert()
             }
 
         }

@@ -14,33 +14,49 @@ if (firstName != null && lastName != null) {
     username.innerText = firstName + " " + lastName;
 }
 
+// alert to tell customer that we are having issues
+function errorAlert(){
+    alert("OOPS! Something went wrong. Please try again later.");
+}
+
 // get cart count
 function getCartCount() {
     xmlHttpRequestGetCartCount = new XMLHttpRequest();
     xmlHttpRequestGetCartCount.open("POST", "./php/cart-count.php", true);
-    xmlHttpRequestGetCartCount.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded         
+    xmlHttpRequestGetCartCount.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded                    
     xmlHttpRequestGetCartCount.onload = () => {
         if (xmlHttpRequestGetCartCount.status === 200) {
-            let cartCount = parseInt(xmlHttpRequestGetCartCount.responseText);
-            let cartCountArray = Array.from(cartCountElement);
-            if (cartCount <= 0) {
-                // cartContentDetails.style.display = "none";
-                cartCountArray[0].style.display = "none"; // will hide the cart number in the nav bar
-            } else if (cartCount <= 99) {
-                cartCountArray.forEach(element => {
-                    cartCountArray[0].style.display = "inline";
-                    element.innerText = "(" + cartCount + ")";
-                });
+            let numberRegEx = /^\d+$/;
+            let requestResponeText = xmlHttpRequestGetCartCount.responseText;
+            if (requestResponeText != "no connection" && numberRegEx.test(requestResponeText)) {
+                let cartCount = parseInt(requestResponeText);
+                let cartCountArray = Array.from(cartCountElement);
+                if (cartCount <= 0) {
+                    cartCountArray[0].style.display = "none"; // will hide the cart number in the nav bar
+                } else if (cartCount <= 99) {
+                    cartCountArray.forEach(element => {
+                        cartCountArray[0].style.display = "inline";
+                        element.innerText = "(" + cartCount + ")";
+                    });
 
+                } else {
+                    cartCountArray.forEach(element => {
+                        cartCountArray[0].style.display = "inline";
+                        element.innerText = "(99+)";
+                    });
+                }
+
+            } else if (requestResponeText == "no connection") {
+                console.error("failed to connect to the database from cart-count.php");
+                errorAlert()
             } else {
-                cartCountArray.forEach(element => {
-                    cartCountArray[0].style.display = "inline";
-                    element.innerText = "(99+)";
-                });
+                console.error(requestResponeText);
+                errorAlert()
             }
 
         } else {
-            alert("can't connect to cart-count php")
+            console.error("can't connect to cart-count php");
+            errorAlert()
         }
 
     }
@@ -72,42 +88,52 @@ xmlHttpRequest.open("POST", "./php/items.php", true);
 xmlHttpRequest.onload = () => {
     if (xmlHttpRequest.status === 200) {
         items = JSON.parse(xmlHttpRequest.responseText);
-        for (let object of items) {
-            let listItem = document.createElement("li");
-            listItem.classList.add("card", "shopping-grid-item");
-            listItem.id = "shopping-item-id-" + object["id"];
+        if (!(items.hasOwnProperty("empty") || items.hasOwnProperty("error"))) {
+            for (let object of items) {
+                let listItem = document.createElement("li");
+                listItem.classList.add("card", "shopping-grid-item");
+                listItem.id = "shopping-item-id-" + object["id"];
 
-            let itemImage = document.createElement("img"); // adding image to the list
-            itemImage.setAttribute("src", object["Image_Pathway"]);
-            itemImage.setAttribute("alt", object["Alt-Text"]);
-            itemImage.classList.add("card-img-top");
-            listItem.appendChild(itemImage);
+                let itemImage = document.createElement("img"); // adding image to the list
+                itemImage.setAttribute("src", object["Image_Pathway"]);
+                itemImage.setAttribute("alt", object["Alt-Text"]);
+                itemImage.classList.add("card-img-top");
+                listItem.appendChild(itemImage);
 
-            let itemDiv = document.createElement("div");
-            itemDiv.classList.add("card-body");
+                let itemDiv = document.createElement("div");
+                itemDiv.classList.add("card-body");
 
-            let itemTitle = document.createElement("p"); // adding shopping item title to the list
-            itemTitle.classList.add("card-title");
-            itemTitle.innerText = object["Item_Name"];
-            itemDiv.appendChild(itemTitle);
+                let itemTitle = document.createElement("p"); // adding shopping item title to the list
+                itemTitle.classList.add("card-title");
+                itemTitle.innerText = object["Item_Name"];
+                itemDiv.appendChild(itemTitle);
 
-            let itemPrice = document.createElement("p"); // adding shopping item price
-            itemPrice.classList.add("card-text");
-            itemPrice.innerText = "C$" + object["Price"];
-            itemDiv.appendChild(itemPrice);
+                let itemPrice = document.createElement("p"); // adding shopping item price
+                itemPrice.classList.add("card-text");
+                itemPrice.innerText = "C$" + object["Price"];
+                itemDiv.appendChild(itemPrice);
 
-            let addToCartButton = document.createElement("button"); // adding add to cart button
-            addToCartButton.setAttribute("onclick", "itemButtonClicked(this)");
-            addToCartButton.id = "itemButton-" + object["id"];
-            addToCartButton.classList.add("btn", "btn-primary", "btn-control");
-            addToCartButton.innerText = "Add To Cart";
-            itemDiv.appendChild(addToCartButton);
+                let addToCartButton = document.createElement("button"); // adding add to cart button
+                addToCartButton.setAttribute("onclick", "itemButtonClicked(this)");
+                addToCartButton.id = "itemButton-" + object["id"];
+                addToCartButton.classList.add("btn", "btn-primary", "btn-control");
+                addToCartButton.innerText = "Add To Cart";
+                itemDiv.appendChild(addToCartButton);
 
-            listItem.appendChild(itemDiv);
-            shoppingList.appendChild(listItem);
+                listItem.appendChild(itemDiv);
+                shoppingList.appendChild(listItem);
+            }
+
+        } else if (items.hasOwnProperty("empty")) {
+            let noItems = document.getElementById("no-items");
+            noItems.innerText = "No Items Availabile";
+        } else {
+            console.error(items["error"]);
+            errorAlert()
         }
     } else {
-        alert("Can't connect to php");
+        console.error("Can't connect to items.php");
+        errorAlert()
     }
 }
 
@@ -127,11 +153,13 @@ function itemButtonClicked(itemButton) {
                 if (xmlHttpRequestAddToCart.responseText == "success") {
                     getCartCount();
                 } else {
-                    alert("Item not available, try again later");
+                    console.error("Error: Can't connect to database from cart-post.php");
+                    errorAlert()
                 }
 
             } else {
-                alert("Can't connect to cart-post php");
+                console.error("Can't connect to cart-post php");
+                errorAlert()
             }
 
         }

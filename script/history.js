@@ -16,6 +16,11 @@ if (firstName != null && lastName != null) {
     window.location.href = "./index.html";
 }
 
+// alert to tell customer that we are having issues
+function errorAlert(){
+    alert("OOPS! Something went wrong. Please try again later.");
+}
+
 // get cart count
 function getCartCount() {
     xmlHttpRequestGetCartCount = new XMLHttpRequest();
@@ -23,26 +28,37 @@ function getCartCount() {
     xmlHttpRequestGetCartCount.setRequestHeader("Content-Type", "application/x-www-form-urlencoded"); // to make parameters url encoded                    
     xmlHttpRequestGetCartCount.onload = () => {
         if (xmlHttpRequestGetCartCount.status === 200) {
-            let cartCount = parseInt(xmlHttpRequestGetCartCount.responseText);
-            let cartCountArray = Array.from(cartCountElement);
-            if (cartCount <= 0) {
-                // cartContentDetails.style.display = "none";
-                cartCountArray[0].style.display = "none"; // will hide the cart number in the nav bar
-            } else if (cartCount <= 99) {
-                cartCountArray.forEach(element => {
-                    cartCountArray[0].style.display = "inline";
-                    element.innerText = "(" + cartCount + ")";
-                });
+            let numberRegEx = /^\d+$/;
+            let requestResponeText = xmlHttpRequestGetCartCount.responseText;
+            if (requestResponeText != "no connection" && numberRegEx.test(requestResponeText)) {
+                let cartCount = parseInt(requestResponeText);
+                let cartCountArray = Array.from(cartCountElement);
+                if (cartCount <= 0) {
+                    cartCountArray[0].style.display = "none"; // will hide the cart number in the nav bar
+                } else if (cartCount <= 99) {
+                    cartCountArray.forEach(element => {
+                        cartCountArray[0].style.display = "inline";
+                        element.innerText = "(" + cartCount + ")";
+                    });
 
+                } else {
+                    cartCountArray.forEach(element => {
+                        cartCountArray[0].style.display = "inline";
+                        element.innerText = "(99+)";
+                    });
+                }
+
+            } else if(requestResponeText == "no connection") {
+                console.error("failed to connect to the database from cart-count.php");       
+                errorAlert()
             } else {
-                cartCountArray.forEach(element => {
-                    cartCountArray[0].style.display = "inline";
-                    element.innerText = "(99+)";
-                });
+                console.error(requestResponeText);
+                errorAlert()
             }
 
         } else {
-            alert("can't connect to cart-count php")
+            console.error("can't connect to cart-count php");
+            errorAlert()
         }
 
     }
@@ -73,7 +89,7 @@ xmlHttpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencod
 xmlHttpRequest.onload = () => {
     if (xmlHttpRequest.status === 200) {
         let items = JSON.parse(xmlHttpRequest.responseText);
-        if (!items.hasOwnProperty("empty")) {
+        if (!(items.hasOwnProperty("empty") || items.hasOwnProperty("error"))) {
             let transactions = {};
             for (let object of items) {
                 let transactionId = object["Transaction_Id"];
@@ -132,9 +148,15 @@ xmlHttpRequest.onload = () => {
             }
             let endHorizontalLine = document.createElement("hr");
             previousPurchasesList.appendChild(endHorizontalLine);
+        } else if(items.hasOwnProperty("empty")){
+            document.getElementById("history-title").innerText = "No Previous Purchases";
+        } else {
+            console.error(items["error"]);
+            errorAlert()
         }
     } else {
-        alert("can't connect to history.php")
+        console.error("can't connect to history.php");
+        errorAlert()
     }
 }
 

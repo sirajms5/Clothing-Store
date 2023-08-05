@@ -12,6 +12,11 @@ let dateOfBirthError = document.getElementById("date-of-birth-error");
 let emailError = document.getElementById("email-error");
 let passwordError = document.getElementById("password-error");
 
+// alert to tell customer that we are having issues
+function errorAlert() {
+    alert("OOPS! Something went wrong. Please try again later.");
+}
+
 // first name input limit control
 firstNameElement.addEventListener("keydown", (event) => {
     let input = event.key;
@@ -91,14 +96,20 @@ registrationButton.addEventListener("click", (event) => {
 
         xmlHttpRequest.onload = () => {
             if (xmlHttpRequest.status === 200) {
-                dateOfBirthError.style.display = "none";
                 if (xmlHttpRequest.responseText == "email already registered") {
                     emailError.innerText = "Email already registered.";
                     emailError.style.display = "inline";
                     firstNameError.style.display = "none";
                     lastNameError.style.display = "none";
                     addressError.style.display = "none";
+                    dateOfBirthError.style.display = "none";
                     passwordError.style.display = "none";
+                } else if (xmlHttpRequest.responseText == "no connection") {
+                    console.error("no connection to database from registration.php");
+                    errorAlert();
+                } else if(xmlHttpRequest.responseText.includes("Error")){
+                    console.error(xmlHttpRequest.responseText);
+                    errorAlert();
                 } else {
                     let firstName = document.getElementById("first-name").value;
                     let lastName = document.getElementById("last-name").value;
@@ -109,7 +120,8 @@ registrationButton.addEventListener("click", (event) => {
                     window.location.href = "./index.html";
                 }
             } else {
-                alert("couldn't connect to registration.php");
+                console.error("can't connect to registration.php");
+                errorAlert();
             }
         }
         xmlHttpRequest.send(new FormData(document.getElementById("registration-form")));
