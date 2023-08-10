@@ -71,9 +71,12 @@ loginButton.addEventListener("click", (event) => {
         }
         xmlHttpRequest.send(new FormData(document.getElementById("log-in-form")));
     } else {
-        if (!emailRegEx.test(emailValue)) {
+        if(emailValue == ""){
             emailError.style.display = "inline";
-            emailError.innerText = "Email field can't be empty."
+            emailError.innerText = "Email field can't be empty.";
+        } else if (!emailRegEx.test(emailValue)) {
+            emailError.style.display = "inline";
+            emailError.innerText = "Email field should be in xyz@xyz.xyz format";
         } else {
             emailError.style.display = "none";
         }
