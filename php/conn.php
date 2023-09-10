@@ -1,4 +1,5 @@
 <?php
+    
     $serverName = "localhost";
     $databaseName = "siraj_store";
     $userName = "root";
@@ -13,8 +14,7 @@
     function getData($field) {
         if (!isset($_POST[$field])) {
             $data = "";
-        }
-        else {
+        } else {
             $data = $_POST[$field];
         }
 
