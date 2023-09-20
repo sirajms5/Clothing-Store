@@ -176,8 +176,8 @@ function checkInput(event) {
     let input = event.key;
     let numberRegEx = /\d/;
     let isNumber = numberRegEx.test(input);
-    let isBackspaceOrDelete = ["Backspace", "Delete"].includes(input);
-    if (!isNumber && !isBackspaceOrDelete) {
+    let isAccepted = ["Backspace", "Delete", "Tab"].includes(input);
+    if (!isNumber && !isAccepted) {
         event.preventDefault();
     }
 }
